@@ -1,0 +1,10 @@
+Flask==3.0.2
+Werkzeug==3.0.1
+Pillow==10.0.1
+numpy==1.24.3
+
+# PDF Tools (if needed)
+pypdf==5.1.0
+reportlab==4.2.5
+PyMuPDF==1.24.11
+pytesseract==0.3.10
