@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug PDF Tools</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        button { padding: 10px; margin: 5px; }
+        .result { margin: 10px 0; padding: 10px; background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <h1>PDF Tools Debug Page</h1>
+    
+    <div class="test-section">
+        <h3>Test Server Connection</h3>
+        <button onclick="testServer()">Test Server</button>
+        <div id="server-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test File Upload</h3>
+        <input type="file" id="test-file" accept=".pdf">
+        <button onclick="testUpload()">Test Upload</button>
+        <div id="upload-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test PDF Merge</h3>
+        <input type="file" id="merge-files" multiple accept=".pdf">
+        <button onclick="testMerge()">Test Merge</button>
+        <div id="merge-result" class="result"></div>
+    </div>
+
+    <script>
+        async function testServer() {
+            const result = document.getElementById('server-result');
+            try {
+                const response = await fetch('/settings');
+                const data = await response.json();
+                result.innerHTML = 'OK: Server connected - ' + JSON.stringify(data).substring(0, 100) + '...';
+                result.style.color = 'green';
+            } catch (error) {
+                result.innerHTML = 'ERROR: ' + error.message;
+                result.style.color = 'red';
+            }
+        }
+        
+        async function testUpload() {
+            const result = document.getElementById('upload-result');
+            const fileInput = document.getElementById('test-file');
+            
+            if (!fileInput.files[0]) {
+                result.innerHTML = 'ERROR: Please select a file first';
+                result.style.color = 'red';
+                return;
+            }
+            
+            try {
+                const formData = new FormData();
+                formData.append('file', fileInput.files[0]);
+                
+                result.innerHTML = 'Testing upload...';
+                result.style.color = 'blue';
+                
+                const response = await fetch('/compress', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    result.innerHTML = 'OK: File processed successfully - Size: ' + blob.size + ' bytes';
+                    result.style.color = 'green';
+                } else {
+                    const error = await response.json();
+                    result.innerHTML = 'ERROR: ' + error.error;
+                    result.style.color = 'red';
+                }
+            } catch (error) {
+                result.innerHTML = 'ERROR: ' + error.message;
+                result.style.color = 'red';
+            }
+        }
+        
+        async function testMerge() {
+            const result = document.getElementById('merge-result');
+            const fileInput = document.getElementById('merge-files');
+            
+            if (!fileInput.files[0]) {
+                result.innerHTML = 'ERROR: Please select files first';
+                result.style.color = 'red';
+                return;
+            }
+            
+            try {
+                const formData = new FormData();
+                for (let file of fileInput.files) {
+                    formData.append('files', file);
+                }
+                
+                result.innerHTML = 'Testing merge...';
+                result.style.color = 'blue';
+                
+                const response = await fetch('/merge', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    result.innerHTML = 'OK: Files merged successfully - Size: ' + blob.size + ' bytes';
+                    result.style.color = 'green';
+                    
+                    // Create download link
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'merged.pdf';
+                    a.textContent = ' Download Result';
+                    result.appendChild(a);
+                } else {
+                    const error = await response.json();
+                    result.innerHTML = 'ERROR: ' + error.error;
+                    result.style.color = 'red';
+                }
+            } catch (error) {
+                result.innerHTML = 'ERROR: ' + error.message;
+                result.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love Img - Free Online Image Tools</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🖼️ I Love Img</h1>
+            <p>Free online image tools - Edit, convert, and enhance your images</p>
+            <div style="margin-top: 20px;">
+                <a href="/editor" class="btn" style="display: inline-block; width: auto; padding: 12px 24px; text-decoration: none;">
+                    🎨 Advanced Editor (GUI Mode)
+                </a>
+            </div>
+        </header>
+
+        <div class="tools-grid">
+            <!-- Image Compression -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">🗜️</div>
+                    Compress Image
+                </h3>
+                <p class="tool-description">Reduce image file size while maintaining quality</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="compress-file" accept="image/*" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Quality (1-100)</label>
+                    <input type="range" id="compress-quality" min="1" max="100" value="90" class="form-control">
+                    <span id="quality-value">90%</span>
+                </div>
+                <button class="btn" onclick="compress_image()">Compress Image</button>
+                <div class="output-area" id="compress-out"></div>
+            </div>
+
+            <!-- Image Resize -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">📐</div>
+                    Resize Image
+                </h3>
+                <p class="tool-description">Change image dimensions</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="resize-file" accept="image/*" class="form-control">
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Width (px)</label>
+                        <input type="number" id="resize-width" value="800" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Height (px)</label>
+                        <input type="number" id="resize-height" value="600" class="form-control">
+                    </div>
+                </div>
+                <button class="btn" onclick="resize_image()">Resize Image</button>
+                <div class="output-area" id="resize-out"></div>
+            </div>
+
+            <!-- Image Crop -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">✂️</div>
+                    Crop Image
+                </h3>
+                <p class="tool-description">Crop image to specific area</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="crop-file" accept="image/*" class="form-control">
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>X Position</label>
+                        <input type="number" id="crop-x" value="0" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Y Position</label>
+                        <input type="number" id="crop-y" value="0" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Width</label>
+                        <input type="number" id="crop-width" value="200" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Height</label>
+                        <input type="number" id="crop-height" value="200" class="form-control">
+                    </div>
+                </div>
+                <button class="btn" onclick="crop_image()">Crop Image</button>
+                <div class="output-area" id="crop-out"></div>
+            </div>
+
+            <!-- Image Rotate -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">🔄</div>
+                    Rotate Image
+                </h3>
+                <p class="tool-description">Rotate image by specified angle</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="rotate-file" accept="image/*" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Angle (degrees)</label>
+                    <select id="rotate-angle" class="form-control">
+                        <option value="90">90°</option>
+                        <option value="180">180°</option>
+                        <option value="270">270°</option>
+                        <option value="45">45°</option>
+                        <option value="-45">-45°</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="rotate_image()">Rotate Image</button>
+                <div class="output-area" id="rotate-out"></div>
+            </div>
+
+            <!-- Image Convert -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">🔄</div>
+                    Convert Format
+                </h3>
+                <p class="tool-description">Convert image to different format</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="convert-file" accept="image/*" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Output Format</label>
+                    <select id="convert-format" class="form-control">
+                        <option value="JPEG">JPEG</option>
+                        <option value="PNG">PNG</option>
+                        <option value="WEBP">WebP</option>
+                        <option value="GIF">GIF</option>
+                        <option value="BMP">BMP</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="convert_image()">Convert Image</button>
+                <div class="output-area" id="convert-out"></div>
+            </div>
+
+            <!-- Brightness -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">☀️</div>
+                    Adjust Brightness
+                </h3>
+                <p class="tool-description">Make image brighter or darker</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="brightness-file" accept="image/*" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Brightness Factor</label>
+                    <input type="range" id="brightness-factor" min="0.1" max="3" step="0.1" value="1.2" class="form-control">
+                    <span id="brightness-value">1.2</span>
+                </div>
+                <button class="btn" onclick="adjust_brightness()">Adjust Brightness</button>
+                <div class="output-area" id="brightness-out"></div>
+            </div>
+
+            <!-- Contrast -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">🎨</div>
+                    Adjust Contrast
+                </h3>
+                <p class="tool-description">Increase or decrease image contrast</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="contrast-file" accept="image/*" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Contrast Factor</label>
+                    <input type="range" id="contrast-factor" min="0.1" max="3" step="0.1" value="1.2" class="form-control">
+                    <span id="contrast-value">1.2</span>
+                </div>
+                <button class="btn" onclick="adjust_contrast()">Adjust Contrast</button>
+                <div class="output-area" id="contrast-out"></div>
+            </div>
+
+            <!-- Saturation -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">🌈</div>
+                    Adjust Saturation
+                </h3>
+                <p class="tool-description">Make colors more or less vibrant</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="saturation-file" accept="image/*" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Saturation Factor</label>
+                    <input type="range" id="saturation-factor" min="0" max="3" step="0.1" value="1.2" class="form-control">
+                    <span id="saturation-value">1.2</span>
+                </div>
+                <button class="btn" onclick="adjust_saturation()">Adjust Saturation</button>
+                <div class="output-area" id="saturation-out"></div>
+            </div>
+
+            <!-- Blur -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">💨</div>
+                    Blur Image
+                </h3>
+                <p class="tool-description">Apply blur effect to image</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="blur-file" accept="image/*" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Blur Radius</label>
+                    <input type="range" id="blur-radius" min="0.1" max="10" step="0.1" value="2" class="form-control">
+                    <span id="blur-value">2.0</span>
+                </div>
+                <button class="btn" onclick="blur_image()">Blur Image</button>
+                <div class="output-area" id="blur-out"></div>
+            </div>
+
+            <!-- Sharpen -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">🔍</div>
+                    Sharpen Image
+                </h3>
+                <p class="tool-description">Enhance image details and edges</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="sharpen-file" accept="image/*" class="form-control">
+                </div>
+                <button class="btn" onclick="sharpen_image()">Sharpen Image</button>
+                <div class="output-area" id="sharpen-out"></div>
+            </div>
+
+            <!-- Grayscale -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">⚫</div>
+                    Grayscale
+                </h3>
+                <p class="tool-description">Convert image to black and white</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="grayscale-file" accept="image/*" class="form-control">
+                </div>
+                <button class="btn" onclick="grayscale_image()">Convert to Grayscale</button>
+                <div class="output-area" id="grayscale-out"></div>
+            </div>
+
+            <!-- Sepia -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">📜</div>
+                    Sepia Effect
+                </h3>
+                <p class="tool-description">Apply vintage sepia tone effect</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="sepia-file" accept="image/*" class="form-control">
+                </div>
+                <button class="btn" onclick="sepia_image()">Apply Sepia</button>
+                <div class="output-area" id="sepia-out"></div>
+            </div>
+
+            <!-- Invert -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">🔄</div>
+                    Invert Colors
+                </h3>
+                <p class="tool-description">Invert all colors in the image</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="invert-file" accept="image/*" class="form-control">
+                </div>
+                <button class="btn" onclick="invert_image()">Invert Colors</button>
+                <div class="output-area" id="invert-out"></div>
+            </div>
+
+            <!-- Watermark -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">💧</div>
+                    Add Watermark
+                </h3>
+                <p class="tool-description">Add text watermark to image</p>
+                <div class="form-group">
+                    <label>Select image file</label>
+                    <input type="file" id="watermark-file" accept="image/*" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Watermark Text</label>
+                    <input type="text" id="watermark-text" value="© Your Watermark" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Position</label>
+                    <select id="watermark-position" class="form-control">
+                        <option value="top-left">Top Left</option>
+                        <option value="top-right">Top Right</option>
+                        <option value="center">Center</option>
+                        <option value="bottom-left">Bottom Left</option>
+                        <option value="bottom-right">Bottom Right</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="add_watermark()">Add Watermark</button>
+                <div class="output-area" id="watermark-out"></div>
+            </div>
+
+            <!-- Batch Processing -->
+            <div class="tool-card">
+                <h3>
+                    <div class="tool-icon">⚡</div>
+                    Batch Process
+                </h3>
+                <p class="tool-description">Process multiple images at once</p>
+                <div class="form-group">
+                    <label>Select images</label>
+                    <input type="file" id="batch-files" multiple accept="image/*" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Operation</label>
+                    <select id="batch-op" class="form-control">
+                        <option value="compress">Compress</option>
+                        <option value="resize">Resize</option>
+                        <option value="convert">Convert Format</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Quality (for compression)</label>
+                        <input type="range" id="batch-quality" min="1" max="100" value="90" class="form-control">
+                        <span id="batch-quality-value">90%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Format (for conversion)</label>
+                        <select id="batch-format" class="form-control">
+                            <option value="JPEG">JPEG</option>
+                            <option value="PNG">PNG</option>
+                            <option value="WEBP">WebP</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn" onclick="batch_process()">Process Images</button>
+                <div class="output-area" id="batch-out"></div>
+            </div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="settings-panel">
+            <h3>⚙️ Settings</h3>
+            <p class="tool-description">Default settings for image processing</p>
+            <div class="row">
+                <div class="form-group">
+                    <label>Default Quality</label>
+                    <input type="number" id="default-quality" value="90" min="1" max="100" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Default Format</label>
+                    <select id="default-format" class="form-control">
+                        <option value="JPEG">JPEG</option>
+                        <option value="PNG">PNG</option>
+                        <option value="WEBP">WebP</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn" onclick="save_settings()">Save Settings</button>
+            <div class="output-area" id="settings-out"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

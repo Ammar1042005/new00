@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love Img - Advanced Image Editor</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .editor-container {
+            display: grid;
+            grid-template-columns: 250px 1fr 250px;
+            gap: 20px;
+            height: calc(100vh - 120px);
+        }
+        
+        .toolbar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+        
+        .canvas-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            position: relative;
+        }
+        
+        .properties-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+        
+        #image-canvas {
+            max-width: 100%;
+            max-height: 100%;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: crosshair;
+        }
+        
+        .tool-section {
+            margin-bottom: 20px;
+        }
+        
+        .tool-section h4 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tool-btn {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+        
+        .tool-btn:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .tool-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .slider-control {
+            margin: 10px 0;
+        }
+        
+        .slider-control label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #495057;
+        }
+        
+        .slider-control input[type="range"] {
+            width: 100%;
+        }
+        
+        .slider-value {
+            text-align: center;
+            font-weight: 600;
+            color: #667eea;
+            margin-top: 5px;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .file-upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .file-upload-area:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+        }
+        
+        .file-upload-area.dragover {
+            border-color: #667eea;
+            background: #e7f3ff;
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .zoom-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #dee2e6;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .zoom-btn:hover {
+            background: #f8f9fa;
+        }
+        
+        .zoom-display {
+            padding: 0 10px;
+            font-weight: 600;
+            color: #495057;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .history-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .history-btn {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #dee2e6;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .history-btn:hover:not(:disabled) {
+            background: #f8f9fa;
+        }
+        
+        .history-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .export-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 1024px) {
+            .editor-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr auto;
+                height: auto;
+            }
+            
+            .toolbar, .properties-panel {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Advanced Image Editor</h1>
+            <p>Professional image editing with real-time preview</p>
+        </header>
+
+        <div class="editor-container">
+            <!-- Left Toolbar -->
+            <div class="toolbar">
+                <div class="file-upload-area" id="uploadArea">
+                    <div>📁 Click or drag image here</div>
+                    <small>Supports JPG, PNG, GIF, WebP</small>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+
+                <div class="history-controls">
+                    <button class="history-btn" id="undoBtn" disabled>↶ Undo</button>
+                    <button class="history-btn" id="redoBtn" disabled>↷ Redo</button>
+                    <button class="history-btn" id="resetBtn" style="background: #dc3545; color: white;">🔄 Reset</button>
+                </div>
+
+                <div class="tool-section">
+                    <h4>🔧 Basic Tools</h4>
+                    <button class="tool-btn" id="cropBtn">✂️ Crop</button>
+                    <button class="tool-btn" id="rotateBtn">🔄 Rotate</button>
+                    <button class="tool-btn" id="flipBtn">↔️ Flip</button>
+                    <button class="tool-btn" id="resizeBtn">📐 Resize</button>
+                    <button class="tool-btn" id="removeBgBtn">🎨 Remove Background</button>
+                    <button class="tool-btn" id="upscaleBtn">🔍 Upscale Image</button>
+                </div>
+
+                <div class="tool-section">
+                    <h4>🎨 Adjustments</h4>
+                    <button class="tool-btn" id="brightnessBtn">☀️ Brightness</button>
+                    <button class="tool-btn" id="contrastBtn">🎨 Contrast</button>
+                    <button class="tool-btn" id="saturationBtn">🌈 Saturation</button>
+                                    </div>
+
+                <div class="tool-section">
+                    <h4>🎭 Effects</h4>
+                    <button class="tool-btn" id="grayscaleBtn">⚫ Grayscale</button>
+                    <button class="tool-btn" id="sepiaBtn">📜 Sepia</button>
+                    <button class="tool-btn" id="invertBtn">🔄 Invert</button>
+                    <button class="tool-btn" id="blurBtn">💨 Blur</button>
+                    <button class="tool-btn" id="sharpenBtn">🔍 Sharpen</button>
+                </div>
+
+                <div class="tool-section">
+                    <h4>💧 Watermark</h4>
+                    <button class="tool-btn" id="watermarkBtn">📝 Add Text</button>
+                </div>
+            </div>
+
+            <!-- Canvas Area -->
+            <div class="canvas-container">
+                <canvas id="image-canvas" style="display: none;"></canvas>
+                <div id="placeholder">
+                    <div style="text-align: center; color: #6c757d;">
+                        <div style="font-size: 4rem; margin-bottom: 20px;">🖼️</div>
+                        <h3>No image loaded</h3>
+                        <p>Upload an image to start editing</p>
+                    </div>
+                </div>
+                
+                <div class="zoom-controls" id="zoomControls" style="display: none;">
+                    <button class="zoom-btn" id="zoomOutBtn">➖</button>
+                    <div class="zoom-display" id="zoomDisplay">100%</div>
+                    <button class="zoom-btn" id="zoomInBtn">➕</button>
+                    <button class="zoom-btn" id="zoomFitBtn">🔲</button>
+                </div>
+            </div>
+
+            <!-- Right Properties Panel -->
+            <div class="properties-panel">
+                <div class="tool-section">
+                    <h4>📊 Image Info</h4>
+                    <div id="imageInfo">
+                        <p><strong>Dimensions:</strong> <span id="imageDimensions">-</span></p>
+                        <p><strong>File Size:</strong> <span id="imageFileSize">-</span></p>
+                        <p><strong>Format:</strong> <span id="imageFormat">-</span></p>
+                    </div>
+                </div>
+
+                <div class="tool-section" id="adjustmentControls" style="display: none;">
+                    <h4>⚙️ Adjustments</h4>
+                    
+                    <div class="slider-control" id="brightnessControl" style="display: none;">
+                        <label>Brightness</label>
+                        <input type="range" id="brightnessSlider" min="0" max="200" value="100">
+                        <div class="slider-value" id="brightnessValue">100%</div>
+                    </div>
+
+                    <div class="slider-control" id="contrastControl" style="display: none;">
+                        <label>Contrast</label>
+                        <input type="range" id="contrastSlider" min="0" max="200" value="100">
+                        <div class="slider-value" id="contrastValue">100%</div>
+                    </div>
+
+                    <div class="slider-control" id="saturationControl" style="display: none;">
+                        <label>Saturation</label>
+                        <input type="range" id="saturationSlider" min="0" max="200" value="100">
+                        <div class="slider-value" id="saturationValue">100%</div>
+                    </div>
+
+                    <div class="slider-control" id="blurControl" style="display: none;">
+                        <label>Blur Radius</label>
+                        <input type="range" id="blurSlider" min="0" max="20" value="0" step="0.5">
+                        <div class="slider-value" id="blurValue">0px</div>
+                    </div>
+                </div>
+
+                <div class="tool-section" id="resizeControls" style="display: none;">
+                    <h4>📐 Resize Options</h4>
+                    <div class="form-group">
+                        <label>Width (px)</label>
+                        <input type="number" id="resizeWidth" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Height (px)</label>
+                        <input type="number" id="resizeHeight" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="maintainAspect" checked> Maintain aspect ratio
+                        </label>
+                    </div>
+                    <button class="btn" id="applyResizeBtn">Apply Resize</button>
+                </div>
+
+                <div class="tool-section" id="watermarkControls" style="display: none;">
+                    <h4>💧 Watermark Options</h4>
+                    <div class="form-group">
+                        <label>Text</label>
+                        <input type="text" id="watermarkText" value="© Your Watermark" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Position</label>
+                        <select id="watermarkPosition" class="form-control">
+                            <option value="top-left">Top Left</option>
+                            <option value="top-right">Top Right</option>
+                            <option value="center">Center</option>
+                            <option value="bottom-left">Bottom Left</option>
+                            <option value="bottom-right">Bottom Right</option>
+                        </select>
+                    </div>
+                    <button class="btn" id="applyWatermarkBtn">Apply Watermark</button>
+                </div>
+
+                <div class="tool-section" id="bgRemovalControls" style="display: none;">
+                    <h4>🎨 Background Removal</h4>
+                    <div class="form-group">
+                        <label>Removal Mode</label>
+                        <select id="bgRemovalMode" class="form-control">
+                            <option value="automatic">Automatic Detection</option>
+                            <option value="brush">Color Brush Selection</option>
+                        </select>
+                    </div>
+                    
+                    <div id="automaticControls">
+                        <div class="form-group">
+                            <label>Removal Strength</label>
+                            <select id="bgRemovalStrength" class="form-control">
+                                <option value="conservative">Conservative (Light backgrounds)</option>
+                                <option value="moderate">Moderate (Mixed backgrounds)</option>
+                                <option value="aggressive">Aggressive (All light colors)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="preserveEdges"> Preserve edges and details
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="brushControls" style="display: none;">
+                        <div class="form-group">
+                            <label>Select Color to Remove</label>
+                            <input type="color" id="colorPicker" value="#ffffff" class="form-control" style="height: 40px;">
+                        </div>
+                        <div class="form-group">
+                            <label>Color Tolerance (Range)</label>
+                            <input type="range" id="colorTolerance" min="0" max="100" value="30" class="form-control">
+                            <div class="slider-value" id="toleranceValue">30</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Brush Size</label>
+                            <input type="range" id="brushSize" min="1" max="50" value="10" class="form-control">
+                            <div class="slider-value" id="brushSizeValue">10px</div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="brushMode"> Brush Mode (Click and drag to paint)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button class="btn" id="applyBgRemovalBtn">Remove Background</button>
+                </div>
+
+                <div class="tool-section" id="upscaleControls" style="display: none;">
+                    <h4>🔍 Upscale Options</h4>
+                    <div class="form-group">
+                        <label>Scale Factor</label>
+                        <select id="scaleFactor" class="form-control">
+                            <option value="2">2x</option>
+                            <option value="3">3x</option>
+                            <option value="4">4x</option>
+                        </select>
+                    </div>
+                    <button class="btn" id="applyUpscaleBtn">Apply Upscale</button>
+                </div>
+
+                <div class="tool-section" id="exportSection" style="display: none;">
+                    <h4>💾 Export</h4>
+                    <div class="export-options">
+                        <button class="btn" id="exportPngBtn">Export PNG</button>
+                        <button class="btn" id="exportJpgBtn">Export JPG</button>
+                        <button class="btn" id="exportWebpBtn">Export WebP</button>
+                        <button class="btn" id="exportOriginalBtn">Export Original</button>
+                    </div>
+                    <div class="slider-control">
+                        <label>JPG Quality</label>
+                        <input type="range" id="exportQuality" min="10" max="100" value="90">
+                        <div class="slider-value" id="qualityValue">90%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/canvas-editor.js"></script>
+    <script>
+        class AdvancedImageEditor {
+            constructor() {
+                this.editor = new CanvasImageEditor('image-canvas');
+                this.currentTool = null;
+                this.originalFile = null;
+                this.zoom = 1;
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                // File upload
+                const uploadArea = document.getElementById('uploadArea');
+                const fileInput = document.getElementById('fileInput');
+                
+                uploadArea.addEventListener('click', () => fileInput.click());
+                fileInput.addEventListener('change', (e) => this.handleFileUpload(e));
+                
+                // Drag and drop
+                uploadArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.add('dragover');
+                });
+                
+                uploadArea.addEventListener('dragleave', () => {
+                    uploadArea.classList.remove('dragover');
+                });
+                
+                uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.remove('dragover');
+                    if (e.dataTransfer.files.length > 0) {
+                        this.loadImage(e.dataTransfer.files[0]);
+                    }
+                });
+
+                // Tool buttons
+                document.getElementById('cropBtn').addEventListener('click', () => this.toggleCrop());
+                document.getElementById('rotateBtn').addEventListener('click', () => this.rotate());
+                document.getElementById('flipBtn').addEventListener('click', () => this.flip());
+                document.getElementById('resizeBtn').addEventListener('click', () => this.showResizeControls());
+                document.getElementById('removeBgBtn').addEventListener('click', () => this.removeBackground());
+                document.getElementById('upscaleBtn').addEventListener('click', () => this.showUpscaleControls());
+                
+                // Adjustment buttons
+                document.getElementById('brightnessBtn').addEventListener('click', () => this.showBrightnessControl());
+                document.getElementById('contrastBtn').addEventListener('click', () => this.showContrastControl());
+                document.getElementById('saturationBtn').addEventListener('click', () => this.showSaturationControl());
+                                
+                // Effect buttons
+                document.getElementById('grayscaleBtn').addEventListener('click', () => this.applyGrayscale());
+                document.getElementById('sepiaBtn').addEventListener('click', () => this.applySepia());
+                document.getElementById('invertBtn').addEventListener('click', () => this.applyInvert());
+                document.getElementById('blurBtn').addEventListener('click', () => this.showBlurControl());
+                document.getElementById('sharpenBtn').addEventListener('click', () => this.applySharpen());
+                
+                // Watermark
+                document.getElementById('watermarkBtn').addEventListener('click', () => this.showWatermarkControls());
+                document.getElementById('applyWatermarkBtn').addEventListener('click', () => this.applyWatermark());
+                
+                // History
+                document.getElementById('undoBtn').addEventListener('click', () => this.undo());
+                document.getElementById('redoBtn').addEventListener('click', () => this.redo());
+                document.getElementById('resetBtn').addEventListener('click', () => this.reset());
+                
+                // Zoom
+                document.getElementById('zoomInBtn').addEventListener('click', () => this.zoomIn());
+                document.getElementById('zoomOutBtn').addEventListener('click', () => this.zoomOut());
+                document.getElementById('zoomFitBtn').addEventListener('click', () => this.zoomFit());
+                
+                // Export
+                document.getElementById('exportPngBtn').addEventListener('click', () => this.export('png'));
+                document.getElementById('exportJpgBtn').addEventListener('click', () => this.export('jpg'));
+                document.getElementById('exportWebpBtn').addEventListener('click', () => this.export('webp'));
+                document.getElementById('exportOriginalBtn').addEventListener('click', () => this.exportOriginal());
+                document.getElementById('applyUpscaleBtn').addEventListener('click', () => this.applyUpscale());
+                document.getElementById('applyBgRemovalBtn').addEventListener('click', () => this.applyBgRemoval());
+                
+                // Background removal controls
+                document.getElementById('bgRemovalMode').addEventListener('change', (e) => this.toggleBgRemovalMode(e));
+                document.getElementById('colorTolerance').addEventListener('input', (e) => {
+                    document.getElementById('toleranceValue').textContent = e.target.value;
+                });
+                document.getElementById('brushSize').addEventListener('input', (e) => {
+                    document.getElementById('brushSizeValue').textContent = e.target.value + 'px';
+                });
+                document.getElementById('brushMode').addEventListener('change', (e) => this.toggleBrushMode(e));
+                
+                // Sliders
+                this.setupSliders();
+                
+                // Resize controls
+                document.getElementById('applyResizeBtn').addEventListener('click', () => this.applyResize());
+                document.getElementById('maintainAspect').addEventListener('change', () => this.maintainAspectRatio());
+            }
+
+            setupSliders() {
+                // Brightness
+                const brightnessSlider = document.getElementById('brightnessSlider');
+                brightnessSlider.addEventListener('input', (e) => {
+                    document.getElementById('brightnessValue').textContent = e.target.value + '%';
+                });
+                brightnessSlider.addEventListener('change', (e) => {
+                    this.adjustBrightness(e.target.value / 100);
+                });
+                
+                // Contrast
+                const contrastSlider = document.getElementById('contrastSlider');
+                contrastSlider.addEventListener('input', (e) => {
+                    document.getElementById('contrastValue').textContent = e.target.value + '%';
+                });
+                contrastSlider.addEventListener('change', (e) => {
+                    this.adjustContrast(e.target.value / 100);
+                });
+                
+                // Saturation
+                const saturationSlider = document.getElementById('saturationSlider');
+                saturationSlider.addEventListener('input', (e) => {
+                    document.getElementById('saturationValue').textContent = e.target.value + '%';
+                });
+                saturationSlider.addEventListener('change', (e) => {
+                    this.adjustSaturation(e.target.value / 100);
+                });
+                
+                // Blur
+                const blurSlider = document.getElementById('blurSlider');
+                blurSlider.addEventListener('input', (e) => {
+                    document.getElementById('blurValue').textContent = e.target.value + 'px';
+                });
+                blurSlider.addEventListener('change', (e) => {
+                    this.applyBlur(parseFloat(e.target.value));
+                });
+                
+                // Export quality
+                const qualitySlider = document.getElementById('exportQuality');
+                qualitySlider.addEventListener('input', (e) => {
+                    document.getElementById('qualityValue').textContent = e.target.value + '%';
+                });
+            }
+
+            async handleFileUpload(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    await this.loadImage(file);
+                }
+            }
+
+            async loadImage(file) {
+                try {
+                    await this.editor.loadImage(file);
+                    this.originalFile = file;
+                    this.showEditor();
+                    this.updateImageInfo(file);
+                    this.updateHistoryButtons();
+                } catch (error) {
+                    alert('Failed to load image: ' + error.message);
+                }
+            }
+
+            showEditor() {
+                document.getElementById('placeholder').style.display = 'none';
+                document.getElementById('image-canvas').style.display = 'block';
+                document.getElementById('zoomControls').style.display = 'flex';
+                document.getElementById('exportSection').style.display = 'block';
+            }
+
+            updateImageInfo(file) {
+                document.getElementById('imageDimensions').textContent = `${this.editor.canvas.width} × ${this.editor.canvas.height}`;
+                document.getElementById('imageFileSize').textContent = this.formatFileSize(file.size);
+                document.getElementById('imageFormat').textContent = file.type.split('/')[1].toUpperCase();
+            }
+
+            formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            toggleCrop() {
+                const btn = document.getElementById('cropBtn');
+                if (btn.classList.contains('active')) {
+                    this.editor.stopCropMode();
+                    btn.classList.remove('active');
+                } else {
+                    this.deactivateAllTools();
+                    this.editor.startCropMode();
+                    btn.classList.add('active');
+                }
+            }
+
+            rotate() {
+                this.editor.rotate(90);
+                this.updateHistoryButtons();
+            }
+
+            flip() {
+                // Ask user which flip direction
+                const flipDirection = confirm('Flip horizontally?\n\nOK = Horizontal Flip\nCancel = Vertical Flip');
+                if (flipDirection === true) {
+                    this.editor.flip(true); // Horizontal flip
+                } else {
+                    this.editor.flip(false); // Vertical flip
+                }
+                this.updateHistoryButtons();
+            }
+
+            showResizeControls() {
+                this.hideAllControls();
+                document.getElementById('resizeControls').style.display = 'block';
+                document.getElementById('resizeWidth').value = this.editor.canvas.width;
+                document.getElementById('resizeHeight').value = this.editor.canvas.height;
+            }
+
+            maintainAspectRatio() {
+                const maintain = document.getElementById('maintainAspect').checked;
+                const widthInput = document.getElementById('resizeWidth');
+                const heightInput = document.getElementById('resizeHeight');
+                
+                if (maintain) {
+                    const aspectRatio = this.editor.canvas.width / this.editor.canvas.height;
+                    widthInput.addEventListener('input', () => {
+                        heightInput.value = Math.round(widthInput.value / aspectRatio);
+                    });
+                    heightInput.addEventListener('input', () => {
+                        widthInput.value = Math.round(heightInput.value * aspectRatio);
+                    });
+                }
+            }
+
+            applyResize() {
+                const width = parseInt(document.getElementById('resizeWidth').value);
+                const height = parseInt(document.getElementById('resizeHeight').value);
+                this.editor.resize(width, height);
+                this.updateImageInfo(this.originalFile);
+                this.updateHistoryButtons();
+            }
+
+            showBrightnessControl() {
+                this.hideAllControls();
+                document.getElementById('adjustmentControls').style.display = 'block';
+                document.getElementById('brightnessControl').style.display = 'block';
+                document.getElementById('brightnessSlider').value = 100;
+                document.getElementById('brightnessValue').textContent = '100%';
+            }
+
+            showContrastControl() {
+                this.hideAllControls();
+                document.getElementById('adjustmentControls').style.display = 'block';
+                document.getElementById('contrastControl').style.display = 'block';
+                document.getElementById('contrastSlider').value = 100;
+                document.getElementById('contrastValue').textContent = '100%';
+            }
+
+            showSaturationControl() {
+                this.hideAllControls();
+                document.getElementById('adjustmentControls').style.display = 'block';
+                document.getElementById('saturationControl').style.display = 'block';
+                document.getElementById('saturationSlider').value = 100;
+                document.getElementById('saturationValue').textContent = '100%';
+            }
+
+            
+            showBlurControl() {
+                this.hideAllControls();
+                document.getElementById('adjustmentControls').style.display = 'block';
+                document.getElementById('blurControl').style.display = 'block';
+                document.getElementById('blurSlider').value = 0;
+                document.getElementById('blurValue').textContent = '0px';
+            }
+
+            showWatermarkControls() {
+                this.hideAllControls();
+                document.getElementById('watermarkControls').style.display = 'block';
+            }
+
+            applyWatermark() {
+                const text = document.getElementById('watermarkText').value;
+                const position = document.getElementById('watermarkPosition').value;
+                this.editor.addWatermark(text, position);
+                this.updateHistoryButtons();
+            }
+
+            adjustBrightness(factor) {
+                this.editor.adjustBrightness(factor);
+                this.updateHistoryButtons();
+            }
+
+            adjustContrast(factor) {
+                this.editor.adjustContrast(factor);
+                this.updateHistoryButtons();
+            }
+
+            adjustSaturation(factor) {
+                this.editor.adjustSaturation(factor);
+                this.updateHistoryButtons();
+            }
+
+            applyGrayscale() {
+                this.editor.grayscale();
+                this.updateHistoryButtons();
+            }
+
+            applySepia() {
+                this.editor.sepia();
+                this.updateHistoryButtons();
+            }
+
+            applyInvert() {
+                this.editor.invert();
+                this.updateHistoryButtons();
+            }
+
+            applyBlur(radius) {
+                this.editor.blur(radius);
+                this.updateHistoryButtons();
+            }
+
+            applySharpen() {
+                this.editor.sharpen();
+                this.updateHistoryButtons();
+            }
+
+            undo() {
+                this.editor.undo();
+                this.updateHistoryButtons();
+            }
+
+            redo() {
+                this.editor.redo();
+                this.updateHistoryButtons();
+            }
+
+            updateHistoryButtons() {
+                document.getElementById('undoBtn').disabled = this.editor.historyStep <= 0;
+                document.getElementById('redoBtn').disabled = this.editor.historyStep >= this.editor.history.length - 1;
+            }
+
+            reset() {
+                this.editor.reset();
+                this.updateHistoryButtons();
+            }
+
+            showUpscaleControls() {
+                this.hideAllControls();
+                document.getElementById('upscaleControls').style.display = 'block';
+            }
+
+            showBgRemovalControls() {
+                this.hideAllControls();
+                document.getElementById('bgRemovalControls').style.display = 'block';
+            }
+
+            removeBackground() {
+                this.showBgRemovalControls();
+            }
+
+            applyBgRemoval() {
+                const mode = document.getElementById('bgRemovalMode').value;
+                
+                if (mode === 'automatic') {
+                    const strength = document.getElementById('bgRemovalStrength').value;
+                    const preserveEdges = document.getElementById('preserveEdges').checked;
+                    this.editor.removeBackground(strength, preserveEdges);
+                } else if (mode === 'brush') {
+                    const color = document.getElementById('colorPicker').value;
+                    const tolerance = parseInt(document.getElementById('colorTolerance').value);
+                    const brushSize = parseInt(document.getElementById('brushSize').value);
+                    this.editor.removeColorBrush(color, tolerance, brushSize);
+                }
+                
+                this.updateHistoryButtons();
+            }
+
+            toggleBgRemovalMode(e) {
+                const mode = e.target.value;
+                const automaticControls = document.getElementById('automaticControls');
+                const brushControls = document.getElementById('brushControls');
+                
+                if (mode === 'automatic') {
+                    automaticControls.style.display = 'block';
+                    brushControls.style.display = 'none';
+                    this.disableBrushMode();
+                } else {
+                    automaticControls.style.display = 'none';
+                    brushControls.style.display = 'block';
+                }
+            }
+
+            toggleBrushMode(e) {
+                if (e.target.checked) {
+                    this.enableBrushMode();
+                } else {
+                    this.disableBrushMode();
+                }
+            }
+
+            enableBrushMode() {
+                this.canvas.style.cursor = 'crosshair';
+                this.isBrushMode = true;
+                this.brushPoints = [];
+                
+                // Add brush event listeners
+                this.brushMouseDown = (e) => this.handleBrushMouseDown(e);
+                this.brushMouseMove = (e) => this.handleBrushMouseMove(e);
+                this.brushMouseUp = () => this.handleBrushMouseUp();
+                
+                this.canvas.addEventListener('mousedown', this.brushMouseDown);
+                this.canvas.addEventListener('mousemove', this.brushMouseMove);
+                this.canvas.addEventListener('mouseup', this.brushMouseUp);
+                this.canvas.addEventListener('mouseleave', this.brushMouseUp);
+            }
+
+            disableBrushMode() {
+                this.canvas.style.cursor = 'default';
+                this.isBrushMode = false;
+                this.brushPoints = [];
+                
+                // Remove brush event listeners
+                if (this.brushMouseDown) {
+                    this.canvas.removeEventListener('mousedown', this.brushMouseDown);
+                    this.canvas.removeEventListener('mousemove', this.brushMouseMove);
+                    this.canvas.removeEventListener('mouseup', this.brushMouseUp);
+                    this.canvas.removeEventListener('mouseleave', this.brushMouseUp);
+                }
+            }
+
+            handleBrushMouseDown(e) {
+                if (!this.isBrushMode) return;
+                
+                this.isBrushDrawing = true;
+                const rect = this.canvas.getBoundingClientRect();
+                const x = (e.clientX - rect.left) * (this.canvas.width / rect.width);
+                const y = (e.clientY - rect.top) * (this.canvas.height / rect.height);
+                
+                this.brushPoints = [{x, y}];
+                this.paintBrushAt(x, y);
+            }
+
+            handleBrushMouseMove(e) {
+                if (!this.isBrushMode || !this.isBrushDrawing) return;
+                
+                const rect = this.canvas.getBoundingClientRect();
+                const x = (e.clientX - rect.left) * (this.canvas.width / rect.width);
+                const y = (e.clientY - rect.top) * (this.canvas.height / rect.height);
+                
+                this.brushPoints.push({x, y});
+                this.paintBrushAt(x, y);
+            }
+
+            handleBrushMouseUp() {
+                if (!this.isBrushMode) return;
+                
+                this.isBrushDrawing = false;
+                this.brushPoints = [];
+                
+                // Save the complete brush stroke to history
+                this.editor.saveBrushStroke();
+                this.updateHistoryButtons();
+            }
+
+            paintBrushAt(x, y) {
+                const color = document.getElementById('colorPicker').value;
+                const tolerance = parseInt(document.getElementById('colorTolerance').value);
+                const brushSize = parseInt(document.getElementById('brushSize').value);
+                
+                this.editor.paintBrushRemove(x, y, color, tolerance, brushSize);
+            }
+
+            applyUpscale() {
+                const scaleFactor = parseInt(document.getElementById('scaleFactor').value);
+                this.editor.upscale(scaleFactor);
+                this.updateHistoryButtons();
+            }
+
+            zoomIn() {
+                this.zoom = Math.min(this.zoom * 1.2, 5);
+                this.applyZoom();
+            }
+
+            zoomOut() {
+                this.zoom = Math.max(this.zoom / 1.2, 0.1);
+                this.applyZoom();
+            }
+
+            zoomFit() {
+                this.zoom = 1;
+                this.applyZoom();
+            }
+
+            applyZoom() {
+                const canvas = document.getElementById('image-canvas');
+                canvas.style.transform = `scale(${this.zoom})`;
+                document.getElementById('zoomDisplay').textContent = Math.round(this.zoom * 100) + '%';
+            }
+
+            async export(format) {
+                const quality = document.getElementById('exportQuality').value / 100;
+                const blob = await this.editor.getBlob(format, quality);
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `edited_image.${format}`;
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+
+            async exportOriginal() {
+                if (this.originalFile) {
+                    const url = URL.createObjectURL(this.originalFile);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = this.originalFile.name;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }
+            }
+
+            hideAllControls() {
+                document.getElementById('adjustmentControls').style.display = 'none';
+                document.getElementById('resizeControls').style.display = 'none';
+                document.getElementById('watermarkControls').style.display = 'none';
+                
+                // Hide individual controls
+                document.getElementById('brightnessControl').style.display = 'none';
+                document.getElementById('contrastControl').style.display = 'none';
+                document.getElementById('saturationControl').style.display = 'none';
+                document.getElementById('blurControl').style.display = 'none';
+            }
+
+            deactivateAllTools() {
+                document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+                this.editor.stopCropMode();
+            }
+        }
+
+        // Initialize the advanced editor
+        const advancedEditor = new AdvancedImageEditor();
+    </script>
+</body>
+</html>
