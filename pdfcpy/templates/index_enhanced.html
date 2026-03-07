@@ -418,6 +418,109 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Compression Preview Styles */
+        .compression-results {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .quality-options {
+            margin-top: 15px;
+        }
+
+        .quality-option {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .quality-option strong {
+            color: #495057;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .quality-option .size {
+            color: #28a745;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .quality-option .ratio {
+            color: #007bff;
+            font-weight: 600;
+        }
+
+        .quality-option .description {
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .quality-option .error {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .quality-display {
+            text-align: center;
+            margin-top: 5px;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+
+        /* Compression Info Styles */
+        .compression-info {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 10px;
+        }
+
+        .compression-info p {
+            margin-bottom: 10px;
+            color: #495057;
+        }
+
+        .compression-info p:last-child {
+            margin-bottom: 0;
+            font-style: italic;
+            color: #6c757d;
+        }
     </style>
 </head>
 <body>
@@ -480,6 +583,12 @@
             </h2>
             
             <div class="tools-grid">
+                <div class="tool-card" data-tool="compress">
+                    <i class="fas fa-compress tool-icon"></i>
+                    <div class="tool-name">Compress PDF</div>
+                    <div class="tool-description">Reduce PDF file size with actual compression</div>
+                </div>
+                
                 <div class="tool-card" data-tool="merge">
                     <i class="fas fa-object-group tool-icon"></i>
                     <div class="tool-name">Merge PDFs</div>
@@ -516,6 +625,28 @@
                     <div class="tool-description">Extract images from PDF</div>
                 </div>
             </div>
+        </div>
+
+        <!-- Compression Options -->
+        <div class="options-section" id="compressOptions">
+            <h3 class="section-title">
+                <i class="fas fa-compress"></i>
+                Compress PDF Options
+            </h3>
+            
+            <div class="form-group">
+                <label>Compression Method</label>
+                <div class="compression-info">
+                    <p><strong>Working Compression Method</strong></p>
+                    <p>This method removes metadata and optimizes the PDF structure to reduce file size while maintaining quality.</p>
+                    <p><em>Note: Compression results vary depending on PDF content. Some PDFs may already be optimally compressed.</em></p>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" id="compressBtn">
+                <i class="fas fa-compress"></i>
+                Compress PDF
+            </button>
         </div>
 
         <!-- Merge Options -->
@@ -783,6 +914,7 @@
         document.getElementById('pageNumbersBtn').addEventListener('click', addPageNumbers);
         document.getElementById('convertImagesBtn').addEventListener('click', convertToImages);
         document.getElementById('extractImagesBtn').addEventListener('click', extractImages);
+        document.getElementById('compressBtn').addEventListener('click', compressPDF);
 
         // Functions
         function handleFiles(files) {
@@ -1188,6 +1320,49 @@
             })
             .catch(error => {
                 showError(error.message);
+            });
+        }
+
+        function compressPDF() {
+            if (!currentFile) {
+                showError('Please select a PDF file');
+                return;
+            }
+            
+            showProgress('Compressing PDF...');
+            
+            const formData = new FormData();
+            formData.append('file', currentFile);
+            
+            fetch('/api/compress', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.error);
+                    });
+                }
+            })
+            .then(blob => {
+                downloadFile(blob, 'compressed.pdf');
+                
+                // Show compression results
+                const originalSize = currentFile.size;
+                const compressedSize = blob.size;
+                const compressionRatio = (1 - compressedSize / originalSize) * 100;
+                
+                showSuccess(`PDF compressed successfully! Size reduced by ${compressionRatio.toFixed(1)}%`);
+            })
+            .catch(error => {
+                if (error.message.includes('COMPRESSION_FAILED') || error.message.includes('NO_COMPRESSION_ACHIEVED')) {
+                    showError('This PDF could not be compressed. It may already be optimally compressed or contain mostly text.');
+                } else {
+                    showError(error.message);
+                }
             });
         }
     </script>
