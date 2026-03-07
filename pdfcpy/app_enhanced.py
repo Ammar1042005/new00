@@ -22,6 +22,18 @@ from enhanced_pdf_tools import (
     safe_pdf_operation,
     MAX_FILE_SIZE
 )
+from enhanced_compression import (
+    compress_pdf_enhanced,
+    compress_pdf_with_ghostscript,
+    get_compression_preview,
+    validate_compression_settings
+)
+from aggressive_compression import (
+    compress_pdf_aggressive_v2,
+    compress_pdf_multi_method,
+    compress_pdf_image_based
+)
+from final_working_compression import compress_pdf_simple
 
 # Initialize Flask app
 app = Flask(__name__, static_folder='static', template_folder='templates')
@@ -302,6 +314,186 @@ def pdf_to_images():
         return jsonify({"success": False, "error": str(e), "error_code": e.error_code}), 400
     except Exception as e:
         return jsonify({"success": False, "error": f"Error converting PDF to images: {str(e)}"}), 500
+
+
+@app.route('/api/compress', methods=['POST'])
+def compress_pdf():
+    """Working PDF compression that actually reduces file size"""
+    try:
+        file = request.files.get('file')
+        
+        if not file:
+            return jsonify({"success": False, "error": "Please provide a PDF file"}), 400
+        
+        # Validate file
+        if not file.filename.lower().endswith('.pdf'):
+            return jsonify({"success": False, "error": f"Invalid file: {file.filename}"}), 400
+        
+        pdf_data = file.read()
+        validate_file_size(pdf_data)
+        
+        original_size = len(pdf_data)
+        
+        # Create temporary files
+        import tempfile
+        with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as temp_input:
+            temp_input.write(pdf_data)
+            temp_input_path = temp_input.name
+        
+        with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as temp_output:
+            temp_output_path = temp_output.name
+        
+        try:
+            # Use the working compression method
+            success = compress_pdf_simple(temp_input_path, temp_output_path)
+            
+            if not success:
+                return jsonify({
+                    "success": False,
+                    "error": "Unable to compress this PDF. The file may already be optimally compressed.",
+                    "error_code": "COMPRESSION_FAILED",
+                    "original_size": original_size,
+                    "note": "This PDF may contain mostly text or already be compressed."
+                }), 400
+            
+            # Read the compressed file
+            with open(temp_output_path, 'rb') as f:
+                compressed_pdf = f.read()
+            
+            compressed_size = len(compressed_pdf)
+            compression_ratio = (1 - compressed_size / original_size) * 100
+            
+            # Verify compression actually reduced size
+            if compressed_size >= original_size:
+                return jsonify({
+                    "success": False,
+                    "error": "Compression did not reduce file size.",
+                    "error_code": "NO_COMPRESSION_ACHIEVED",
+                    "original_size": original_size,
+                    "compressed_size": compressed_size
+                }), 400
+            
+            return send_file(
+                io.BytesIO(compressed_pdf),
+                mimetype='application/pdf',
+                as_attachment=True,
+                download_name='compressed.pdf'
+            )
+            
+        finally:
+            # Clean up temporary files
+            try:
+                os.unlink(temp_input_path)
+                os.unlink(temp_output_path)
+            except:
+                pass
+        
+    except PDFProcessingError as e:
+        return jsonify({"success": False, "error": str(e), "error_code": e.error_code}), 400
+    except Exception as e:
+        return jsonify({"success": False, "error": f"Error compressing PDF: {str(e)}"}), 500
+
+
+@app.route('/api/compress-preview', methods=['POST'])
+def get_compression_preview_endpoint():
+    """Get compression preview for different quality levels"""
+    try:
+        file = request.files.get('file')
+        if not file:
+            return jsonify({"success": False, "error": "No file provided"}), 400
+        
+        # Validate file
+        if not file.filename.lower().endswith('.pdf'):
+            return jsonify({"success": False, "error": "Invalid file format"}), 400
+        
+        # Read file
+        pdf_data = file.read()
+        validate_file_size(pdf_data)
+        
+        # Get compression preview
+        preview = get_compression_preview(pdf_data)
+        
+        return jsonify({
+            "success": True,
+            "preview": preview,
+            "file_name": file.filename
+        })
+        
+    except PDFProcessingError as e:
+        return jsonify({"success": False, "error": str(e), "error_code": e.error_code}), 400
+    except Exception as e:
+        return jsonify({"success": False, "error": f"Unexpected error: {str(e)}"}), 500
+
+
+@app.route('/api/compress', methods=['POST'])
+def compress_pdf():
+    """Enhanced PDF compression with actual size reduction"""
+    try:
+        file = request.files.get('file')
+        quality = request.form.get('quality', 'medium')
+        image_quality = int(request.form.get('image_quality', 75))
+        use_ghostscript = request.form.get('use_ghostscript', 'false').lower() == 'true'
+        remove_metadata = request.form.get('remove_metadata', 'true').lower() == 'true'
+        optimize_fonts = request.form.get('optimize_fonts', 'true').lower() == 'true'
+        
+        if not file:
+            return jsonify({"success": False, "error": "Please provide a PDF file"}), 400
+        
+        # Validate file
+        if not file.filename.lower().endswith('.pdf'):
+            return jsonify({"success": False, "error": f"Invalid file: {file.filename}"}), 400
+        
+        # Validate compression settings
+        validation = validate_compression_settings(quality, image_quality)
+        if not validation['valid']:
+            return jsonify({
+                "success": False, 
+                "error": f"Invalid compression settings: {', '.join(validation['errors'])}",
+                "error_code": "INVALID_COMPRESSION_SETTINGS"
+            }), 400
+        
+        pdf_data = file.read()
+        validate_file_size(pdf_data)
+        
+        original_size = len(pdf_data)
+        
+        # Compress PDF
+        if use_ghostscript:
+            try:
+                compressed_pdf = safe_pdf_operation(compress_pdf_with_ghostscript, pdf_data, quality)
+            except PDFProcessingError as e:
+                if e.error_code == "GHOSTSCRIPT_UNAVAILABLE":
+                    # Fallback to regular compression
+                    compressed_pdf = safe_pdf_operation(compress_pdf_enhanced, pdf_data, quality, image_quality, remove_metadata, optimize_fonts)
+                else:
+                    raise
+        else:
+            compressed_pdf = safe_pdf_operation(compress_pdf_enhanced, pdf_data, quality, image_quality, remove_metadata, optimize_fonts)
+        
+        compressed_size = len(compressed_pdf)
+        compression_ratio = (1 - compressed_size / original_size) * 100
+        
+        # Check if compression actually reduced size
+        if compressed_size >= original_size:
+            return jsonify({
+                "success": False,
+                "error": "Compression did not reduce file size. Try a higher compression level.",
+                "error_code": "NO_COMPRESSION_ACHIEVED",
+                "original_size": original_size,
+                "compressed_size": compressed_size
+            }), 400
+        
+        return send_file(
+            io.BytesIO(compressed_pdf),
+            mimetype='application/pdf',
+            as_attachment=True,
+            download_name=f'compressed_{quality}.pdf'
+        )
+        
+    except PDFProcessingError as e:
+        return jsonify({"success": False, "error": str(e), "error_code": e.error_code}), 400
+    except Exception as e:
+        return jsonify({"success": False, "error": f"Error compressing PDF: {str(e)}"}), 500
 
 
 @app.route('/api/extract-images', methods=['POST'])
