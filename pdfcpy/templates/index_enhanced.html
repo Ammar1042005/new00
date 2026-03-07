@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Suite - Enhanced Document Processing</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .upload-section, .preview-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #667eea;
+        }
+
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            background: #fafafa;
+        }
+
+        .upload-area:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .upload-area.dragover {
+            border-color: #667eea;
+            background: #e8f0fe;
+        }
+
+        .upload-icon {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-size-limit {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .file-size-limit i {
+            color: #28a745;
+            margin-right: 5px;
+        }
+
+        .file-preview-container {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            background: #f9f9f9;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .file-preview-header {
+            margin-bottom: 16px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+        }
+
+        .file-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            line-height: 1.4;
+        }
+
+        .file-details {
+            display: flex;
+            gap: 16px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .file-details {
+                flex-direction: column;
+                gap: 4px;
+            }
+            
+            .file-name {
+                font-size: 14px;
+            }
+        }
+
+        .file-preview-content {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .preview-placeholder {
+            text-align: center;
+            color: #999;
+        }
+
+        .preview-placeholder i {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .tools-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .tool-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .tool-card.active {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .tool-icon {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .tool-description {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .options-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .options-section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-container.active {
+            display: block;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #667eea;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border: 1px solid #f5c6cb;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .validation-error {
+            color: #dc3545;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .validation-error.active {
+            display: block;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-file-pdf"></i> PDF Suite</h1>
+            <p>Enhanced Document Processing Platform</p>
+        </header>
+
+        <div class="main-content">
+            <div class="upload-section">
+                <h2 class="section-title">
+                    <i class="fas fa-upload"></i>
+                    Upload Document
+                </h2>
+                
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <p class="upload-text">Drag & drop your PDF files here</p>
+                    <p>or <strong>click to browse</strong></p>
+                    <input type="file" id="fileInput" class="file-input" multiple accept=".pdf">
+                </div>
+                
+                <div class="file-size-limit">
+                    <i class="fas fa-info-circle"></i>
+                    Maximum file size: {{ max_file_size_display }}
+                    <br>
+                    Supported formats: PDF
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <h2 class="section-title">
+                    <i class="fas fa-eye"></i>
+                    File Preview
+                </h2>
+                
+                <div class="file-preview-container">
+                    <div class="file-preview-header">
+                        <div class="file-name" id="fileName">No file selected</div>
+                        <div class="file-details" id="fileDetails">
+                            <span class="file-size">Size: --</span>
+                            <span class="file-pages">Pages: --</span>
+                        </div>
+                    </div>
+                    <div class="file-preview-content" id="previewContent">
+                        <div class="preview-placeholder">
+                            <i class="fas fa-file-pdf"></i>
+                            <p>Select a file to preview</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tools-section">
+            <h2 class="section-title">
+                <i class="fas fa-tools"></i>
+                PDF Tools
+            </h2>
+            
+            <div class="tools-grid">
+                <div class="tool-card" data-tool="merge">
+                    <i class="fas fa-object-group tool-icon"></i>
+                    <div class="tool-name">Merge PDFs</div>
+                    <div class="tool-description">Combine multiple PDFs into one</div>
+                </div>
+                
+                <div class="tool-card" data-tool="split">
+                    <i class="fas fa-cut tool-icon"></i>
+                    <div class="tool-name">Split PDF</div>
+                    <div class="tool-description">Split PDF into pages or ranges</div>
+                </div>
+                
+                <div class="tool-card" data-tool="rotate">
+                    <i class="fas fa-sync-alt tool-icon"></i>
+                    <div class="tool-name">Rotate PDF</div>
+                    <div class="tool-description">Rotate pages by specified angles</div>
+                </div>
+                
+                <div class="tool-card" data-tool="page-numbers">
+                    <i class="fas fa-list-ol tool-icon"></i>
+                    <div class="tool-name">Add Page Numbers</div>
+                    <div class="tool-description">Add page numbers to PDF</div>
+                </div>
+                
+                <div class="tool-card" data-tool="convert-images">
+                    <i class="fas fa-images tool-icon"></i>
+                    <div class="tool-name">PDF to Images</div>
+                    <div class="tool-description">Convert PDF pages to images</div>
+                </div>
+                
+                <div class="tool-card" data-tool="extract-images">
+                    <i class="fas fa-image tool-icon"></i>
+                    <div class="tool-name">Extract Images</div>
+                    <div class="tool-description">Extract images from PDF</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Merge Options -->
+        <div class="options-section" id="mergeOptions">
+            <h3 class="section-title">
+                <i class="fas fa-object-group"></i>
+                Merge PDFs Options
+            </h3>
+            <p>Select multiple PDF files to merge them into a single document.</p>
+            <button class="btn btn-primary" id="mergeBtn">
+                <i class="fas fa-object-group"></i>
+                Merge PDFs
+            </button>
+        </div>
+
+        <!-- Split Options -->
+        <div class="options-section" id="splitOptions">
+            <h3 class="section-title">
+                <i class="fas fa-cut"></i>
+                Split PDF Options
+            </h3>
+            <div class="form-group">
+                <label>Split Type</label>
+                <select class="form-control" id="splitType">
+                    <option value="range">Page Range</option>
+                    <option value="extract">Extract Specific Pages</option>
+                </select>
+            </div>
+            
+            <div id="rangeOptions">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>From Page</label>
+                        <input type="number" class="form-control" id="fromPage" min="1" value="1">
+                        <div class="validation-error" id="fromPageError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>To Page</label>
+                        <input type="number" class="form-control" id="toPage" min="1" value="1">
+                        <div class="validation-error" id="toPageError"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="extractOptions" style="display: none;">
+                <div class="form-group">
+                    <label>Page Numbers (comma-separated)</label>
+                    <input type="text" class="form-control" id="pageNumbers" placeholder="1,3,5,10">
+                    <div class="validation-error" id="pageNumbersError"></div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" id="splitBtn">
+                <i class="fas fa-cut"></i>
+                Split PDF
+            </button>
+        </div>
+
+        <!-- Rotate Options -->
+        <div class="options-section" id="rotateOptions">
+            <h3 class="section-title">
+                <i class="fas fa-sync-alt"></i>
+                Rotate PDF Options
+            </h3>
+            <div class="form-group">
+                <label>Rotation Angle</label>
+                <select class="form-control" id="rotationAngle">
+                    <option value="90">90° (Clockwise)</option>
+                    <option value="180">180°</option>
+                    <option value="270">270° (Clockwise)</option>
+                    <option value="-90">90° (Counter-clockwise)</option>
+                    <option value="-180">180°</option>
+                    <option value="-270">270° (Counter-clockwise)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Page Range</label>
+                <select class="form-control" id="pageRange">
+                    <option value="all">All Pages</option>
+                    <option value="1">Page 1 Only</option>
+                    <option value="2">Page 2 Only</option>
+                    <option value="3">Page 3 Only</option>
+                    <option value="4">Page 4 Only</option>
+                    <option value="5">Page 5 Only</option>
+                </select>
+            </div>
+            
+            <button class="btn btn-primary" id="rotateBtn">
+                <i class="fas fa-sync-alt"></i>
+                Rotate PDF
+            </button>
+        </div>
+
+        <!-- Page Numbers Options -->
+        <div class="options-section" id="pageNumbersOptions">
+            <h3 class="section-title">
+                <i class="fas fa-list-ol"></i>
+                Add Page Numbers Options
+            </h3>
+            <div class="form-group">
+                <label>Format</label>
+                <input type="text" class="form-control" id="numberFormat" value="Page {n}">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Position</label>
+                    <select class="form-control" id="numberPosition">
+                        <option value="bottom-center">Bottom Center</option>
+                        <option value="bottom-left">Bottom Left</option>
+                        <option value="bottom-right">Bottom Right</option>
+                        <option value="top-center">Top Center</option>
+                        <option value="top-left">Top Left</option>
+                        <option value="top-right">Top Right</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Font Size</label>
+                    <input type="number" class="form-control" id="fontSize" min="8" max="72" value="12">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Start Page</label>
+                <input type="number" class="form-control" id="startPage" min="1" value="1">
+            </div>
+            
+            <button class="btn btn-primary" id="pageNumbersBtn">
+                <i class="fas fa-list-ol"></i>
+                Add Page Numbers
+            </button>
+        </div>
+
+        <!-- Convert to Images Options -->
+        <div class="options-section" id="convertImagesOptions">
+            <h3 class="section-title">
+                <i class="fas fa-images"></i>
+                Convert to Images Options
+            </h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>DPI (Quality)</label>
+                    <select class="form-control" id="imageDPI">
+                        <option value="72">72 DPI (Low)</option>
+                        <option value="150" selected>150 DPI (Medium)</option>
+                        <option value="300">300 DPI (High)</option>
+                        <option value="600">600 DPI (Ultra)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Format</label>
+                    <select class="form-control" id="imageFormat">
+                        <option value="PNG" selected>PNG</option>
+                        <option value="JPEG">JPEG</option>
+                        <option value="WEBP">WEBP</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" id="convertImagesBtn">
+                <i class="fas fa-images"></i>
+                Convert to Images
+            </button>
+        </div>
+
+        <!-- Extract Images Options -->
+        <div class="options-section" id="extractImagesOptions">
+            <h3 class="section-title">
+                <i class="fas fa-image"></i>
+                Extract Images Options
+            </h3>
+            <p>Extract all images from the PDF document.</p>
+            <button class="btn btn-primary" id="extractImagesBtn">
+                <i class="fas fa-image"></i>
+                Extract Images
+            </button>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">Processing...</div>
+        </div>
+
+        <!-- Messages -->
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentFile = null;
+        let currentTool = null;
+        let uploadedFiles = [];
+
+        // DOM elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileName = document.getElementById('fileName');
+        const fileDetails = document.getElementById('fileDetails');
+        const previewContent = document.getElementById('previewContent');
+        const toolCards = document.querySelectorAll('.tool-card');
+        const optionsSections = document.querySelectorAll('.options-section');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+
+        // File upload handling
+        uploadArea.addEventListener('click', () => fileInput.click());
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        // Tool selection
+        toolCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const tool = card.dataset.tool;
+                selectTool(tool);
+            });
+        });
+
+        // Split type change
+        document.getElementById('splitType').addEventListener('change', (e) => {
+            const rangeOptions = document.getElementById('rangeOptions');
+            const extractOptions = document.getElementById('extractOptions');
+            
+            if (e.target.value === 'range') {
+                rangeOptions.style.display = 'block';
+                extractOptions.style.display = 'none';
+            } else {
+                rangeOptions.style.display = 'none';
+                extractOptions.style.display = 'block';
+            }
+        });
+
+        // Page range validation
+        document.getElementById('fromPage').addEventListener('input', validatePageRange);
+        document.getElementById('toPage').addEventListener('input', validatePageRange);
+
+        // Button handlers
+        document.getElementById('mergeBtn').addEventListener('click', mergePDFs);
+        document.getElementById('splitBtn').addEventListener('click', splitPDF);
+        document.getElementById('rotateBtn').addEventListener('click', rotatePDF);
+        document.getElementById('pageNumbersBtn').addEventListener('click', addPageNumbers);
+        document.getElementById('convertImagesBtn').addEventListener('click', convertToImages);
+        document.getElementById('extractImagesBtn').addEventListener('click', extractImages);
+
+        // Functions
+        function handleFiles(files) {
+            const fileArray = Array.from(files);
+            const pdfFiles = fileArray.filter(file => file.name.toLowerCase().endsWith('.pdf'));
+            
+            if (pdfFiles.length === 0) {
+                showError('Please select PDF files only');
+                return;
+            }
+            
+            if (currentTool === 'merge') {
+                uploadedFiles = pdfFiles;
+                updatePreview(pdfFiles[0]);
+                showSuccess(`${pdfFiles.length} PDF files selected for merging`);
+            } else {
+                if (pdfFiles.length > 1) {
+                    showError('Please select only one PDF file for this operation');
+                    return;
+                }
+                currentFile = pdfFiles[0];
+                updatePreview(currentFile);
+                getPDFInfo(currentFile);
+            }
+        }
+
+        function updatePreview(file) {
+            fileName.textContent = file.name;
+            const fileSize = (file.size / 1024 / 1024).toFixed(1);
+            fileDetails.innerHTML = `
+                <span class="file-size">Size: ${fileSize}MB</span>
+                <span class="file-pages">Pages: Loading...</span>
+            `;
+            
+            previewContent.innerHTML = `
+                <div class="preview-placeholder">
+                    <i class="fas fa-file-pdf"></i>
+                    <p>${file.name}</p>
+                </div>
+            `;
+        }
+
+        function getPDFInfo(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            fetch('/api/pdf-info', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const pages = fileDetails.querySelector('.file-pages');
+                    pages.textContent = `Pages: ${data.info.page_count}`;
+                    
+                    // Update page range options
+                    updatePageRangeOptions(data.info.page_count);
+                } else {
+                    showError(data.error);
+                }
+            })
+            .catch(error => {
+                showError('Error getting PDF information');
+                console.error(error);
+            });
+        }
+
+        function updatePageRangeOptions(totalPages) {
+            const pageRange = document.getElementById('pageRange');
+            pageRange.innerHTML = '<option value="all">All Pages</option>';
+            
+            for (let i = 1; i <= Math.min(totalPages, 10); i++) {
+                pageRange.innerHTML += `<option value="${i}">Page ${i} Only</option>`;
+            }
+            
+            // Update max values for page inputs
+            document.getElementById('fromPage').max = totalPages;
+            document.getElementById('toPage').max = totalPages;
+            document.getElementById('toPage').value = totalPages;
+            document.getElementById('startPage').max = totalPages;
+        }
+
+        function selectTool(tool) {
+            currentTool = tool;
+            
+            // Update UI
+            toolCards.forEach(card => {
+                card.classList.remove('active');
+                if (card.dataset.tool === tool) {
+                    card.classList.add('active');
+                }
+            });
+            
+            // Show appropriate options
+            optionsSections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            const optionsId = tool + 'Options';
+            const optionsSection = document.getElementById(optionsId);
+            if (optionsSection) {
+                optionsSection.classList.add('active');
+            }
+        }
+
+        function validatePageRange() {
+            const fromPage = parseInt(document.getElementById('fromPage').value);
+            const toPage = parseInt(document.getElementById('toPage').value);
+            const totalPages = parseInt(document.getElementById('toPage').max);
+            
+            // Clear previous errors
+            document.getElementById('fromPageError').classList.remove('active');
+            document.getElementById('toPageError').classList.remove('active');
+            
+            let hasError = false;
+            
+            if (fromPage < 1 || fromPage > totalPages) {
+                document.getElementById('fromPageError').textContent = `Must be between 1 and ${totalPages}`;
+                document.getElementById('fromPageError').classList.add('active');
+                hasError = true;
+            }
+            
+            if (toPage < 1 || toPage > totalPages) {
+                document.getElementById('toPageError').textContent = `Must be between 1 and ${totalPages}`;
+                document.getElementById('toPageError').classList.add('active');
+                hasError = true;
+            }
+            
+            if (fromPage > toPage) {
+                document.getElementById('toPageError').textContent = 'Must be greater than or equal to From page';
+                document.getElementById('toPageError').classList.add('active');
+                hasError = true;
+            }
+            
+            return !hasError;
+        }
+
+        function showProgress(message = 'Processing...') {
+            progressContainer.classList.add('active');
+            progressFill.style.width = '0%';
+            progressText.textContent = message;
+            errorMessage.classList.remove('active');
+            successMessage.classList.remove('active');
+        }
+
+        function updateProgress(percent, message) {
+            progressFill.style.width = percent + '%';
+            progressText.textContent = message;
+        }
+
+        function hideProgress() {
+            progressContainer.classList.remove('active');
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('active');
+            successMessage.classList.remove('active');
+            hideProgress();
+        }
+
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.classList.add('active');
+            errorMessage.classList.remove('active');
+            hideProgress();
+        }
+
+        function downloadFile(blob, filename) {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        // API functions
+        function mergePDFs() {
+            if (uploadedFiles.length < 2) {
+                showError('Please select at least 2 PDF files to merge');
+                return;
+            }
+            
+            showProgress('Merging PDFs...');
+            
+            const formData = new FormData();
+            uploadedFiles.forEach(file => {
+                formData.append('files', file);
+            });
+            
+            fetch('/api/merge', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.error);
+                    });
+                }
+            })
+            .then(blob => {
+                downloadFile(blob, 'merged.pdf');
+                showSuccess('PDFs merged successfully!');
+            })
+            .catch(error => {
+                showError(error.message);
+            });
+        }
+
+        function splitPDF() {
+            if (!currentFile) {
+                showError('Please select a PDF file');
+                return;
+            }
+            
+            const splitType = document.getElementById('splitType').value;
+            
+            if (splitType === 'range') {
+                if (!validatePageRange()) {
+                    return;
+                }
+            }
+            
+            showProgress('Splitting PDF...');
+            
+            const formData = new FormData();
+            formData.append('file', currentFile);
+            formData.append('type', splitType);
+            
+            if (splitType === 'range') {
+                formData.append('from_page', document.getElementById('fromPage').value);
+                formData.append('to_page', document.getElementById('toPage').value);
+            } else {
+                formData.append('pages', document.getElementById('pageNumbers').value);
+            }
+            
+            fetch('/api/split', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.error);
+                    });
+                }
+            })
+            .then(blob => {
+                const filename = splitType === 'range' ? 
+                    `split_pages_${document.getElementById('fromPage').value}-${document.getElementById('toPage').value}.pdf` :
+                    'extracted_pages.pdf';
+                downloadFile(blob, filename);
+                showSuccess('PDF split successfully!');
+            })
+            .catch(error => {
+                showError(error.message);
+            });
+        }
+
+        function rotatePDF() {
+            if (!currentFile) {
+                showError('Please select a PDF file');
+                return;
+            }
+            
+            showProgress('Rotating PDF...');
+            
+            const formData = new FormData();
+            formData.append('file', currentFile);
+            formData.append('angle', document.getElementById('rotationAngle').value);
+            formData.append('page_range', document.getElementById('pageRange').value);
+            
+            fetch('/api/rotate', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.error);
+                    });
+                }
+            })
+            .then(blob => {
+                downloadFile(blob, 'rotated.pdf');
+                showSuccess('PDF rotated successfully!');
+            })
+            .catch(error => {
+                showError(error.message);
+            });
+        }
+
+        function addPageNumbers() {
+            if (!currentFile) {
+                showError('Please select a PDF file');
+                return;
+            }
+            
+            showProgress('Adding page numbers...');
+            
+            const formData = new FormData();
+            formData.append('file', currentFile);
+            formData.append('format', document.getElementById('numberFormat').value);
+            formData.append('position', document.getElementById('numberPosition').value);
+            formData.append('font_size', document.getElementById('fontSize').value);
+            formData.append('start_page', document.getElementById('startPage').value);
+            
+            fetch('/api/add-page-numbers', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.error);
+                    });
+                }
+            })
+            .then(blob => {
+                downloadFile(blob, 'page_numbers.pdf');
+                showSuccess('Page numbers added successfully!');
+            })
+            .catch(error => {
+                showError(error.message);
+            });
+        }
+
+        function convertToImages() {
+            if (!currentFile) {
+                showError('Please select a PDF file');
+                return;
+            }
+            
+            showProgress('Converting to images...');
+            
+            const formData = new FormData();
+            formData.append('file', currentFile);
+            formData.append('dpi', document.getElementById('imageDPI').value);
+            formData.append('format', document.getElementById('imageFormat').value);
+            
+            fetch('/api/convert-to-images', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.error);
+                    });
+                }
+            })
+            .then(blob => {
+                downloadFile(blob, 'pdf_images.zip');
+                showSuccess('PDF converted to images successfully!');
+            })
+            .catch(error => {
+                showError(error.message);
+            });
+        }
+
+        function extractImages() {
+            if (!currentFile) {
+                showError('Please select a PDF file');
+                return;
+            }
+            
+            showProgress('Extracting images...');
+            
+            const formData = new FormData();
+            formData.append('file', currentFile);
+            
+            fetch('/api/extract-images', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.error);
+                    });
+                }
+            })
+            .then(blob => {
+                downloadFile(blob, 'extracted_images.zip');
+                showSuccess('Images extracted successfully!');
+            })
+            .catch(error => {
+                showError(error.message);
+            });
+        }
+    </script>
+</body>
+</html>
