@@ -88,7 +88,7 @@ class PDFTools {
                 </div>
             `;
             
-            fileItem.appendChild(fileInfo);
+            //fileItem.appendChild(fileInfo);
             
             // Add preview based on file type
             if (file.type.startsWith('image/') || file.name.toLowerCase().endsWith('.png') || file.name.toLowerCase().endsWith('.jpg') || file.name.toLowerCase().endsWith('.jpeg')) {
@@ -98,7 +98,7 @@ class PDFTools {
             } else {
                 this.createDocumentPreview(file, fileItem);
             }
-            
+               fileList.appendChild(fileInfo);
             fileList.appendChild(fileItem);
         });
 

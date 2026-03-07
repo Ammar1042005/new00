@@ -446,3 +446,39 @@ footer {
 .btn-small:active {
     transform: translateY(0);
 }
+
+.filter-container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+    margin-bottom:35px;
+}
+
+.filter-pill{
+    padding:10px 18px;
+    border-radius:25px;
+    border:1px solid #d1d5db;
+    background:#f3f4f6;
+    font-size:14px;
+    font-weight:500;
+    cursor:pointer;
+    transition:all 0.25s ease;
+}
+
+.filter-pill:hover{
+    background:#e5e7eb;
+}
+
+.filter-pill.active{
+    background:#2f2f38;
+    color:white;
+    border-color:#2f2f38;
+}
+.filter-pill{
+    box-shadow:0 2px 5px rgba(0,0,0,0.08);
+}
+.savesettings{
+    margin-bottom: 10px;
+}
+    
