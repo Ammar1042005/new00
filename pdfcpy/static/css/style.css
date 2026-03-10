@@ -7,7 +7,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #A8DF8E 0%, #F0FFDF 100%);
     min-height: 100vh;
     color: #333;
 }
@@ -63,7 +63,7 @@ header p {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
+    background: linear-gradient(90deg, #A8DF8E, #F0FFDF);
 }
 
 .tool-card:hover {
@@ -83,7 +83,7 @@ header p {
 .tool-icon {
     width: 30px;
     height: 30px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #A8DF8E, #F0FFDF);
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -114,8 +114,8 @@ header p {
 
 .form-control:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #A8DF8E;
+    box-shadow: 0 0 0 3px rgba(168, 223, 142, 0.1);
 }
 
 input[type="file"] {
@@ -127,12 +127,12 @@ input[type="file"] {
 }
 
 input[type="file"]:hover {
-    border-color: #667eea;
-    background: #f0f2ff;
+    border-color: #A8DF8E;
+    background: #f0f8f0;
 }
 
 .btn {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #A8DF8E, #F0FFDF);
     color: white;
     border: none;
     padding: 12px 24px;
@@ -223,7 +223,7 @@ input[type="file"]:hover {
     width: 20px;
     height: 20px;
     border: 3px solid #f3f3f3;
-    border-top: 3px solid #667eea;
+    border-top: 3px solid #A8DF8E;
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-right: 10px;
@@ -298,7 +298,7 @@ footer {
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #667eea, #764ba2);
+    background: linear-gradient(90deg, #A8DF8E, #F0FFDF);
     width: 0%;
     transition: width 0.3s ease;
 }
@@ -430,7 +430,7 @@ footer {
 .btn-small {
     padding: 4px 8px;
     font-size: 0.75rem;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #A8DF8E, #F0FFDF);
     color: white;
     border: none;
     border-radius: 4px;
@@ -447,12 +447,30 @@ footer {
     transform: translateY(0);
 }
 
-.filter-container{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    justify-content:center;
-    margin-bottom:35px;
+.category-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin: 30px 0 20px;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.category-section {
+    margin-bottom: 40px;
+}
+
+.category-section .tools-grid {
+    margin-bottom: 0;
+}
+
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 35px;
 }
 
 .filter-pill{
