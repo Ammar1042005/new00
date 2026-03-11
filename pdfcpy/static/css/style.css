@@ -1,4 +1,4 @@
-/* Modern iLovePDF-style CSS */
+/* Modern Professional UI Design */
 * {
     margin: 0;
     padding: 0;
@@ -7,9 +7,32 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, #A8DF8E 0%, #F0FFDF 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
     min-height: 100vh;
-    color: #333;
+    color: #2d3748;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(245, 87, 108, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.1) 0%, transparent 50%);
+    z-index: -1;
+    animation: floatingGradient 20s ease-in-out infinite;
+}
+
+@keyframes floatingGradient {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-20px, -20px) rotate(1deg); }
+    66% { transform: translate(20px, -10px) rotate(-1deg); }
 }
 
 .container {
@@ -21,19 +44,126 @@ body {
 header {
     text-align: center;
     color: white;
-    padding: 40px 0;
-    margin-bottom: 30px;
+    padding: 60px 40px;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border-radius: 24px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 80px rgba(102, 126, 234, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+        transparent 30%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        transparent 70%);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%); }
+    100% { transform: translateX(100%) translateY(100%); }
 }
 
 header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #ffffff, #f0f0f0, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
 }
 
 header p {
+    color: rgba(255, 255, 255, 0.9);
     font-size: 1.2rem;
+    opacity: 0.95;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+}
+
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.filter-pill {
+    padding: 12px 24px;
+    border-radius: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.filter-pill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.filter-pill:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.filter-pill:hover::before {
+    left: 100%;
+}
+
+.filter-pill.active {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-color: transparent;
+    color: white;
+    font-weight: 700;
+    box-shadow: 
+        0 10px 30px rgba(102, 126, 234, 0.4),
+        0 0 20px rgba(102, 126, 234, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px) scale(1.05);
+}
+
+header p {
+    color: #5a6c7d;
+    font-size: 1.1rem;
     opacity: 0.9;
     max-width: 600px;
     margin: 0 auto;
@@ -47,13 +177,18 @@ header p {
 }
 
 .tool-card {
-    background: white;
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 60px rgba(102, 126, 234, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .tool-card::before {
@@ -62,92 +197,294 @@ header p {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #A8DF8E, #F0FFDF);
+    height: 6px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe);
+    background-size: 200% 100%;
+    animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.tool-card.organize::before {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.tool-card.optimize::before {
+    background: linear-gradient(90deg, #f093fb, #f5576c);
+}
+
+.tool-card.edit::before {
+    background: linear-gradient(90deg, #4facfe, #667eea);
+}
+
+.tool-card.convert::before {
+    background: linear-gradient(90deg, #764ba2, #f093fb);
+}
+
+.tool-card.security::before {
+    background: linear-gradient(90deg, #f5576c, #4facfe);
+}
+
+.tool-card.setting::before {
+    background: linear-gradient(90deg, #667eea, #f093fb);
 }
 
 .tool-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.15),
+        0 0 80px rgba(102, 126, 234, 0.2),
+        inset 0 0 30px rgba(255, 255, 255, 0.15);
 }
 
 .tool-card h3 {
-    color: #333;
-    font-size: 1.4rem;
-    margin-bottom: 15px;
+    color: white;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.tool-card p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-weight: 300;
 }
 
 .tool-icon {
-    width: 30px;
-    height: 30px;
-    background: linear-gradient(135deg, #A8DF8E, #F0FFDF);
-    border-radius: 8px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-weight: bold;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.form-group {
-    margin-bottom: 15px;
+.tool-card.organize .tool-icon {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.tool-card.optimize .tool-icon {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+}
+
+.tool-card.edit .tool-icon {
+    background: linear-gradient(135deg, #4facfe, #667eea);
+}
+
+.tool-card.convert .tool-icon {
+    background: linear-gradient(135deg, #764ba2, #f093fb);
+}
+
+.tool-card.security .tool-icon {
+    background: linear-gradient(135deg, #f5576c, #4facfe);
+}
+
+.tool-card.setting .tool-icon {
+    background: linear-gradient(135deg, #667eea, #f093fb);
+}
+
+.tool-icon img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.category-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: white;
+    margin: 50px 0 30px;
+    text-align: center;
+    padding-bottom: 15px;
+    background: linear-gradient(135deg, #ffffff, #f0f0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe);
+    border-radius: 2px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: #555;
-}
-
-.form-control {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #e1e5e9;
-    border-radius: 8px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-}
-
-.form-control:focus {
-    outline: none;
-    border-color: #A8DF8E;
-    box-shadow: 0 0 0 3px rgba(168, 223, 142, 0.1);
-}
-
-input[type="file"] {
-    padding: 10px;
-    background: #f8f9fa;
-    border: 2px dashed #dee2e6;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-input[type="file"]:hover {
-    border-color: #A8DF8E;
-    background: #f0f8f0;
-}
-
-.btn {
-    background: linear-gradient(135deg, #A8DF8E, #F0FFDF);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
+    margin-bottom: 8px;
     font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
+.form-control {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    color: white;
+    font-weight: 400;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 
+        0 0 0 4px rgba(102, 126, 234, 0.2),
+        0 8px 16px rgba(102, 126, 234, 0.1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
+}
+
+input[type="file"] {
+    padding: 15px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+input[type="file"]:hover {
+    border-color: #667eea;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    color: white;
+}
+
+.btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 10px 20px rgba(102, 126, 234, 0.3),
+        0 0 30px rgba(102, 126, 234, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 15px 30px rgba(102, 126, 234, 0.4),
+        0 0 40px rgba(102, 126, 234, 0.2),
+        inset 0 0 25px rgba(255, 255, 255, 0.15);
+    background: linear-gradient(135deg, #764ba2, #f093fb);
+}
+
+.tool-card.organize .btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.tool-card.optimize .btn {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+}
+
+.tool-card.edit .btn {
+    background: linear-gradient(135deg, #4facfe, #667eea);
+}
+
+.tool-card.convert .btn {
+    background: linear-gradient(135deg, #764ba2, #f093fb);
+}
+
+.tool-card.security .btn {
+    background: linear-gradient(135deg, #f5576c, #4facfe);
+}
+
+.tool-card.setting .btn {
+    background: linear-gradient(135deg, #667eea, #f093fb);
+}
+
+.tool-card.organize .btn:hover {
+    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #764ba2, #667eea);
+}
+
+.tool-card.optimize .btn:hover {
+    box-shadow: 0 15px 30px rgba(240, 147, 251, 0.4);
+    background: linear-gradient(135deg, #f5576c, #f093fb);
+}
+
+.tool-card.edit .btn:hover {
+    box-shadow: 0 15px 30px rgba(79, 172, 254, 0.4);
+    background: linear-gradient(135deg, #667eea, #4facfe);
+}
+
+.tool-card.convert .btn:hover {
+    box-shadow: 0 15px 30px rgba(118, 75, 162, 0.4);
+    background: linear-gradient(135deg, #f093fb, #764ba2);
+}
+
+.tool-card.security .btn:hover {
+    box-shadow: 0 15px 30px rgba(245, 87, 108, 0.4);
+    background: linear-gradient(135deg, #4facfe, #f5576c);
+}
+
+.tool-card.setting .btn:hover {
+    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #f093fb, #667eea);
 }
 
 .btn:disabled {
@@ -177,56 +514,67 @@ input[type="file"]:hover {
 }
 
 .output-area {
-    margin-top: 15px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    min-height: 50px;
-    border: 1px solid #e9ecef;
+    margin-top: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    min-height: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
 }
 
 .download-link {
     display: inline-block;
-    background: #28a745;
+    background: linear-gradient(135deg, #28a745, #20c997);
     color: white;
-    padding: 10px 20px;
+    padding: 12px 24px;
     text-decoration: none;
-    border-radius: 6px;
-    margin-top: 10px;
-    transition: background 0.3s ease;
+    border-radius: 8px;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
 }
 
 .download-link:hover {
-    background: #218838;
+    background: linear-gradient(135deg, #20c997, #28a745);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
 }
 
 .error-message {
-    background: #f8d7da;
-    color: #721c24;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #f5c6cb;
-    margin-top: 10px;
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.2), rgba(220, 53, 69, 0.1));
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    margin-top: 15px;
+    font-weight: 500;
 }
 
 .success-message {
-    background: #d4edda;
-    color: #155724;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #c3e6cb;
-    margin-top: 10px;
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.2), rgba(40, 167, 69, 0.1));
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    margin-top: 15px;
+    font-weight: 500;
 }
 
 .loading {
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #A8DF8E;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #667eea;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin-right: 10px;
+    margin-right: 12px;
 }
 
 @keyframes spin {
@@ -234,30 +582,23 @@ input[type="file"]:hover {
     100% { transform: rotate(360deg); }
 }
 
-.settings-panel {
-    background: white;
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
-}
-
-.settings-panel h3 {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 1.4rem;
-}
-
 footer {
     text-align: center;
-    color: white;
-    padding: 20px;
-    opacity: 0.8;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    margin-top: 60px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: 300;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
 }
 
 @media (max-width: 768px) {
     header h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
     
     .tools-grid {
@@ -267,6 +608,24 @@ footer {
     
     .container {
         padding: 15px;
+    }
+    
+    .category-title {
+        font-size: 1.8rem;
+    }
+    
+    .filter-pill {
+        padding: 10px 18px;
+        font-size: 13px;
+    }
+    
+    .tool-card {
+        padding: 20px;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+        font-size: 13px;
     }
 }
 

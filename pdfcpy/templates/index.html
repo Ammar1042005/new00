@@ -33,7 +33,7 @@
                     <!-- Merge PDF -->
                     <div class="tool-card organize">
                         <h3>
-                            <div class="tool-icon">📄</div>
+                            <div class="tool-icon"><img src="/icons/merge.png" alt="Merge"></div>
                             Merge PDF
                         </h3>
                         <p class="tool-description">Combine multiple PDF files into a single document</p>
@@ -48,36 +48,35 @@
                     <!-- Split PDF -->
                     <div class="tool-card organize">
                         <h3>
-                            <div class="tool-icon">✂️</div>
+                            <div class="tool-icon"><img src="/icons/split.png" alt="Split"></div>
                             Split PDF
                         </h3>
                         <p class="tool-description">Extract pages or split your PDF into multiple files</p>
-                    <div class="form-group">
-                        <label>Select PDF file</label>
-                        <input type="file" id="rotate-file" accept="application/pdf" class="form-control">
-                    </div>
-                    <div class="row">
                         <div class="form-group">
-                            <label>Angle</label>
-                            <select id="rotate-angle" class="form-control">
-                                <option value="90">90°</option>
-                                <option value="180">180°</option>
-                                <option value="270">270°</option>
-                            </select>
+                            <label>Select PDF file</label>
+                            <input type="file" id="split-file" accept="application/pdf" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label>Pages (optional)</label>
-                            <input type="text" id="rotate-pages" placeholder="e.g. 1,2,3" class="form-control">
+                        <div class="row">
+                            <div class="form-group">
+                                <label>From page</label>
+                                <input type="number" id="split-from" min="1" value="1" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>To page</label>
+                                <input type="number" id="split-to" min="1" value="1" class="form-control">
+                            </div>
                         </div>
+                        <button class="btn" onclick="split()">Split PDF</button>
+                        <div class="output-area" id="split-out"></div>
                     </div>
-                    <button class="btn" onclick="rotate()">Rotate PDF</button>
-                    <div class="output-area" id="rotate-out"></div>
-                </div>
 
-                <!-- Watermark -->
-                <div class="tool-card edit">
-                    <h3>
-                        <div class="tool-icon">💧</div>
+                    <!-- Watermark -->
+                    <div class="tool-card edit">
+                        <h3>
+                            <div class="tool-icon"><img src="/icons/water mark.png" alt="Watermark"></div>
+                            Add Watermark
+                        </h3>
+                        <p class="tool-description">Add text watermark to your PDF</p>
                         Add Watermark
                     </h3>
                     <p class="tool-description">Add text watermark to your PDF</p>
@@ -107,7 +106,7 @@
                 <!-- Page Numbers -->
                 <div class="tool-card edit">
                     <h3>
-                        <div class="tool-icon">🔢</div>
+                        <div class="tool-icon"><img src="/icons/page number.png" alt="Page Numbers"></div>
                         Add Page Numbers
                     </h3>
                     <p class="tool-description">Add page numbers to your PDF document</p>
@@ -138,7 +137,7 @@
                 <!-- Protect PDF -->
                 <div class="tool-card security">
                     <h3>
-                        <div class="tool-icon">🔒</div>
+                        <div class="tool-icon"><img src="/icons/protect.png" alt="Protect"></div>
                         Protect PDF
                     </h3>
                     <p class="tool-description">Add password protection to your PDF</p>
@@ -161,7 +160,7 @@
                 <!-- Unlock PDF -->
                 <div class="tool-card security">
                     <h3>
-                        <div class="tool-icon">🔓</div>
+                        <div class="tool-icon"><img src="/icons/unlock.png" alt="Unlock"></div>
                         Unlock PDF
                     </h3>
                     <p class="tool-description">Remove password protection from PDF</p>
@@ -180,7 +179,7 @@
                 <!-- Compress PDF -->
                 <div class="tool-card optimize">
                     <h3>
-                        <div class="tool-icon">📦</div>
+                        <div class="tool-icon"><img src="/icons/compress.png" alt="Compress"></div>
                         Compress PDF
                     </h3>
                     <p class="tool-description">Reduce PDF file size while maintaining quality</p>
@@ -195,7 +194,7 @@
                 <!-- Convert to Images -->
                 <div class="tool-card convert">
                     <h3>
-                        <div class="tool-icon">🖼️</div>
+                        <div class="tool-icon"><img src="/icons/pdf to image.png" alt="PDF to Images"></div>
                         PDF to Images
                     </h3>
                     <p class="tool-description">Convert PDF pages to image files</p>
@@ -223,7 +222,7 @@
                 <!-- Images to PDF -->
                 <div class="tool-card convert">
                     <h3>
-                        <div class="tool-icon">📷</div>
+                        <div class="tool-icon"><img src="/icons/image to pdf.png" alt="Images to PDF"></div>
                         Images to PDF
                     </h3>
                     <p class="tool-description">Combine multiple images into a PDF</p>
@@ -238,7 +237,7 @@
                 <!-- Word to PDF -->
                 <div class="tool-card convert">
                     <h3>
-                        <div class="tool-icon">📝</div>
+                        <div class="tool-icon"><img src="/icons/word to pdf.png" alt="Word to PDF"></div>
                         Word to PDF
                     </h3>
                     <p class="tool-description">Convert Microsoft Word documents to PDF</p>
@@ -253,7 +252,7 @@
                 <!-- Excel to PDF -->
                 <div class="tool-card convert">
                     <h3>
-                        <div class="tool-icon">📊</div>
+                        <div class="tool-icon"><img src="/icons/excel to pdf.png" alt="Excel to PDF"></div>
                         Excel to PDF
                     </h3>
                     <p class="tool-description">Convert Excel spreadsheets to PDF</p>
@@ -268,7 +267,7 @@
                 <!-- PowerPoint to PDF -->
                 <div class="tool-card convert">
                     <h3>
-                        <div class="tool-icon">📽️</div>
+                        <div class="tool-icon"><img src="/icons/PowerPoint to pdf.png" alt="PowerPoint to PDF"></div>
                         PowerPoint to PDF
                     </h3>
                     <p class="tool-description">Convert PowerPoint presentations to PDF</p>
@@ -283,7 +282,7 @@
                 <!-- PDF to Word -->
                 <div class="tool-card convert">
                     <h3>
-                        <div class="tool-icon">📄</div>
+                        <div class="tool-icon"><img src="/icons/pdf to word.png" alt="PDF to Word"></div>
                         PDF to Word
                     </h3>
                     <p class="tool-description">Convert PDF to Microsoft Word document</p>
@@ -298,7 +297,7 @@
                 <!-- OCR PDF -->
                 <div class="tool-card optimize">
                     <h3>
-                        <div class="tool-icon">🔍</div>
+                        <div class="tool-icon"><img src="/icons/OCR.png" alt="OCR"></div>
                         OCR PDF
                     </h3>
                     <p class="tool-description">Make scanned PDFs searchable with OCR</p>
@@ -319,7 +318,7 @@
                 <!-- Batch Processing -->
                 <div class="tool-card optimize">
                     <h3>
-                        <div class="tool-icon">⚡</div>
+                        <div class="tool-icon"><img src="/icons/batch process.png" alt="Batch Process"></div>
                         Batch Process
                     </h3>
                     <p class="tool-description">Process multiple files at once</p>
@@ -366,7 +365,7 @@
                 <!-- Edit Metadata -->
                 <div class="tool-card edit">
                     <h3>
-                        <div class="tool-icon">📝</div>
+                        <div class="tool-icon"><img src="/icons/matadata.png" alt="Edit Metadata"></div>
                         Edit Metadata
                     </h3>
                     <p class="tool-description">Edit PDF title, author, subject, and keywords</p>
@@ -398,7 +397,7 @@
                 <!-- Compare PDFs -->
                 <div class="tool-card Security">
                     <h3>
-                        <div class="tool-icon">🔍</div>
+                        <div class="tool-icon"><img src="/icons/compare.png" alt="Compare PDFs"></div>
                         Compare PDFs
                     </h3>
                     <p class="tool-description">Compare two PDF documents side by side</p>

@@ -15,9 +15,31 @@ app.config["UPLOAD_EXTENSIONS"] = {".pdf", ".docx", ".xlsx", ".pptx", ".jpg", ".
 def index():
     return render_template("index.html")
 
+@app.route('/icons/<path:filename>')
+def serve_icons(filename):
+    """Serve icon files from both static/icons and icons folder"""
+    import os
+    from flask import send_from_directory
+    
+    # Try static/icons first
+    static_icons_path = os.path.join(app.static_folder, 'icons')
+    if os.path.exists(os.path.join(static_icons_path, filename)):
+        return send_from_directory(static_icons_path, filename)
+    
+    # Fallback to root icons folder
+    icons_path = 'icons'
+    if os.path.exists(os.path.join(icons_path, filename)):
+        return send_from_directory(icons_path, filename)
+    
+    return "Icon not found", 404
+
 @app.get("/debug")
 def debug():
     return send_file("debug.html")
+
+@app.get("/test-icons")
+def test_icons():
+    return send_file("test_icon_display.html")
 
 def _validate_files(files):
     valid = []
