@@ -110,21 +110,24 @@ header p {
 }
 
 .filter-pill {
-    padding: 12px 24px;
+    padding: 14px 28px;
     border-radius: 30px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
-    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.7), rgba(118, 75, 162, 0.7));
+    backdrop-filter: blur(15px);
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
-    color: white;
+    color: #00ffff;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 
+        0 8px 20px rgba(102, 126, 234, 0.3),
+        inset 0 0 15px rgba(255, 255, 255, 0.1);
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .filter-pill::before {
@@ -135,15 +138,18 @@ header p {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s ease;
+    transition: left 0.6s ease;
 }
 
 .filter-pill:hover {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
-    border-color: rgba(255, 255, 255, 0.7);
-    color: white;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+    border-color: rgba(255, 255, 255, 0.8);
+    color: #00ffff;
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    box-shadow: 
+        0 12px 30px rgba(102, 126, 234, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.15);
+    text-shadow: 0 0 12px rgba(0, 255, 255, 1), 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .filter-pill:hover::before {
@@ -151,15 +157,16 @@ header p {
 }
 
 .filter-pill.active {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
-    border-color: transparent;
-    color: white;
-    font-weight: 700;
+    background: linear-gradient(135deg, rgba(240, 147, 251, 0.9), rgba(245, 87, 108, 0.9));
+    border-color: rgba(255, 255, 255, 0.7);
+    color: #ffffff;
+    font-weight: 800;
     box-shadow: 
-        0 10px 30px rgba(240, 147, 251, 0.4),
-        0 0 20px rgba(240, 147, 251, 0.2),
-        inset 0 0 20px rgba(255, 255, 255, 0.1);
+        0 15px 35px rgba(240, 147, 251, 0.4),
+        0 0 25px rgba(240, 147, 251, 0.3),
+        inset 0 0 25px rgba(255, 255, 255, 0.2);
     transform: translateY(-2px) scale(1.05);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 header p {
@@ -266,45 +273,16 @@ header p {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
-    backdrop-filter: blur(10px);
-    box-shadow: 
-        0 8px 16px rgba(0, 0, 0, 0.1),
-        inset 0 0 10px rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.tool-card.organize .tool-icon {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-}
-
-.tool-card.optimize .tool-icon {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
-}
-
-.tool-card.edit .tool-icon {
-    background: linear-gradient(135deg, #4facfe, #667eea);
-}
-
-.tool-card.convert .tool-icon {
-    background: linear-gradient(135deg, #764ba2, #f093fb);
-}
-
-.tool-card.security .tool-icon {
-    background: linear-gradient(135deg, #f5576c, #4facfe);
-}
-
-.tool-card.setting .tool-icon {
-    background: linear-gradient(135deg, #667eea, #f093fb);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .tool-icon img {
     width: 24px;
     height: 24px;
     object-fit: contain;
-    filter: brightness(0) invert(1);
+    filter: none; /* Show original icon colors */
 }
 
 .category-title {
@@ -632,17 +610,19 @@ footer {
 
 /* Advanced features styling */
 .advanced-options {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 15px;
-    border: 1px solid #e9ecef;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .advanced-options h4 {
-    color: #495057;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
+    font-size: 1rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
