@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lithograph PDF | Professional Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-variant": "#2d3449",
+              "secondary-container": "#413f82",
+              "surface": "#0b1326",
+              "on-primary-fixed": "#07006c",
+              "on-error": "#690005",
+              "error": "#ffb4ab",
+              "inverse-on-surface": "#283044",
+              "on-surface-variant": "#c7c4d8",
+              "inverse-surface": "#dae2fd",
+              "tertiary": "#ffb695",
+              "on-tertiary-fixed": "#351000",
+              "outline-variant": "#464555",
+              "on-primary": "#1000a9",
+              "secondary": "#c3c0ff",
+              "on-secondary-container": "#b0aef9",
+              "tertiary-container": "#a44100",
+              "primary-fixed": "#e1e0ff",
+              "on-secondary-fixed": "#140f54",
+              "secondary-fixed-dim": "#c3c0ff",
+              "secondary-fixed": "#e2dfff",
+              "primary": "#c0c1ff",
+              "on-tertiary": "#571f00",
+              "on-error-container": "#ffdad6",
+              "tertiary-fixed": "#ffdbcc",
+              "surface-container-highest": "#2d3449",
+              "surface-dim": "#0b1326",
+              "on-primary-container": "#d9d8ff",
+              "on-primary-fixed-variant": "#2f2ebe",
+              "on-tertiary-fixed-variant": "#7b2f00",
+              "outline": "#918fa1",
+              "on-background": "#dae2fd",
+              "on-secondary": "#2a276a",
+              "surface-bright": "#31394d",
+              "primary-container": "#4b4dd8",
+              "on-tertiary-container": "#ffd2be",
+              "surface-container-lowest": "#060e20",
+              "surface-container-high": "#222a3d",
+              "surface-container": "#171f33",
+              "primary-fixed-dim": "#c0c1ff",
+              "error-container": "#93000a",
+              "on-secondary-fixed-variant": "#413f82",
+              "surface-tint": "#c0c1ff",
+              "background": "#0b1326",
+              "on-surface": "#dae2fd",
+              "tertiary-fixed-dim": "#ffb695",
+              "inverse-primary": "#494bd6",
+              "surface-container-low": "#131b2e"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body overflow-hidden h-screen flex flex-col">
+<!-- Top Navigation / Toolbar Shell -->
+<header class="fixed top-0 w-full flex justify-between items-center px-8 py-4 max-w-none bg-[#0b1326]/80 backdrop-blur-xl z-50 no-border shadow-none">
+<div class="flex items-center gap-8">
+<span class="font-['Manrope'] font-extrabold text-2xl bg-gradient-to-tr from-[#4b4dd8] to-[#c0c1ff] bg-clip-text text-transparent">Lithograph PDF</span>
+<nav class="hidden md:flex items-center gap-6">
+<button class="font-['Manrope'] font-bold tracking-tight text-lg text-[#c0c1ff] border-b-2 border-[#c0c1ff] pb-1">Workspace</button>
+<button class="font-['Manrope'] font-bold tracking-tight text-lg text-[#c7c4d8] hover:text-[#c0c1ff] transition-colors">Documents</button>
+<button class="font-['Manrope'] font-bold tracking-tight text-lg text-[#c7c4d8] hover:text-[#c0c1ff] transition-colors">Templates</button>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex bg-surface-container p-1 rounded-full">
+<button class="p-2 rounded-full hover:bg-surface-bright text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">undo</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-bright text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">redo</span>
+</button>
+</div>
+<button class="bg-gradient-to-tr from-[#4b4dd8] to-[#c0c1ff] text-on-primary-fixed font-headline font-bold px-6 py-2 rounded-full hover:opacity-90 transition-all text-sm uppercase tracking-wider">
+                Export PDF
+            </button>
+</div>
+</header>
+<div class="flex flex-1 pt-20 h-screen overflow-hidden">
+<!-- Side Navigation (Left) -->
+<aside class="fixed left-0 top-0 h-full py-6 flex flex-col gap-4 bg-[#131b2e] h-screen w-64 pt-24 z-40 border-none">
+<div class="px-6 mb-4">
+<span class="font-['Inter'] font-medium text-xs uppercase tracking-widest text-on-surface-variant opacity-60">Pages &amp; Thumbnails</span>
+</div>
+<div class="flex-1 overflow-y-auto px-4 scrollbar-hide space-y-4">
+<!-- Thumbnail 1 (Active) -->
+<div class="relative group">
+<div class="aspect-[3/4] rounded-lg bg-surface-container-highest ring-2 ring-primary p-1 overflow-hidden transition-all">
+<div class="w-full h-full bg-white flex items-start justify-center p-2">
+<img alt="document preview" class="w-full object-contain" data-alt="clean minimalist architectural floor plan with precise black lines on a crisp white background showing spatial layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5eEbE2uBuQaBLrN5wR2vuwGVeEUewAOCBqW3k269OwneL0nHr7S5YQhPC4YlrwTn5zhcpbSCOv5UToyV5CwQxApI0jOvU4NMrGFLvRGnvdzRheFNXA0sCkCACnEyzBUUEzARHImDYuZUYK5kv0KyNb5r8o3wJTwR0RewJ6ci-RuWJiW5j0npCfSi-GWUo-3SpSTQ53faSDDzJkx7aO-Dk8uQj7_YBOzpowrk_ty-PTEGpNPo15QS7ltMfpj4mlGdUirgcRiRzDITJ"/>
+</div>
+</div>
+<span class="absolute top-2 left-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-1.5 rounded">1</span>
+</div>
+<!-- Thumbnail 2 -->
+<div class="relative group">
+<div class="aspect-[3/4] rounded-lg bg-surface-container-high hover:bg-surface-container-highest p-1 overflow-hidden transition-all cursor-pointer">
+<div class="w-full h-full bg-white flex items-start justify-center p-2 opacity-80 group-hover:opacity-100 transition-opacity">
+<img alt="document preview" class="w-full object-contain" data-alt="technical architectural drawing of building elevation with detailed structural annotations and clean linework on white paper" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiKarx6ts12H_TxZTD_l0N82fidpR143kpS1k-VfeXBGQA9Wqge7J4mmWVXBhA53CVJzwlEpQ27E6rTxJ6skRiv2kU4K_B6rDZyqaM3gXKY4hQlD18IXDlWp4PlCSkKmlRNY5Yp51w97u0qg1nZpvlnPUYQLTn-nuQ14dUPryd6UBjdQcRets0AFDGFij0S93hVDB18qwiDS8uWxk47jCRuES_x3xaYl6OhplZKXFUR02oKM2042qq7htheOVX1PMsk2WYm0N7fVaz"/>
+</div>
+</div>
+<span class="absolute top-2 left-2 bg-surface-variant text-on-surface-variant text-[10px] font-bold px-1.5 rounded">2</span>
+</div>
+<!-- Thumbnail 3 -->
+<div class="relative group">
+<div class="aspect-[3/4] rounded-lg bg-surface-container-high hover:bg-surface-container-highest p-1 overflow-hidden transition-all cursor-pointer">
+<div class="w-full h-full bg-white/90 flex items-center justify-center">
+<span class="material-symbols-outlined text-surface-container-highest text-4xl">description</span>
+</div>
+</div>
+<span class="absolute top-2 left-2 bg-surface-variant text-on-surface-variant text-[10px] font-bold px-1.5 rounded">3</span>
+</div>
+</div>
+<div class="mt-auto px-4 pt-4 border-t border-outline-variant/10">
+<button class="w-full flex items-center gap-3 px-4 py-3 bg-surface-container-highest text-primary rounded-xl font-headline font-bold text-sm transition-all hover:bg-surface-bright">
+<span class="material-symbols-outlined">add_circle</span>
+                    Add Page
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 mr-80 flex flex-col bg-surface overflow-hidden">
+<!-- Toolbar Floating -->
+<div class="mx-auto mt-4 px-6 py-2 bg-surface-container-high/80 backdrop-blur-md rounded-full flex items-center gap-2 shadow-2xl border border-outline-variant/10 z-30">
+<button class="p-2.5 rounded-full hover:bg-surface-bright text-primary transition-all flex items-center justify-center" title="Select">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">near_me</span>
+</button>
+<div class="w-px h-6 bg-outline-variant/30 mx-1"></div>
+<button class="p-2.5 rounded-full hover:bg-surface-bright text-on-surface-variant hover:text-primary transition-all flex items-center justify-center" title="Text">
+<span class="material-symbols-outlined">title</span>
+</button>
+<button class="p-2.5 rounded-full bg-primary-container text-on-primary-container transition-all flex items-center justify-center" title="Highlight">
+<span class="material-symbols-outlined">stylus_note</span>
+</button>
+<button class="p-2.5 rounded-full hover:bg-surface-bright text-on-surface-variant hover:text-primary transition-all flex items-center justify-center" title="Draw">
+<span class="material-symbols-outlined">draw</span>
+</button>
+<button class="p-2.5 rounded-full hover:bg-surface-bright text-on-surface-variant hover:text-primary transition-all flex items-center justify-center" title="Shapes">
+<span class="material-symbols-outlined">category</span>
+</button>
+<div class="w-px h-6 bg-outline-variant/30 mx-1"></div>
+<button class="p-2.5 rounded-full hover:bg-surface-bright text-on-surface-variant hover:text-primary transition-all flex items-center justify-center" title="Signature">
+<span class="material-symbols-outlined">history_edu</span>
+</button>
+<button class="p-2.5 rounded-full hover:bg-surface-bright text-on-surface-variant hover:text-primary transition-all flex items-center justify-center" title="Image">
+<span class="material-symbols-outlined">image</span>
+</button>
+</div>
+<!-- PDF Viewer Canvas -->
+<div class="flex-1 overflow-auto p-12 scrollbar-hide flex justify-center items-start">
+<div class="bg-white shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)] w-full max-w-4xl min-h-[1100px] relative p-16 origin-top transform transition-transform duration-300">
+<!-- Placeholder PDF Content -->
+<div class="text-slate-900">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h1 class="text-3xl font-bold tracking-tight mb-2 uppercase">Architectural Proposal</h1>
+<p class="text-slate-500 font-medium">Project ID: #8829-XL • Revision 04</p>
+</div>
+<div class="w-16 h-16 bg-slate-200 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">architecture</span>
+</div>
+</div>
+<!-- Highlight Overlay Simulation -->
+<div class="relative inline-block mb-8">
+<div class="absolute inset-0 bg-primary/30 -rotate-1 translate-y-1"></div>
+<h2 class="relative text-xl font-bold italic z-10">01. Conceptual Site Integration</h2>
+</div>
+<div class="grid grid-cols-2 gap-8 mb-12">
+<div class="space-y-4">
+<p class="text-slate-700 leading-relaxed">The site is characterized by a significant 15% gradient descending towards the southern coastline. Our primary objective is to integrate the structural massing into the existing topography to minimize excavation and preserve the local flora.</p>
+<div class="p-4 bg-slate-50 border-l-4 border-primary">
+<p class="text-sm italic text-slate-600">Note: Verify structural load capacity for the cantilevered terrace by Monday EOD.</p>
+</div>
+</div>
+<div class="bg-slate-100 rounded-xl overflow-hidden aspect-square flex items-center justify-center relative border-2 border-dashed border-slate-300">
+<img alt="blueprint" class="w-full h-full object-cover grayscale opacity-80" data-alt="monochrome technical sketch of a modern villa exterior with clean sharp lines and architectural shading" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3RQCxmakmh9tXGwSwxi2DLDYvsVGzCP_IfwJKCdzI_FRVaQu6FvPSqspYh_oZrNumXx_Ober_zekzetqHbhB27j-RaFBX5VaeNnpwpLourHJGzkttJhemd-lNWHrHCsCzEGAiPP-VNlU9mBZ1CcqiPIyxRQ1C2Nb56q7hG8hrwMAUpAz-QIHMsBeJo1MOTHH-TMNjkp2PSkGGzVs8vO6S3UcaJ5ZWfgDGEUY7MhA4OW28RsS6tOQtFOmnjPwI76x0mBULKrkO3awd"/>
+<div class="absolute inset-0 bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-5xl opacity-40">edit_square</span>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<h3 class="font-bold border-b border-slate-200 pb-2">Material Palette Selection</h3>
+<div class="grid grid-cols-3 gap-4">
+<div class="h-20 bg-slate-800 rounded"></div>
+<div class="h-20 bg-slate-400 rounded"></div>
+<div class="h-20 bg-slate-200 rounded"></div>
+</div>
+<p class="text-slate-700">All materials have been audited for thermal efficiency and local availability. We are prioritizing raw concrete and reclaimed oak for the primary facade components.</p>
+</div>
+</div>
+<!-- Floating Comment Simulation -->
+<div class="absolute top-1/4 -right-12 w-64 p-4 bg-surface-bright text-on-surface rounded-xl shadow-2xl border border-primary/20 animate-pulse">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary-fixed flex items-center justify-center text-[10px] font-bold">JD</div>
+<span class="text-xs font-bold">Jordan Duplex</span>
+</div>
+<p class="text-[11px] leading-relaxed opacity-90">Can we increase the opacity of the glass panels in this section?</p>
+</div>
+</div>
+</div>
+<!-- Zoom Controls -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-surface-container-high/90 backdrop-blur-md px-6 py-2 rounded-full flex items-center gap-6 shadow-xl border border-outline-variant/10 z-30">
+<button class="text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">zoom_out</span>
+</button>
+<span class="font-headline font-bold text-sm text-primary">125%</span>
+<button class="text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<div class="w-px h-6 bg-outline-variant/30"></div>
+<button class="text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">fit_screen</span>
+</button>
+</div>
+</main>
+<!-- Right Tool Properties Sidebar -->
+<aside class="fixed right-0 top-0 h-full w-80 bg-surface-container-low pt-24 pb-8 px-6 z-40 flex flex-col gap-8 shadow-[-24px_0_48px_-12px_rgba(0,0,0,0.3)]">
+<div class="space-y-6">
+<div>
+<h2 class="font-headline font-bold text-lg text-primary mb-1">Highlight Tool</h2>
+<p class="text-xs text-on-surface-variant">Active annotation settings</p>
+</div>
+<div class="space-y-4">
+<label class="block">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mb-3 block">Color Preset</span>
+<div class="flex flex-wrap gap-3">
+<button class="w-8 h-8 rounded-full bg-primary ring-2 ring-primary ring-offset-2 ring-offset-surface-container-low"></button>
+<button class="w-8 h-8 rounded-full bg-tertiary hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-emerald-400 hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-rose-400 hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-amber-400 hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full border-2 border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">palette</span>
+</button>
+</div>
+</label>
+<label class="block space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Opacity</span>
+<span class="text-xs font-headline font-bold text-primary">30%</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+</label>
+<label class="block space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Thickness</span>
+<span class="text-xs font-headline font-bold text-primary">12pt</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">line_weight</span>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+</div>
+</label>
+</div>
+<div class="pt-6 border-t border-outline-variant/10 space-y-4">
+<button class="w-full flex justify-between items-center p-3 rounded-xl bg-surface-container-highest/50 hover:bg-surface-container-highest transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">brush</span>
+<span class="text-sm font-medium">Style Presets</span>
+</div>
+<span class="material-symbols-outlined text-sm opacity-40">chevron_right</span>
+</button>
+<button class="w-full flex justify-between items-center p-3 rounded-xl bg-surface-container-highest/50 hover:bg-surface-container-highest transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">layers</span>
+<span class="text-sm font-medium">Layer Hierarchy</span>
+</div>
+<span class="material-symbols-outlined text-sm opacity-40">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="mt-auto space-y-4">
+<div class="p-4 bg-primary-container/20 rounded-2xl border border-primary/20">
+<p class="text-xs font-bold text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                        AI Smart Suggest
+                    </p>
+<p class="text-[11px] leading-relaxed text-on-surface-variant opacity-80">
+                        Detected 4 inconsistent margin widths on this page. Would you like to auto-align them?
+                    </p>
+<button class="mt-3 text-[10px] font-bold uppercase tracking-wider text-primary hover:underline">Apply Alignment</button>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container hover:bg-surface-bright rounded-2xl transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+<img alt="user avatar" class="w-full h-full object-cover" data-alt="professional portrait of a creative designer with neutral background and soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnG1EiFIaCRg93zrqNSOvZbG0vPXnK7NEbP_8G0-Vdf90ch6H1xAhyib2Oiv2HGq9OJwOspAokrcHy7fmynYxTOCpyzB1txQgtC73NujrP1FTb7soEuy7GtlzttkZqwe67Zj-fXA9PZjeNHbHoh35NP-ZZPRwDmJuZ6UReWDps60LNTI5Z6R9JjlyGPB88EwIdO0ftWczeChNwedYY9ChmqLtYQr9cX2vlhgg16FKA_HNqvW5BxVbAGjDh0A2kiERucLiwY2g0dNyB"/>
+</div>
+<div>
+<p class="text-xs font-bold">Alex Rivera</p>
+<p class="text-[10px] text-on-surface-variant">Lead Architect</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant text-sm">more_vert</span>
+</div>
+</div>
+</aside>
+</div>
+<!-- Footer Meta-bar -->
+<footer class="fixed bottom-0 w-full flex flex-col md:flex-row justify-between items-center gap-6 bg-[#0b1326] w-full py-3 px-8 border-t border-[#171f33] z-50">
+<div class="flex items-center gap-6">
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest text-[#c7c4d8]">© 2024 Lithograph PDF</span>
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest text-[#c0c1ff]">Autosaved • 12:45 PM</span>
+</div>
+</div>
+<div class="flex gap-4">
+<a class="font-['Inter'] text-[10px] uppercase tracking-widest text-[#c7c4d8] hover:text-white transition-colors" href="#">API</a>
+<a class="font-['Inter'] text-[10px] uppercase tracking-widest text-[#c7c4d8] hover:text-white transition-colors" href="#">Documentation</a>
+<a class="font-['Inter'] text-[10px] uppercase tracking-widest text-[#c7c4d8] hover:text-white transition-colors" href="#">Support</a>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iLovePDF - Local PDF Tools</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="/static/assets/3383405f54bfabaf7cc5389bc26d181abdeaeb2e58f2a3989893261dcee6f88e.png" type="image/png">
+</head>
+
+<body class="lang-en home">
+    <header class="header">
+        <nav>
+            <a class="brand" href="/" title="iLovePDF">
+                <img src="/static/assets/5a57cc7ec71eca69c8e70372656e4234ab1ad56a259a8f518ad535b419aed877.svg" alt="iLovePDF">
+                iLovePDF
+            </a>
+            <div class="menu">
+                <span class="menu--md">All PDF tools</span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <div class="filter-container">
+            <button class="filter-pill active" onclick="filterTools('all')">All</button>
+            <button class="filter-pill" onclick="filterTools('organize')">Organize PDF</button>
+            <button class="filter-pill" onclick="filterTools('optimize')">Optimize PDF</button>
+            <button class="filter-pill" onclick="filterTools('convert')">Convert PDF</button>
+            <button class="filter-pill" onclick="filterTools('edit')">Edit PDF</button>
+            <button class="filter-pill" onclick="filterTools('security')">PDF Security</button>
+            <button class="filter-pill" onclick="filterTools('setting')">PDF Settings</button>
+        </div>
+        <main>
+            <!-- PDF Organization Tools -->
+            <div class="category-section">
+                <h2 class="category-title">📁 PDF Organization</h2>
+                <div class="tools-grid">
+                    <!-- Merge PDF -->
+                    <div class="tool-card organize">
+                        <h3>
+                            <div class="tool-icon"><img src="/icons/merge.png" alt="Merge"></div>
+                            Merge PDF
+                        </h3>
+                        <p class="tool-description">Combine multiple PDF files into a single document</p>
+                        <div class="form-group">
+                            <label>Select PDF files to merge</label>
+                            <input type="file" id="merge-files" multiple accept="application/pdf" class="form-control">
+                        </div>
+                        <button class="btn" onclick="merge()">Merge PDFs</button>
+                        <div class="output-area" id="merge-out"></div>
+                    </div>
+
+                    <!-- Split PDF -->
+                    <div class="tool-card organize">
+                        <h3>
+                            <div class="tool-icon"><img src="/icons/split.png" alt="Split"></div>
+                            Split PDF
+                        </h3>
+                        <p class="tool-description">Extract pages or split your PDF into multiple files</p>
+                        <div class="form-group">
+                            <label>Select PDF file</label>
+                            <input type="file" id="split-file" accept="application/pdf" class="form-control">
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>From page</label>
+                                <input type="number" id="split-from" min="1" value="1" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>To page</label>
+                                <input type="number" id="split-to" min="1" value="1" class="form-control">
+                            </div>
+                        </div>
+                        <button class="btn" onclick="split()">Split PDF</button>
+                        <div class="output-area" id="split-out"></div>
+                    </div>
+
+                    <!-- Watermark -->
+                    <div class="tool-card edit">
+                        <h3>
+                            <div class="tool-icon"><img src="/icons/water mark.png" alt="Watermark"></div>
+                            Add Watermark
+                        </h3>
+                        <p class="tool-description">Add text watermark to your PDF</p>
+                        Add Watermark
+                    </h3>
+                    <p class="tool-description">Add text watermark to your PDF</p>
+                    <div class="form-group">
+                        <label>Select PDF file</label>
+                        <input type="file" id="wm-file" accept="application/pdf" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Watermark text</label>
+                        <input type="text" id="wm-text" placeholder="Enter watermark text" class="form-control">
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Opacity</label>
+                            <input type="number" id="wm-opacity" step="0.1" value="0.2" min="0" max="1"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Font size</label>
+                            <input type="number" id="wm-font" value="48" min="8" max="200" class="form-control">
+                        </div>
+                    </div>
+                    <button class="btn" onclick="watermark()">Add Watermark</button>
+                    <div class="output-area" id="wm-out"></div>
+                </div>
+
+                <!-- Page Numbers -->
+                <div class="tool-card edit">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/page number.png" alt="Page Numbers"></div>
+                        Add Page Numbers
+                    </h3>
+                    <p class="tool-description">Add page numbers to your PDF document</p>
+                    <div class="form-group">
+                        <label>Select PDF file</label>
+                        <input type="file" id="pg-file" accept="application/pdf" class="form-control">
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Position</label>
+                            <select id="pg-pos" class="form-control">
+                                <option value="bottom_center">Bottom Center</option>
+                                <option value="bottom_left">Bottom Left</option>
+                                <option value="bottom_right">Bottom Right</option>
+                                <option value="top_left">Top Left</option>
+                                <option value="top_right">Top Right</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Font size</label>
+                            <input type="number" id="pg-font" value="12" min="8" max="72" class="form-control">
+                        </div>
+                    </div>
+                    <button class="btn" onclick="paginate()">Add Numbers</button>
+                    <div class="output-area" id="pg-out"></div>
+                </div>
+
+                <!-- Protect PDF -->
+                <div class="tool-card security">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/protect.png" alt="Protect"></div>
+                        Protect PDF
+                    </h3>
+                    <p class="tool-description">Add password protection to your PDF</p>
+                    <div class="form-group">
+                        <label>Select PDF file</label>
+                        <input type="file" id="prot-file" accept="application/pdf" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>User password</label>
+                        <input type="password" id="prot-user" placeholder="Enter user password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Owner password (optional)</label>
+                        <input type="password" id="prot-owner" placeholder="Enter owner password" class="form-control">
+                    </div>
+                    <button class="btn" onclick="protect()">Protect PDF</button>
+                    <div class="output-area" id="prot-out"></div>
+                </div>
+
+                <!-- Unlock PDF -->
+                <div class="tool-card security">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/unlock.png" alt="Unlock"></div>
+                        Unlock PDF
+                    </h3>
+                    <p class="tool-description">Remove password protection from PDF</p>
+                    <div class="form-group">
+                        <label>Select protected PDF file</label>
+                        <input type="file" id="unl-file" accept="application/pdf" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="unl-pass" placeholder="Enter PDF password" class="form-control">
+                    </div>
+                    <button class="btn" onclick="unlock()">Unlock PDF</button>
+                    <div class="output-area" id="unl-out"></div>
+                </div>
+
+                <!-- Compress PDF -->
+                <div class="tool-card optimize">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/compress.png" alt="Compress"></div>
+                        Compress PDF
+                    </h3>
+                    <p class="tool-description">Reduce PDF file size while maintaining quality</p>
+                    <div class="form-group">
+                        <label>Select PDF file</label>
+                        <input type="file" id="cmp-file" accept="application/pdf" class="form-control">
+                    </div>
+                    <button class="btn" onclick="compress()">Compress PDF</button>
+                    <div class="output-area" id="cmp-out"></div>
+                </div>
+
+                <!-- Convert to Images -->
+                <div class="tool-card convert">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/pdf to image.png" alt="PDF to Images"></div>
+                        PDF to Images
+                    </h3>
+                    <p class="tool-description">Convert PDF pages to image files</p>
+                    <div class="form-group">
+                        <label>Select PDF file</label>
+                        <input type="file" id="pdf-img-file" accept="application/pdf" class="form-control">
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Format</label>
+                            <select id="pdf-img-format" class="form-control">
+                                <option value="png">PNG</option>
+                                <option value="jpg">JPG</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>DPI</label>
+                            <input type="number" id="pdf-img-dpi" value="144" min="72" max="300" class="form-control">
+                        </div>
+                    </div>
+                    <button class="btn" onclick="pdf_to_images()">Convert to Images</button>
+                    <div class="output-area" id="pdf-img-out"></div>
+                </div>
+
+                <!-- Images to PDF -->
+                <div class="tool-card convert">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/image to pdf.png" alt="Images to PDF"></div>
+                        Images to PDF
+                    </h3>
+                    <p class="tool-description">Combine multiple images into a PDF</p>
+                    <div class="form-group">
+                        <label>Select image files</label>
+                        <input type="file" id="img-pdf-file" multiple accept="image/*" class="form-control">
+                    </div>
+                    <button class="btn" onclick="imgs_to_pdf()">Convert to PDF</button>
+                    <div class="output-area" id="img-pdf-out"></div>
+                </div>
+
+                <!-- Word to PDF -->
+                <div class="tool-card convert">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/word to pdf.png" alt="Word to PDF"></div>
+                        Word to PDF
+                    </h3>
+                    <p class="tool-description">Convert Microsoft Word documents to PDF</p>
+                    <div class="form-group">
+                        <label>Select Word file (.docx)</label>
+                        <input type="file" id="word-file" accept=".docx" class="form-control">
+                    </div>
+                    <button class="btn" onclick="word_to_pdf()">Convert to PDF</button>
+                    <div class="output-area" id="word-out"></div>
+                </div>
+
+                <!-- Excel to PDF -->
+                <div class="tool-card convert">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/excel to pdf.png" alt="Excel to PDF"></div>
+                        Excel to PDF
+                    </h3>
+                    <p class="tool-description">Convert Excel spreadsheets to PDF</p>
+                    <div class="form-group">
+                        <label>Select Excel file (.xlsx)</label>
+                        <input type="file" id="excel-file" accept=".xlsx" class="form-control">
+                    </div>
+                    <button class="btn" onclick="excel_to_pdf()">Convert to PDF</button>
+                    <div class="output-area" id="excel-out"></div>
+                </div>
+
+                <!-- PowerPoint to PDF -->
+                <div class="tool-card convert">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/PowerPoint to pdf.png" alt="PowerPoint to PDF"></div>
+                        PowerPoint to PDF
+                    </h3>
+                    <p class="tool-description">Convert PowerPoint presentations to PDF</p>
+                    <div class="form-group">
+                        <label>Select PowerPoint file (.pptx)</label>
+                        <input type="file" id="ppt-file" accept=".pptx" class="form-control">
+                    </div>
+                    <button class="btn" onclick="powerpoint_to_pdf()">Convert to PDF</button>
+                    <div class="output-area" id="ppt-out"></div>
+                </div>
+
+                <!-- PDF to Word -->
+                <div class="tool-card convert">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/pdf to word.png" alt="PDF to Word"></div>
+                        PDF to Word
+                    </h3>
+                    <p class="tool-description">Convert PDF to Microsoft Word document</p>
+                    <div class="form-group">
+                        <label>Select PDF file</label>
+                        <input type="file" id="pdf-word-file" accept="application/pdf" class="form-control">
+                    </div>
+                    <button class="btn" onclick="pdf_to_word()">Convert to Word</button>
+                    <div class="output-area" id="pdf-word-out"></div>
+                </div>
+
+                <!-- OCR PDF -->
+                <div class="tool-card optimize">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/OCR.png" alt="OCR"></div>
+                        OCR PDF
+                    </h3>
+                    <p class="tool-description">Make scanned PDFs searchable with OCR</p>
+                    <div class="form-group">
+                        <label>Select PDF file</label>
+                        <input type="file" id="ocr-file" accept="application/pdf" class="form-control">
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>DPI</label>
+                            <input type="number" id="ocr-dpi" value="200" min="150" max="300" class="form-control">
+                        </div>
+                    </div>
+                    <button class="btn" onclick="ocr()">Apply OCR</button>
+                    <div class="output-area" id="ocr-out"></div>
+                </div>
+
+                <!-- Batch Processing -->
+                <div class="tool-card optimize">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/batch process.png" alt="Batch Process"></div>
+                        Batch Process
+                    </h3>
+                    <p class="tool-description">Process multiple files at once</p>
+                    <div class="form-group">
+                        <label>Select files</label>
+                        <input type="file" id="batch-files" multiple accept=".pdf,.docx,.xlsx,.pptx"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Operation</label>
+                        <select id="batch-op" class="form-control">
+                            <option value="compress">Compress PDFs</option>
+                            <option value="compress_strong">Strong Compression</option>
+                            <option value="ocr">Apply OCR</option>
+                            <option value="office_to_pdf">Office to PDF</option>
+                            <option value="pdf_to_images">PDF to Images</option>
+                        </select>
+                    </div>
+                    <div class="advanced-options">
+                        <h4>Advanced Options</h4>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Quality (for compression)</label>
+                                <select id="batch-quality" class="form-control">
+                                    <option value="screen">Screen</option>
+                                    <option value="ebook">Ebook</option>
+                                    <option value="printer">Printer</option>
+                                    <option value="prepress">Prepress</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Image format</label>
+                                <select id="batch-format" class="form-control">
+                                    <option value="png">PNG</option>
+                                    <option value="jpg">JPG</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="batch_process()">Process Files</button>
+                    <div class="output-area" id="batch-out"></div>
+                </div>
+
+                <!-- Edit Metadata -->
+                <div class="tool-card edit">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/matadata.png" alt="Edit Metadata"></div>
+                        Edit Metadata
+                    </h3>
+                    <p class="tool-description">Edit PDF title, author, subject, and keywords</p>
+                    <div class="form-group">
+                        <label>Select PDF file</label>
+                        <input type="file" id="meta-file" accept="application/pdf" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="meta-title" placeholder="Document title" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Author</label>
+                        <input type="text" id="meta-author" placeholder="Author name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" id="meta-subject" placeholder="Document subject" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Keywords</label>
+                        <input type="text" id="meta-keywords" placeholder="Comma-separated keywords"
+                            class="form-control">
+                    </div>
+                    <button class="btn" onclick="edit_metadata()">Edit Metadata</button>
+                    <div class="output-area" id="meta-out"></div>
+                </div>
+
+                <!-- Compare PDFs -->
+                <div class="tool-card Security">
+                    <h3>
+                        <div class="tool-icon"><img src="/icons/compare.png" alt="Compare PDFs"></div>
+                        Compare PDFs
+                    </h3>
+                    <p class="tool-description">Compare two PDF documents side by side</p>
+                    <div class="form-group">
+                        <label>First PDF file</label>
+                        <input type="file" id="compare-file1" accept="application/pdf" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Second PDF file</label>
+                        <input type="file" id="compare-file2" accept="application/pdf" class="form-control">
+                    </div>
+                    <button class="btn" onclick="compare_pdfs()">Compare PDFs</button>
+                    <div class="output-area" id="compare-out"></div>
+                </div>
+
+                <!-- Settings Panel -->
+                <div class=" tool-card setting">
+                    <h3>⚙️ Settings</h3>
+                    <p class="tool-description">Configure external tools paths for advanced features</p>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Tesseract Path (for OCR)</label>
+                            <input type="text" id="tesseract-path" class="form-control"
+                                placeholder="e.g. C:\Program Files\Tesseract-OCR\tesseract.exe">
+                        </div>
+                        <div class="form-group">
+                            <label>LibreOffice Path (for Office conversions)</label>
+                            <input type="text" id="libreoffice-path" class="form-control"
+                                placeholder="e.g. C:\Program Files\LibreOffice\program\soffice.exe">
+                        </div>
+                        <div class="form-group">
+                            <label>Ghostscript Path (for compression)</label>
+                            <input type="text" id="ghostscript-path" class="form-control"
+                                placeholder="e.g. C:\Program Files\gs\gs10.01.2\bin\gswin64c.exe">
+                        </div>
+                    </div>
+                    <button class="btn savesettings" onclick="save_settings()">Save Settings</button>
+                    <button class="btn btn-secondary" onclick="load_settings()">Reload Settings</button>
+                    <div class="output-area" id="settings-out"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>iLovePDF Local Edition • 100% Offline • Privacy First</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+
+    <!-- Additional JavaScript for remaining tools -->
+    <script>
+        // Additional tool functions
+        function pdf_to_images() {
+            const fileInput = document.getElementById('pdf-img-file');
+            const format = document.getElementById('pdf-img-format').value;
+            const dpi = document.getElementById('pdf-img-dpi').value;
+
+            if (!fileInput.files[0]) {
+                alert('Please select a PDF file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('format', format);
+            formData.append('dpi', dpi);
+
+            fetch('/pdf-to-images', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'images.zip';
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.getElementById('pdf-img-out').innerHTML = '<div class="success-message">PDF converted to images successfully!</div>';
+                })
+                .catch(error => {
+                    document.getElementById('pdf-img-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
+                });
+        }
+
+        function imgs_to_pdf() {
+            const fileInput = document.getElementById('img-pdf-file');
+
+            if (!fileInput.files[0]) {
+                alert('Please select at least one image file');
+                return;
+            }
+
+            const formData = new FormData();
+            Array.from(fileInput.files).forEach(file => formData.append('files', file));
+
+            fetch('/images-to-pdf', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'from_images.pdf';
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.getElementById('img-pdf-out').innerHTML = '<div class="success-message">Images converted to PDF successfully!</div>';
+                })
+                .catch(error => {
+                    document.getElementById('img-pdf-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
+                });
+        }
+
+        function word_to_pdf() {
+            convertOfficeToPDF('word-file', 'word-out', '/word-to-pdf');
+        }
+
+        function excel_to_pdf() {
+            convertOfficeToPDF('excel-file', 'excel-out', '/excel-to-pdf');
+        }
+
+        function powerpoint_to_pdf() {
+            convertOfficeToPDF('ppt-file', 'ppt-out', '/powerpoint-to-pdf');
+        }
+
+        function convertOfficeToPDF(fileInputId, outputId, endpoint) {
+            const fileInput = document.getElementById(fileInputId);
+
+            if (!fileInput.files[0]) {
+                alert('Please select a file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            fetch(endpoint, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) return response.json();
+                    return response.blob();
+                })
+                .then(result => {
+                    if (result.error) {
+                        throw new Error(result.error);
+                    }
+                    const url = window.URL.createObjectURL(result);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'converted.pdf';
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.getElementById(outputId).innerHTML = '<div class="success-message">File converted successfully!</div>';
+                })
+                .catch(error => {
+                    document.getElementById(outputId).innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
+                });
+        }
+
+        function pdf_to_word() {
+            convertPDFToOffice('pdf-word-file', 'pdf-word-out', '/pdf-to-word', 'converted.docx');
+        }
+
+        function convertPDFToOffice(fileInputId, outputId, endpoint, filename) {
+            const fileInput = document.getElementById(fileInputId);
+
+            if (!fileInput.files[0]) {
+                alert('Please select a PDF file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            fetch(endpoint, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) return response.json();
+                    return response.blob();
+                })
+                .then(result => {
+                    if (result.error) {
+                        throw new Error(result.error);
+                    }
+                    const url = window.URL.createObjectURL(result);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.getElementById(outputId).innerHTML = '<div class="success-message">PDF converted successfully!</div>';
+                })
+                .catch(error => {
+                    document.getElementById(outputId).innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
+                });
+        }
+
+        function ocr() {
+            const fileInput = document.getElementById('ocr-file');
+            const dpi = document.getElementById('ocr-dpi').value;
+
+            if (!fileInput.files[0]) {
+                alert('Please select a PDF file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('dpi', dpi);
+
+            fetch('/ocr', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) return response.json();
+                    return response.blob();
+                })
+                .then(result => {
+                    if (result.error) {
+                        throw new Error(result.error);
+                    }
+                    const url = window.URL.createObjectURL(result);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'ocr.pdf';
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.getElementById('ocr-out').innerHTML = '<div class="success-message">OCR applied successfully!</div>';
+                })
+                .catch(error => {
+                    document.getElementById('ocr-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
+                });
+        }
+
+        function batch_process() {
+            const fileInput = document.getElementById('batch-files');
+            const operation = document.getElementById('batch-op').value;
+            const quality = document.getElementById('batch-quality').value;
+            const format = document.getElementById('batch-format').value;
+
+            if (!fileInput.files[0]) {
+                alert('Please select files to process');
+                return;
+            }
+
+            const formData = new FormData();
+            Array.from(fileInput.files).forEach(file => formData.append('files', file));
+            formData.append('operation', operation);
+            if (operation === 'compress_strong') formData.append('quality', quality);
+            if (operation === 'pdf_to_images') {
+                formData.append('format', format);
+                formData.append('dpi', '144');
+            }
+            if (operation === 'ocr') formData.append('dpi', '200');
+
+            fetch('/batch', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'batch_results.zip';
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.getElementById('batch-out').innerHTML = '<div class="success-message">Batch processing completed!</div>';
+                })
+                .catch(error => {
+                    document.getElementById('batch-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
+                });
+        }
+
+        function save_settings() {
+            const tesseractPath = document.getElementById('tesseract-path').value;
+            const libreofficePath = document.getElementById('libreoffice-path').value;
+            const ghostscriptPath = document.getElementById('ghostscript-path').value;
+
+            const formData = new FormData();
+            formData.append('tesseract_path', tesseractPath);
+            formData.append('libreoffice_path', libreofficePath);
+            formData.append('ghostscript_path', ghostscriptPath);
+
+            fetch('/settings', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('settings-out').innerHTML = '<div class="success-message">Settings saved successfully!</div>';
+                })
+                .catch(error => {
+                    document.getElementById('settings-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
+                });
+        }
+
+        function load_settings() {
+            fetch('/settings')
+                .then(response => response.json())
+                .then(data => {
+                    const config = data.config;
+                    document.getElementById('tesseract-path').value = config.tesseract_path || '';
+                    document.getElementById('libreoffice-path').value = config.libreoffice_path || '';
+                    document.getElementById('ghostscript-path').value = config.ghostscript_path || '';
+                    document.getElementById('settings-out').innerHTML = '<div class="success-message">Settings loaded successfully!</div>';
+                })
+                .catch(error => {
+                    document.getElementById('settings-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
+                });
+        }
+
+        // Load settings on page load
+        document.addEventListener('DOMContentLoaded', load_settings);
+
+        function edit_metadata() {
+            const fileInput = document.getElementById('meta-file');
+            const title = document.getElementById('meta-title').value;
+            const author = document.getElementById('meta-author').value;
+            const subject = document.getElementById('meta-subject').value;
+            const keywords = document.getElementById('meta-keywords').value;
+
+            if (!fileInput.files[0]) {
+                alert('Please select a PDF file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('title', title);
+            formData.append('author', author);
+            formData.append('subject', subject);
+            formData.append('keywords', keywords);
+
+            fetch('/edit-metadata', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) return response.json();
+                    return response.blob();
+                })
+                .then(result => {
+                    if (result.error) {
+                        throw new Error(result.error);
+                    }
+                    const url = window.URL.createObjectURL(result);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'metadata_edited.pdf';
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.getElementById('meta-out').innerHTML = '<div class="success-message">Metadata edited successfully!</div>';
+                })
+                .catch(error => {
+                    document.getElementById('meta-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
+                });
+        }
+
+        function compare_pdfs() {
+            const file1Input = document.getElementById('compare-file1');
+            const file2Input = document.getElementById('compare-file2');
+
+            if (!file1Input.files[0] || !file2Input.files[0]) {
+                alert('Please select both PDF files');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file1', file1Input.files[0]);
+            formData.append('file2', file2Input.files[0]);
+
+            fetch('/compare', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) return response.json();
+                    return response.blob();
+                })
+                .then(result => {
+                    if (result.error) {
+                        throw new Error(result.error);
+                    }
+                    const url = window.URL.createObjectURL(result);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'comparison.pdf';
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.getElementById('compare-out').innerHTML = '<div class="success-message">PDFs compared successfully!</div>';
+                })
+                .catch(error => {
+                    document.getElementById('compare-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
+                });
+        }
+
+        function filterTools(category) {
+
+            const tools = document.querySelectorAll(".tool-card");
+
+            tools.forEach(tool => {
+
+                if (category === "all") {
+                    tool.style.display = "block";
+                }
+                else if (tool.classList.contains(category)) {
+                    tool.style.display = "block";
+                }
+                else {
+                    tool.style.display = "none";
+                }
+
+            });
+
+            const buttons = document.querySelectorAll(".filter-pill");
+
+            buttons.forEach(btn => btn.classList.remove("active"));
+
+            event.target.classList.add("active");
+        }
+    </script>
+</body>
+</html>

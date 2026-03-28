@@ -4,830 +4,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iLovePDF - Local PDF Tools</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <title>iLovePDF | Online PDF tools for PDF lovers</title>
+    <meta content="iLovePDF is an online service to work with PDF files completely free and easy to use. Merge PDF, split PDF, compress PDF, office to PDF, PDF to JPG and more!" name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="ilovepdf.com" name="author"/>
+    <meta content="Merge PDF, split PDF, combine PDF, extract PDF, compress PDF, convert PDF, Word to PDF, Excel to PDF, Powerpoint to PDF, PDF to JPG, JPG to PDF" name="keywords"/>
+    <link href="https://www.ilovepdf.com/" rel="canonical"/>
+    <link href="/static/assets/3383405f54bfabaf7cc5389bc26d181abdeaeb2e58f2a3989893261dcee6f88e.png" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="/static/css/style.css" rel="stylesheet"/>
 </head>
 
-<body>
-    <div class="container">
-        <header>
-            <h1>iLovePDF</h1>
-            <p>Complete PDF solution, right on your computer. All tools work 100% offline.</p>
-        </header>
-        <div class="filter-container">
-
-            <button class="filter-pill active" onclick="filterTools('all')">All</button>
-            <button class="filter-pill" onclick="filterTools('organize')">Organize PDF</button>
-            <button class="filter-pill" onclick="filterTools('optimize')">Optimize PDF</button>
-            <button class="filter-pill" onclick="filterTools('convert')">Convert PDF</button>
-            <button class="filter-pill" onclick="filterTools('edit')">Edit PDF</button>
-            <button class="filter-pill" onclick="filterTools('security')">PDF Security</button>
-            <button class="filter-pill" onclick="filterTools('setting')">PDF Settings</button>
-
+<body class="lang-en home">
+    <header class="header">
+        <nav>
+            <a class="brand" href="/" title="iLovePDF">
+                <img src="/static/assets/5a57cc7ec71eca69c8e70372656e4234ab1ad56a259a8f518ad535b419aed877.svg" alt="iLovePDF"/>
+            </a> 
+            <div class="menu">
+                <span class="menu--sm"><i class="ico ico--hamburger"></i></span>
+                <span class="menu--md">All PDF tools <i class="ico ico--down"></i></span>
+                <ul>
+                    <li><a href="/merge_pdf">Merge PDF</a></li>
+                    <li><a href="/split_pdf">Split PDF</a></li>
+                    <li><a href="/compress_pdf">Compress PDF</a></li>
+                    <li class="nav-has-dropdown">
+                        <span>Convert PDF<i class="ico ico--down"></i></span>
+                        <div class="nav-dropdown">
+                            <ul>
+                                <li>
+                                    <ul>
+                                        <li>
+                                            <div class="nav__title">Convert to PDF</div>
+                                        </li>
+                                        <li><a href="/jpg_to_pdf"><i class="ico ico--jpgpdf"></i>JPG to PDF</a></li>
+                                        <li><a href="/word_to_pdf"><i class="ico ico--wordpdf"></i>Word to PDF</a></li>
+                                        <li><a href="/powerpoint_to_pdf"><i class="ico ico--pptpdf"></i>PowerPoint to PDF</a></li>
+                                        <li><a href="/excel_to_pdf"><i class="ico ico--excelpdf"></i>Excel to PDF</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul>
+                                        <li>
+                                            <div class="nav__title">Convert from PDF</div>
+                                        </li>
+                                        <li><a href="/pdf_to_word"><i class="ico ico--pdfword"></i>PDF to Word</a></li>
+                                        <li><a href="/pdf_to_powerpoint"><i class="ico ico--pdfppt"></i>PDF to PowerPoint</a></li>
+                                        <li><a href="/pdf_to_excel"><i class="ico ico--pdfexcel"></i>PDF to Excel</a></li>
+                                        <li><a href="/pdf_to_jpg"><i class="ico ico--pdfjpg"></i>PDF to JPG</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-has-dropdown">
+                        <span>Edit PDF<i class="ico ico--down"></i></span>
+                        <div class="nav-dropdown">
+                            <ul>
+                                <li><a href="/edit-pdf"><i class="ico ico--editpdf"></i>Edit PDF</a></li>
+                                <li><a href="/pdf_add_watermark"><i class="ico ico--watermark"></i>Watermark</a></li>
+                                <li><a href="/page_number"><i class="ico ico--pagenumber"></i>Add Page Numbers</a></li>
+                                <li><a href="/rotate_pdf"><i class="ico ico--rotate"></i>Rotate PDF</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-has-dropdown">
+                        <span>PDF Security<i class="ico ico--down"></i></span>
+                        <div class="nav-dropdown">
+                            <ul>
+                                <li><a href="/sign-pdf"><i class="ico ico--esign"></i>Sign PDF</a></li>
+                                <li><a href="/protect-pdf"><i class="ico ico--protect"></i>Protect PDF</a></li>
+                                <li><a href="/unlock-pdf"><i class="ico ico--unlock"></i>Unlock PDF</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-has-dropdown">
+                        <span>More<i class="ico ico--down"></i></span>
+                        <div class="nav-dropdown nav-dropdown--right">
+                            <ul>
+                                <li><a href="/ocr-pdf"><i class="ico ico--ocr"></i>OCR PDF</a></li>
+                                <li><a href="/compare-pdf"><i class="ico ico--compare"></i>Compare PDF</a></li>
+                                <li><a href="/repair-pdf"><i class="ico ico--repair"></i>Repair PDF</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="header__actions">
+                <a class="btn btn--sm hide--sm" href="/login">Login</a>
+                <a class="btn btn--sm" href="/register">Sign up</a>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="main">
+        <div class="pattern-bg"></div>
+        <div class="home-title">
+            <h1 class="home-title__title">Every tool you need to work with PDFs in one place</h1>
+            <h2 class="home-title__subtitle">Every tool you need to use PDFs, at your fingertips. All are 100% FREE and easy to use! Merge, split, compress, convert, rotate, unlock and watermark PDFs with just a few clicks.</h2>
         </div>
-        <main>
-            <!-- PDF Organization Tools -->
-            <div class="category-section">
-                <h2 class="category-title">📁 PDF Organization</h2>
-                <div class="tools-grid">
-                    <!-- Merge PDF -->
-                    <div class="tool-card organize">
-                        <h3>
-                            <div class="tool-icon"><img src="/icons/merge.png" alt="Merge"></div>
-                            Merge PDF
-                        </h3>
-                        <p class="tool-description">Combine multiple PDF files into a single document</p>
-                        <div class="form-group">
-                            <label>Select PDF files to merge</label>
-                            <input type="file" id="merge-files" multiple accept="application/pdf" class="form-control">
+        
+        <div class="tools">
+            <div class="tools__filter">
+                <div class="tag active" data-filter="all">All</div>
+                <div class="tag workflows" data-filter="workflows">Workflows</div>
+                <div class="tag" data-filter="organize">Organize PDF</div>
+                <div class="tag" data-filter="optimize">Optimize PDF</div>
+                <div class="tag" data-filter="convert">Convert PDF</div>
+                <div class="tag" data-filter="edit">Edit PDF</div>
+                <div class="tag" data-filter="security">PDF Security</div>
+                <div class="tag" data-filter="intelligence">PDF Intelligence</div>
+            </div>
+            
+            <div class="tools__container">
+                <div class="tools__item" data-category="organize">
+                    <a href="/merge_pdf" title="Merge PDF">
+                        <div class="tools__item__icon">
+                            <svg height="48" viewBox="0 0 50 50" width="48" xmlns="http://www.w3.org/2000/svg">
+                                <g fill="#EE6C4D" fill-rule="evenodd">
+                                    <path d="M5.488.363h21.75c1.78 0 2.43.184 3.082.535a3.66 3.66 0 0 1 1.512 1.512c.348.652.535 1.297.535 3.082v21.746c0 1.78-.187 2.43-.535 3.082a3.66 3.66 0 0 1-1.512 1.512c-.652.348-1.3.535-3.082.535H5.488c-1.78 0-2.43-.187-3.082-.535A3.66 3.66 0 0 1 .895 30.32c-.348-.652-.535-1.3-.535-3.082V5.488c0-1.78.188-2.43.535-3.082A3.7 3.7 0 0 1 2.406.895c.652-.348 1.3-.53 3.082-.53zm0 0"/>
+                                    <path d="M44.563 49.69H22.816c-1.78 0-2.43-.184-3.082-.535a3.6 3.6 0 0 1-1.512-1.512c-.348-.652-.535-1.297-.535-3.082V22.816c0-1.78.184-2.43.535-3.082a3.6 3.6 0 0 1 1.512-1.512c.652-.348 1.3-.535 3.082-.535h21.746c1.785 0 2.43.188 3.082.535.645.34 1.172.867 1.512 1.512.352.652.535 1.3.535 3.082v21.746c0 1.785-.184 2.43-.535 3.082a3.6 3.6 0 0 1-1.512 1.512c-.652.352-1.297.535-3.082.535zm0 0"/>
+                                </g>
+                                <path d="M17.906 10.965a.87.87 0 0 0-.875.86v3.8L9.84 8.523a.886.886 0 0 0-1.238 0 .85.85 0 0 0-.254.605.86.86 0 0 0 .254.6l7.195 7.098h-3.875c-.484 0-.875.387-.875.86s.4.86.875.86h5.984a.9.9 0 0 0 .332-.066.86.86 0 0 0 .473-.465.8.8 0 0 0 .066-.328v-5.87a.86.86 0 0 0-.87-.86zm14.418 28.008c.48 0 .87-.383.87-.86v-3.797l7.195 7.098a.88.88 0 0 0 1.234 0 .85.85 0 0 0 .258-.605c0-.23-.094-.45-.258-.605l-7.2-7.102h3.875c.484 0 .875-.383.875-.86s-.4-.855-.875-.855h-5.984a.9.9 0 0 0-.336.066.9.9 0 0 0-.473.46.9.9 0 0 0-.066.328v5.87c0 .477.4.86.875.86zm-10.1-10.1c-.355.352-.93.352-1.285 0s-.355-.934 0-1.3a.91.91 0 0 1 1.285 0 .927.927 0 0 1 0 1.3m3.374-3.357a.91.91 0 0 1-1.285 0 .91.91 0 0 1 0-1.285.914.914 0 0 1 1.285 0 .91.91 0 0 1 0 1.285m3.36-3.364a.91.91 0 0 1-1.285 0 .91.91 0 0 1 0-1.285.91.91 0 0 1 1.285 0 .91.91 0 0 1 0 1.285m0 0" fill="#FFF"/>
+                            </svg>
                         </div>
-                        <button class="btn" onclick="merge()">Merge PDFs</button>
-                        <div class="output-area" id="merge-out"></div>
-                    </div>
-
-                    <!-- Split PDF -->
-                    <div class="tool-card organize">
-                        <h3>
-                            <div class="tool-icon"><img src="/icons/split.png" alt="Split"></div>
-                            Split PDF
-                        </h3>
-                        <p class="tool-description">Extract pages or split your PDF into multiple files</p>
-                        <div class="form-group">
-                            <label>Select PDF file</label>
-                            <input type="file" id="split-file" accept="application/pdf" class="form-control">
+                        <h3>Merge PDF</h3>
+                        <div class="tools__item__content">
+                            <p>Combine PDFs in the order you want with the easiest PDF merger available.</p>
                         </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label>From page</label>
-                                <input type="number" id="split-from" min="1" value="1" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>To page</label>
-                                <input type="number" id="split-to" min="1" value="1" class="form-control">
-                            </div>
+                    </a>
+                </div>
+
+                <div class="tools__item" data-category="organize">
+                    <a href="/split_pdf" title="Split PDF">
+                        <div class="tools__item__icon">
+                            <svg height="48" viewBox="0 0 50 50" width="48" xmlns="http://www.w3.org/2000/svg">
+                                <g fill="#EE6C4D" fill-rule="evenodd">
+                                    <path d="M5.488.363h21.75c1.78 0 2.43.184 3.082.535a3.66 3.66 0 0 1 1.512 1.512c.348.652.535 1.297.535 3.082v21.746c0 1.78-.187 2.43-.535 3.082a3.66 3.66 0 0 1-1.512 1.512c-.652.348-1.3.535-3.082.535H5.488c-1.78 0-2.43-.187-3.082-.535A3.66 3.66 0 0 1 .895 30.32c-.348-.652-.535-1.3-.535-3.082V5.488c0-1.78.188-2.43.535-3.082A3.7 3.7 0 0 1 2.406.895c.652-.348 1.3-.53 3.082-.53zm0 0"/>
+                                    <path d="M44.563 49.69H22.816c-1.78 0-2.43-.184-3.082-.535a3.6 3.6 0 0 1-1.512-1.512c-.348-.652-.535-1.297-.535-3.082V22.816c0-1.78.184-2.43.535-3.082a3.6 3.6 0 0 1 1.512-1.512c.652-.348 1.3-.535 3.082-.535h21.746c1.785 0 2.43.188 3.082.535.645.34 1.172.867 1.512 1.512.352.652.535 1.3.535 3.082v21.746c0 1.785-.184 2.43-.535 3.082a3.6 3.6 0 0 1-1.512 1.512c-.652.352-1.297.535-3.082.535zm0 0"/>
+                                </g>
+                                <path d="M9.22 15.87a.87.87 0 0 0 .875-.86v-3.8l7.195 7.102a.88.88 0 0 0 1.234 0 .85.85 0 0 0 0-1.215L11.328 10h3.875c.484 0 .875-.387.875-.86s-.4-.86-.875-.86H9.22a.9.9 0 0 0-.332.066.86.86 0 0 0-.539.793v5.875c0 .473.4.86.87.86zm31.793 18.2a.865.865 0 0 0-.875.855v3.8L32.94 31.63a.88.88 0 0 0-1.234 0 .84.84 0 0 0-.258.605.85.85 0 0 0 .258.605l7.2 7.1H35.02c-.48 0-.87.387-.87.86a.86.86 0 0 0 .871.855H41a.88.88 0 0 0 .805-.527.9.9 0 0 0 .066-.328v-5.883a.87.87 0 0 0-.87-.855zm-18.78-5.187c-.355.352-.93.352-1.285 0s-.355-.934 0-1.3a.91.91 0 0 1 1.285 0 .927.927 0 0 1 0 1.3m3.365-3.367a.91.91 0 0 1-1.285 0 .91.91 0 0 1 0-1.285.914.914 0 0 1 1.285 0 .91.91 0 0 1 0 1.285m3.36-3.364a.91.91 0 0 1-1.285 0 .91.91 0 0 1 0-1.285.91.91 0 0 1 1.285 0 .91.91 0 0 1 0 1.285m0 0" fill="#FFF"/>
+                            </svg>
                         </div>
-                        <button class="btn" onclick="split()">Split PDF</button>
-                        <div class="output-area" id="split-out"></div>
-                    </div>
-
-                    <!-- Watermark -->
-                    <div class="tool-card edit">
-                        <h3>
-                            <div class="tool-icon"><img src="/icons/water mark.png" alt="Watermark"></div>
-                            Add Watermark
-                        </h3>
-                        <p class="tool-description">Add text watermark to your PDF</p>
-                        Add Watermark
-                    </h3>
-                    <p class="tool-description">Add text watermark to your PDF</p>
-                    <div class="form-group">
-                        <label>Select PDF file</label>
-                        <input type="file" id="wm-file" accept="application/pdf" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Watermark text</label>
-                        <input type="text" id="wm-text" placeholder="Enter watermark text" class="form-control">
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <label>Opacity</label>
-                            <input type="number" id="wm-opacity" step="0.1" value="0.2" min="0" max="1"
-                                class="form-control">
+                        <h3>Split PDF</h3>
+                        <div class="tools__item__content">
+                            <p>Separate one page or a whole set for easy conversion into independent PDF files.</p>
                         </div>
-                        <div class="form-group">
-                            <label>Font size</label>
-                            <input type="number" id="wm-font" value="48" min="8" max="200" class="form-control">
+                    </a>
+                </div>
+
+                <div class="tools__item" data-category="optimize">
+                    <a href="/compress_pdf" title="Compress PDF">
+                        <div class="tools__item__icon">
+                            <svg height="48" viewBox="0 0 50 50" width="48" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M31.523 28h14.953c1.223 0 1.668.13 2.117.367.44.234.805.598 1.04 1.04.242.45.367.895.367 2.117v14.953c0 1.223-.13 1.668-.367 2.117-.234.44-.598.805-1.04 1.04-.45.242-.895.367-2.117.367H31.523c-1.223 0-1.668-.13-2.117-.367a2.52 2.52 0 0 1-1.04-1.04c-.242-.45-.367-.895-.367-2.117V31.523c0-1.223.13-1.668.367-2.117.234-.44.598-.805 1.04-1.04.45-.242.895-.367 2.117-.367zm0-28h14.953c1.223 0 1.668.13 2.117.367.44.234.805.598 1.04 1.04.242.45.367.895.367 2.117v14.953c0 1.223-.13 1.668-.367 2.117-.234.44-.598.805-1.04 1.04-.45.242-.895.367-2.117.367H31.523c-1.223 0-1.668-.13-2.117-.367a2.52 2.52 0 0 1-1.04-1.04c-.242-.45-.367-.895-.367-2.117V3.523c0-1.223.13-1.668.367-2.117.234-.44.598-.805 1.04-1.04C29.855.125 30.3 0 31.523 0m-28 28h14.953c1.223 0 1.668.13 2.117.367.44.234.805.598 1.04 1.04.242.45.367.895.367 2.117v14.953c0 1.223-.13 1.668-.367 2.117-.234.44-.598.805-1.04 1.04-.45.242-.895.367-2.117.367H3.523c-1.223 0-1.668-.13-2.117-.367a2.52 2.52 0 0 1-1.04-1.04C.125 48.145 0 47.7 0 46.477V31.523c0-1.223.13-1.668.367-2.117.234-.44.598-.805 1.04-1.04.45-.242.895-.367 2.117-.367zm0-28h14.953c1.223 0 1.668.13 2.117.367.44.234.805.598 1.04 1.04.242.45.367.895.367 2.117v14.953c0 1.223-.13 1.668-.367 2.117-.234.44-.598.805-1.04 1.04-.45.242-.895.367-2.117.367H3.523c-1.223 0-1.668-.13-2.117-.367a2.52 2.52 0 0 1-1.04-1.04C.125 20.145 0 19.7 0 18.477V3.523C0 2.3.13 1.852.367 1.406A2.56 2.56 0 0 1 1.406.367C1.855.13 2.3 0 3.523 0m0 0" fill="#8FBC5D" fill-rule="evenodd"/>
+                                <path d="M35 41.8c0 .48.398.867.883.867a.88.88 0 0 0 .883-.867v-3.844l5.145 5.05a.89.89 0 0 0 1.246 0 .85.85 0 0 0 .262-.613c0-.23-.094-.45-.262-.613l-5.14-5.047h3.914a.88.88 0 0 0 .883-.867.874.874 0 0 0-.883-.867h-6.05a.875.875 0 0 0-.817.536.8.8 0 0 0-.066.328zm7.3-26.387c.48 0 .867-.398.867-.883a.88.88 0 0 0-.867-.883h-3.844l5.05-5.14a.9.9 0 0 0 0-1.25.86.86 0 0 0-1.227 0l-5.047 5.148V8.492a.876.876 0 0 0-.867-.883.88.88 0 0 0-.883.867v6.05a.88.88 0 0 0 .867.883zm-26.387 7.3c0-.48-.398-.867-.883-.867a.88.88 0 0 0-.883.867v3.844L8.99 20.695a.9.9 0 0 0-1.25 0 .86.86 0 0 0 0 1.227l5.148 5.047h-3.844a.876.876 0 0 0-.883.867.88.88 0 0 0 .867.883h6.05a.88.88 0 0 0 .883-.867v-6.05a.88.88 0 0 0-.867-.883zm26.387 26.387c0 .48-.398.867-.883.867a.88.88 0 0 1-.883-.867v-3.844l-5.145 5.05a.89.89 0 0 1-1.246 0 .85.85 0 0 1-.262-.613c0-.23.094-.45.262-.613l5.14-5.047h-3.914a.88.88 0 0 1-.883-.867.874.874 0 0 1 .883-.867h6.05a.875.875 0 0 1 .817.536.8.8 0 0 1 .066.328zm-7.3-26.387c-.48 0-.867-.398-.867-.883a.88.88 0 0 1 .867-.883h3.844l-5.05-5.14a.9.9 0 0 1 0-1.25.86.86 0 0 1 1.227 0l5.047 5.148V8.492a.876.876 0 0 1 .867-.883.88.88 0 0 1 .883.867v6.05a.88.88 0 0 1-.867.883z" fill="#FFF"/>
+                            </svg>
                         </div>
-                    </div>
-                    <button class="btn" onclick="watermark()">Add Watermark</button>
-                    <div class="output-area" id="wm-out"></div>
-                </div>
-
-                <!-- Page Numbers -->
-                <div class="tool-card edit">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/page number.png" alt="Page Numbers"></div>
-                        Add Page Numbers
-                    </h3>
-                    <p class="tool-description">Add page numbers to your PDF document</p>
-                    <div class="form-group">
-                        <label>Select PDF file</label>
-                        <input type="file" id="pg-file" accept="application/pdf" class="form-control">
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <label>Position</label>
-                            <select id="pg-pos" class="form-control">
-                                <option value="bottom_center">Bottom Center</option>
-                                <option value="bottom_left">Bottom Left</option>
-                                <option value="bottom_right">Bottom Right</option>
-                                <option value="top_left">Top Left</option>
-                                <option value="top_right">Top Right</option>
-                            </select>
+                        <h3>Compress PDF</h3>
+                        <div class="tools__item__content">
+                            <p>Reduce file size while optimizing for maximal PDF quality.</p>
                         </div>
-                        <div class="form-group">
-                            <label>Font size</label>
-                            <input type="number" id="pg-font" value="12" min="8" max="72" class="form-control">
+                    </a>
+                </div>
+
+                <div class="tools__item" data-category="convert">
+                    <a href="/pdf_to_word" title="PDF to Word">
+                        <div class="tools__item__icon">
+                            <svg height="48" viewBox="0 0 50 50" width="48" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M32.324 15.656h-9.547c-2.477 0-3.375.258-4.28.742a5.04 5.04 0 0 0-2.098 2.102c-.484.902-.742 1.8-.742 4.277v9.547H5.18c-1.8 0-2.45-.187-3.113-.54A3.7 3.7 0 0 1 .54 30.257c-.352-.66-.54-1.31-.54-3.113V5.18c0-1.8.188-2.45.54-3.113S1.4.89 2.066.54 3.38 0 5.18 0h21.965c1.8 0 2.453.188 3.113.54a3.7 3.7 0 0 1 1.527 1.527c.352.66.54 1.313.54 3.113zm0 0" fill="#DCE5FA" fill-rule="evenodd"/>
+                                <path d="M14.477 7.52a.88.88 0 0 0-.883-.867c-.48 0-.883.39-.883.867v3.844L7.566 6.316a.89.89 0 0 0-1.246 0c-.168.16-.258.38-.258.61s.1.453.258.613l5.145 5.05H7.547c-.488 0-.883.387-.883.863s.398.867.883.867h6.055a.9.9 0 0 0 .336-.066.86.86 0 0 0 .477-.47.74.74 0 0 0 .066-.328l.004-5.938zm0 0" fill="#295795"/>
+                                <path d="M22.855 17.676H44.82c1.8 0 2.45.188 3.113.543a3.7 3.7 0 0 1 1.527 1.523c.352.66.54 1.313.54 3.113V44.82c0 1.8-.187 2.45-.54 3.113s-.867 1.176-1.527 1.527-1.312.54-3.113.54H22.855c-1.8 0-2.453-.187-3.113-.54a3.7 3.7 0 0 1-1.527-1.527c-.352-.66-.54-1.312-.54-3.113V22.855c0-1.8.188-2.453.54-3.113.348-.648.88-1.18 1.527-1.527.66-.352 1.313-.54 3.113-.54zm0 0" fill="#5F83C6" fill-rule="evenodd"/>
+                                <path d="M38.996 26.75h2.965l-2.94 14.64h-3.094l-1.777-9.035-1.824 9.035H29.12L26.2 26.75h3.164l1.508 9.363 1.938-9.363h3.004l1.727 9.297zm0 0" fill="#FFF"/>
+                            </svg>
                         </div>
-                    </div>
-                    <button class="btn" onclick="paginate()">Add Numbers</button>
-                    <div class="output-area" id="pg-out"></div>
-                </div>
-
-                <!-- Protect PDF -->
-                <div class="tool-card security">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/protect.png" alt="Protect"></div>
-                        Protect PDF
-                    </h3>
-                    <p class="tool-description">Add password protection to your PDF</p>
-                    <div class="form-group">
-                        <label>Select PDF file</label>
-                        <input type="file" id="prot-file" accept="application/pdf" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>User password</label>
-                        <input type="password" id="prot-user" placeholder="Enter user password" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Owner password (optional)</label>
-                        <input type="password" id="prot-owner" placeholder="Enter owner password" class="form-control">
-                    </div>
-                    <button class="btn" onclick="protect()">Protect PDF</button>
-                    <div class="output-area" id="prot-out"></div>
-                </div>
-
-                <!-- Unlock PDF -->
-                <div class="tool-card security">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/unlock.png" alt="Unlock"></div>
-                        Unlock PDF
-                    </h3>
-                    <p class="tool-description">Remove password protection from PDF</p>
-                    <div class="form-group">
-                        <label>Select protected PDF file</label>
-                        <input type="file" id="unl-file" accept="application/pdf" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" id="unl-pass" placeholder="Enter PDF password" class="form-control">
-                    </div>
-                    <button class="btn" onclick="unlock()">Unlock PDF</button>
-                    <div class="output-area" id="unl-out"></div>
-                </div>
-
-                <!-- Compress PDF -->
-                <div class="tool-card optimize">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/compress.png" alt="Compress"></div>
-                        Compress PDF
-                    </h3>
-                    <p class="tool-description">Reduce PDF file size while maintaining quality</p>
-                    <div class="form-group">
-                        <label>Select PDF file</label>
-                        <input type="file" id="cmp-file" accept="application/pdf" class="form-control">
-                    </div>
-                    <button class="btn" onclick="compress()">Compress PDF</button>
-                    <div class="output-area" id="cmp-out"></div>
-                </div>
-
-                <!-- Convert to Images -->
-                <div class="tool-card convert">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/pdf to image.png" alt="PDF to Images"></div>
-                        PDF to Images
-                    </h3>
-                    <p class="tool-description">Convert PDF pages to image files</p>
-                    <div class="form-group">
-                        <label>Select PDF file</label>
-                        <input type="file" id="pdf-img-file" accept="application/pdf" class="form-control">
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <label>Format</label>
-                            <select id="pdf-img-format" class="form-control">
-                                <option value="png">PNG</option>
-                                <option value="jpg">JPG</option>
-                            </select>
+                        <h3>PDF to Word</h3>
+                        <div class="tools__item__content">
+                            <p>Easily convert your PDF files into easy to edit DOC and DOCX documents. The converted WORD document is almost 100% accurate.</p>
                         </div>
-                        <div class="form-group">
-                            <label>DPI</label>
-                            <input type="number" id="pdf-img-dpi" value="144" min="72" max="300" class="form-control">
+                    </a>
+                </div>
+
+                <div class="tools__item" data-category="convert">
+                    <a href="/pdf_to_jpg" title="PDF to JPG">
+                        <div class="tools__item__icon">
+                            <svg height="48" viewBox="0 0 50 50" width="48" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M32.324 15.656h-9.55c-2.477 0-3.375.258-4.28.742a5.06 5.06 0 0 0-2.098 2.102c-.484.902-.742 1.8-.742 4.277v9.55H5.18c-1.8 0-2.453-.187-3.113-.54A3.7 3.7 0 0 1 .54 30.26C.188 29.598 0 28.945 0 27.145V5.18c0-1.8.188-2.453.54-3.113A3.7 3.7 0 0 1 2.066.539C2.727.188 3.38 0 5.18 0h21.965c1.8 0 2.453.188 3.113.54a3.7 3.7 0 0 1 1.527 1.527c.352.66.54 1.313.54 3.113zm0 0" fill="#FBEFA8" fill-rule="evenodd"/>
+                                <path d="M14.477 7.52c0-.477-.395-.863-.883-.863s-.883.387-.883.863v3.844L7.566 6.316a.89.89 0 0 0-1.246 0c-.168.16-.258.38-.258.61s.1.453.258.613l5.145 5.05H7.55c-.488 0-.883.387-.883.867s.395.863.883.863h6.047a.85.85 0 0 0 .34-.066.86.86 0 0 0 .477-.47.74.74 0 0 0 .066-.328l.004-5.934zm0 0" fill="#B7A001"/>
+                                <g fill-rule="evenodd">
+                                    <path d="M22.855 17.676H44.82c1.8 0 2.453.188 3.113.543a3.67 3.67 0 0 1 1.527 1.527c.352.656.54 1.31.54 3.11V44.82c0 1.8-.187 2.453-.54 3.113a3.7 3.7 0 0 1-1.527 1.527c-.66.352-1.312.54-3.113.54H22.855c-1.8 0-2.453-.187-3.113-.54a3.7 3.7 0 0 1-1.527-1.527c-.352-.66-.54-1.312-.54-3.113V22.855c0-1.8.188-2.453.54-3.113.348-.648.88-1.18 1.527-1.527.66-.352 1.313-.54 3.113-.54zm0 0" fill="#D6BF2D"/>
+                                    <path d="M41.5 26c1.102 0 2 .898 2 2s-.898 2-2 2-2-.898-2-2 .898-2 2-2M30.6 39h-6.344c-.1 0-.172-.047-.215-.125s-.043-.168.004-.242l6.574-11.02a.26.26 0 0 1 .426 0l3.832 6.422 2.57-2.625a.24.24 0 0 1 .176-.074h.008c.07 0 .137.03.18.086l6.1 7.13c.07.043.11.12.11.203a.246.246 0 0 1-.246.242H30.6v-.004zm0 0" fill="#FFF"/>
+                                </g>
+                            </svg>
                         </div>
-                    </div>
-                    <button class="btn" onclick="pdf_to_images()">Convert to Images</button>
-                    <div class="output-area" id="pdf-img-out"></div>
-                </div>
-
-                <!-- Images to PDF -->
-                <div class="tool-card convert">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/image to pdf.png" alt="Images to PDF"></div>
-                        Images to PDF
-                    </h3>
-                    <p class="tool-description">Combine multiple images into a PDF</p>
-                    <div class="form-group">
-                        <label>Select image files</label>
-                        <input type="file" id="img-pdf-file" multiple accept="image/*" class="form-control">
-                    </div>
-                    <button class="btn" onclick="imgs_to_pdf()">Convert to PDF</button>
-                    <div class="output-area" id="img-pdf-out"></div>
-                </div>
-
-                <!-- Word to PDF -->
-                <div class="tool-card convert">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/word to pdf.png" alt="Word to PDF"></div>
-                        Word to PDF
-                    </h3>
-                    <p class="tool-description">Convert Microsoft Word documents to PDF</p>
-                    <div class="form-group">
-                        <label>Select Word file (.docx)</label>
-                        <input type="file" id="word-file" accept=".docx" class="form-control">
-                    </div>
-                    <button class="btn" onclick="word_to_pdf()">Convert to PDF</button>
-                    <div class="output-area" id="word-out"></div>
-                </div>
-
-                <!-- Excel to PDF -->
-                <div class="tool-card convert">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/excel to pdf.png" alt="Excel to PDF"></div>
-                        Excel to PDF
-                    </h3>
-                    <p class="tool-description">Convert Excel spreadsheets to PDF</p>
-                    <div class="form-group">
-                        <label>Select Excel file (.xlsx)</label>
-                        <input type="file" id="excel-file" accept=".xlsx" class="form-control">
-                    </div>
-                    <button class="btn" onclick="excel_to_pdf()">Convert to PDF</button>
-                    <div class="output-area" id="excel-out"></div>
-                </div>
-
-                <!-- PowerPoint to PDF -->
-                <div class="tool-card convert">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/PowerPoint to pdf.png" alt="PowerPoint to PDF"></div>
-                        PowerPoint to PDF
-                    </h3>
-                    <p class="tool-description">Convert PowerPoint presentations to PDF</p>
-                    <div class="form-group">
-                        <label>Select PowerPoint file (.pptx)</label>
-                        <input type="file" id="ppt-file" accept=".pptx" class="form-control">
-                    </div>
-                    <button class="btn" onclick="powerpoint_to_pdf()">Convert to PDF</button>
-                    <div class="output-area" id="ppt-out"></div>
-                </div>
-
-                <!-- PDF to Word -->
-                <div class="tool-card convert">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/pdf to word.png" alt="PDF to Word"></div>
-                        PDF to Word
-                    </h3>
-                    <p class="tool-description">Convert PDF to Microsoft Word document</p>
-                    <div class="form-group">
-                        <label>Select PDF file</label>
-                        <input type="file" id="pdf-word-file" accept="application/pdf" class="form-control">
-                    </div>
-                    <button class="btn" onclick="pdf_to_word()">Convert to Word</button>
-                    <div class="output-area" id="pdf-word-out"></div>
-                </div>
-
-                <!-- OCR PDF -->
-                <div class="tool-card optimize">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/OCR.png" alt="OCR"></div>
-                        OCR PDF
-                    </h3>
-                    <p class="tool-description">Make scanned PDFs searchable with OCR</p>
-                    <div class="form-group">
-                        <label>Select PDF file</label>
-                        <input type="file" id="ocr-file" accept="application/pdf" class="form-control">
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <label>DPI</label>
-                            <input type="number" id="ocr-dpi" value="200" min="150" max="300" class="form-control">
+                        <h3>PDF to JPG</h3>
+                        <div class="tools__item__content">
+                            <p>Convert each PDF page into a JPG or extract all images contained in a PDF.</p>
                         </div>
-                    </div>
-                    <button class="btn" onclick="ocr()">Apply OCR</button>
-                    <div class="output-area" id="ocr-out"></div>
+                    </a>
                 </div>
 
-                <!-- Batch Processing -->
-                <div class="tool-card optimize">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/batch process.png" alt="Batch Process"></div>
-                        Batch Process
-                    </h3>
-                    <p class="tool-description">Process multiple files at once</p>
-                    <div class="form-group">
-                        <label>Select files</label>
-                        <input type="file" id="batch-files" multiple accept=".pdf,.docx,.xlsx,.pptx"
-                            class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Operation</label>
-                        <select id="batch-op" class="form-control">
-                            <option value="compress">Compress PDFs</option>
-                            <option value="compress_strong">Strong Compression</option>
-                            <option value="ocr">Apply OCR</option>
-                            <option value="office_to_pdf">Office to PDF</option>
-                            <option value="pdf_to_images">PDF to Images</option>
-                        </select>
-                    </div>
-                    <div class="advanced-options">
-                        <h4>Advanced Options</h4>
-                        <div class="row">
-                            <div class="form-group">
-                                <label>Quality (for compression)</label>
-                                <select id="batch-quality" class="form-control">
-                                    <option value="screen">Screen</option>
-                                    <option value="ebook">Ebook</option>
-                                    <option value="printer">Printer</option>
-                                    <option value="prepress">Prepress</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Image format</label>
-                                <select id="batch-format" class="form-control">
-                                    <option value="png">PNG</option>
-                                    <option value="jpg">JPG</option>
-                                </select>
-                            </div>
+                <div class="tools__item" data-category="edit">
+                    <a href="/edit-pdf" title="Edit PDF">
+                        <div class="tools__item__icon">
+                            <svg fill="none" fill-rule="evenodd" height="48" viewBox="0 0 100 100" width="48" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.024 0h67.95c5.572 0 7.593.58 9.63 1.67s3.636 2.688 4.725 4.725 1.67 4.058 1.67 9.63v67.95c0 5.572-.58 7.593-1.67 9.63s-2.688 3.636-4.725 4.725-4.058 1.67-9.63 1.67h-67.95c-5.572 0-7.593-.58-9.63-1.67S2.76 95.642 1.67 93.605 0 89.548 0 83.976v-67.95c0-5.572.58-7.593 1.67-9.63S4.358 2.76 6.395 1.67 10.452 0 16.024 0" fill="#ab6993"/>
+                                <path d="m57.98 39.967 5.413 4.398a.51.51 0 0 1-.092.847l-6.234 3.142a1.4 1.4 0 0 1-.388.124l-.136.016a1.44 1.44 0 0 1-1.031-.31 1.34 1.34 0 0 1-.48-1.336l.037-.134 2.108-6.5a.51.51 0 0 1 .803-.238zm15.55-20.523a4.33 4.33 0 0 1 5.728-.648l.182.136 1.06.88a4.14 4.14 0 0 1 1.486 2.821 4.12 4.12 0 0 1-.82 2.849l-.148.184-14.9 17.566c-.36.425-.995.48-1.423.125l-5.915-4.9a1.007 1.007 0 0 1-.133-1.43z" fill="#fff"/>
+                                <g stroke="#eadae4" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.046">
+                                    <path d="M48.012 62.483h-7.356m7.356-24.49h-7.356M44.232 39.695l.004 21.566"/>
+                                </g>
+                                <path d="M24 22.985c-.523 0-.954.396-1.01.905l-.006.11v52c0 .523.396.954.905 1.01l.11.006h52c.523 0 .954-.396 1.01-.905l.006-.11V42.302a1.016 1.016 0 0 0-2.025-.11l-.006.11v32.682h-49.97v-49.97h34.7c.523 0 .954-.396 1.01-.905l.006-.11c0-.523-.396-.954-.905-1.01l-.11-.006H24z" fill="#fff" fill-rule="nonzero"/>
+                                <g fill="#eadae4">
+                                    <rect height="12" rx="6" width="12" x="18" y="18"/>
+                                    <rect height="12" rx="6" width="12" x="18" y="70"/>
+                                    <rect height="12" rx="6" width="12" x="70" y="70"/>
+                                </g>
+                            </svg>
                         </div>
-                    </div>
-                    <button class="btn" onclick="batch_process()">Process Files</button>
-                    <div class="output-area" id="batch-out"></div>
+                        <h3>Edit PDF</h3>
+                        <div class="tools__item__content">
+                            <p>Add text, images, shapes or freehand annotations to a PDF document. Edit the size, font, and color of the added content.</p>
+                        </div>
+                    </a>
                 </div>
 
-                <!-- Edit Metadata -->
-                <div class="tool-card edit">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/matadata.png" alt="Edit Metadata"></div>
-                        Edit Metadata
-                    </h3>
-                    <p class="tool-description">Edit PDF title, author, subject, and keywords</p>
-                    <div class="form-group">
-                        <label>Select PDF file</label>
-                        <input type="file" id="meta-file" accept="application/pdf" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" id="meta-title" placeholder="Document title" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Author</label>
-                        <input type="text" id="meta-author" placeholder="Author name" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Subject</label>
-                        <input type="text" id="meta-subject" placeholder="Document subject" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Keywords</label>
-                        <input type="text" id="meta-keywords" placeholder="Comma-separated keywords"
-                            class="form-control">
-                    </div>
-                    <button class="btn" onclick="edit_metadata()">Edit Metadata</button>
-                    <div class="output-area" id="meta-out"></div>
-                </div>
-
-                <!-- Compare PDFs -->
-                <div class="tool-card Security">
-                    <h3>
-                        <div class="tool-icon"><img src="/icons/compare.png" alt="Compare PDFs"></div>
-                        Compare PDFs
-                    </h3>
-                    <p class="tool-description">Compare two PDF documents side by side</p>
-                    <div class="form-group">
-                        <label>First PDF file</label>
-                        <input type="file" id="compare-file1" accept="application/pdf" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Second PDF file</label>
-                        <input type="file" id="compare-file2" accept="application/pdf" class="form-control">
-                    </div>
-                    <button class="btn" onclick="compare_pdfs()">Compare PDFs</button>
-                    <div class="output-area" id="compare-out"></div>
-                </div>
-
-                <!-- Settings Panel -->
-                <div class=" tool-card setting">
-                    <h3>⚙️ Settings</h3>
-                    <p class="tool-description">Configure external tools paths for advanced features</p>
-                    <div class="row">
-                        <div class="form-group">
-                            <label>Tesseract Path (for OCR)</label>
-                            <input type="text" id="tesseract-path" class="form-control"
-                                placeholder="e.g. C:\Program Files\Tesseract-OCR\tesseract.exe">
+                <div class="tools__item" data-category="security">
+                    <a href="/sign-pdf" title="Sign PDF">
+                        <div class="tools__item__icon">
+                            <svg height="50" viewBox="0 0 100 100" width="50" xmlns="http://www.w3.org/2000/svg">
+                                <g fill="none">
+                                    <path d="M16 0h68c5.5 0 7.6.6 9.6 1.7s3.6 2.7 4.7 4.7 1.7 4.1 1.7 9.6v68c0 5.5-.6 7.6-1.7 9.6s-2.7 3.6-4.7 4.7-4.1 1.7-9.6 1.7H16c-5.5 0-7.6-.6-9.6-1.7s-3.6-2.7-4.7-4.7S0 89.5 0 84V16c0-5.5.6-7.6 1.7-9.6s2.7-3.6 4.7-4.7S10.5 0 16 0" fill="#AB6993"/>
+                                    <path d="M16 0h68c5.5 0 7.6.6 9.6 1.7s3.6 2.7 4.7 4.7 1.7 4.1 1.7 9.6v68c0 5.5-.6 7.6-1.7 9.6s-2.7 3.6-4.7 4.7-4.1 1.7-9.6 1.7H16c-5.5 0-7.6-.6-9.6-1.7s-3.6-2.7-4.7-4.7S0 89.5 0 84V16c0-5.5.6-7.6 1.7-9.6s2.7-3.6 4.7-4.7S10.5 0 16 0" fill="#4A7AAB"/>
+                                    <g fill="#FFF">
+                                        <path d="m34.57 45.69-.812 29.208c.073.273.197.46.42.473s.36-.023.46-.196l9.35-16.195c-1.779-1.72-2.201-4.388-.951-6.553 1.45-2.512 4.728-3.39 7.24-1.94 2.598 1.5 3.476 4.778 2.026 7.29-1.25 2.165-3.859 3.083-6.237 2.403l-9.35 16.195c-.1.173-.027.446.233.596.087.05.31.063.446.027L62.283 61.69c.747-.493 1.147-1.186 1.287-2.029l1.755-18.039c.153-1.066-.326-2.036-1.279-2.586l-10.739-6.2c-.952-.55-2.032-.48-2.965.136l-14.658 10.59c-.66.542-1.06 1.235-1.114 2.128M67.644 38.805l-15.935-9.2c-.78-.45-.972-1.716-.372-2.755l3.7-6.409c.6-1.039 1.793-1.505 2.572-1.055l15.935 9.2c.866.5 1.06 1.766.46 2.805l-3.7 6.41c-.6 1.038-1.794 1.504-2.66 1.004"/>
+                                    </g>
+                                </g>
+                            </svg>
                         </div>
-                        <div class="form-group">
-                            <label>LibreOffice Path (for Office conversions)</label>
-                            <input type="text" id="libreoffice-path" class="form-control"
-                                placeholder="e.g. C:\Program Files\LibreOffice\program\soffice.exe">
+                        <h3>Sign PDF</h3>
+                        <div class="tools__item__content">
+                            <p>Sign yourself or request electronic signatures from others.</p>
                         </div>
-                        <div class="form-group">
-                            <label>Ghostscript Path (for compression)</label>
-                            <input type="text" id="ghostscript-path" class="form-control"
-                                placeholder="e.g. C:\Program Files\gs\gs10.01.2\bin\gswin64c.exe">
-                        </div>
-                    </div>
-                    <button class="btn savesettings" onclick="save_settings()">Save Settings</button>
-                    <button class="btn btn-secondary" onclick="load_settings()">Reload Settings</button>
-                    <div class="output-area" id="settings-out"></div>
+                    </a>
                 </div>
             </div>
-        </main>
-
-        <footer>
-            <p>iLovePDF Local Edition • 100% Offline • Privacy First</p>
-        </footer>
+        </div>
     </div>
 
-    <script src="/static/js/main.js"></script>
-
-    <!-- Additional JavaScript for remaining tools -->
     <script>
-        // Additional tool functions
-        function pdf_to_images() {
-            const fileInput = document.getElementById('pdf-img-file');
-            const format = document.getElementById('pdf-img-format').value;
-            const dpi = document.getElementById('pdf-img-dpi').value;
-
-            if (!fileInput.files[0]) {
-                alert('Please select a PDF file');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
-            formData.append('format', format);
-            formData.append('dpi', dpi);
-
-            fetch('/pdf-to-images', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.blob())
-                .then(blob => {
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'images.zip';
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.getElementById('pdf-img-out').innerHTML = '<div class="success-message">PDF converted to images successfully!</div>';
-                })
-                .catch(error => {
-                    document.getElementById('pdf-img-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
-                });
-        }
-
-        function imgs_to_pdf() {
-            const fileInput = document.getElementById('img-pdf-file');
-
-            if (!fileInput.files[0]) {
-                alert('Please select at least one image file');
-                return;
-            }
-
-            const formData = new FormData();
-            Array.from(fileInput.files).forEach(file => formData.append('files', file));
-
-            fetch('/images-to-pdf', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.blob())
-                .then(blob => {
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'from_images.pdf';
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.getElementById('img-pdf-out').innerHTML = '<div class="success-message">Images converted to PDF successfully!</div>';
-                })
-                .catch(error => {
-                    document.getElementById('img-pdf-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
-                });
-        }
-
-        function word_to_pdf() {
-            convertOfficeToPDF('word-file', 'word-out', '/word-to-pdf');
-        }
-
-        function excel_to_pdf() {
-            convertOfficeToPDF('excel-file', 'excel-out', '/excel-to-pdf');
-        }
-
-        function powerpoint_to_pdf() {
-            convertOfficeToPDF('ppt-file', 'ppt-out', '/powerpoint-to-pdf');
-        }
-
-        function convertOfficeToPDF(fileInputId, outputId, endpoint) {
-            const fileInput = document.getElementById(fileInputId);
-
-            if (!fileInput.files[0]) {
-                alert('Please select a file');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
-
-            fetch(endpoint, {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => {
-                    if (!response.ok) return response.json();
-                    return response.blob();
-                })
-                .then(result => {
-                    if (result.error) {
-                        throw new Error(result.error);
-                    }
-                    const url = window.URL.createObjectURL(result);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'converted.pdf';
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.getElementById(outputId).innerHTML = '<div class="success-message">File converted successfully!</div>';
-                })
-                .catch(error => {
-                    document.getElementById(outputId).innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
-                });
-        }
-
-        function pdf_to_word() {
-            convertPDFToOffice('pdf-word-file', 'pdf-word-out', '/pdf-to-word', 'converted.docx');
-        }
-
-        function convertPDFToOffice(fileInputId, outputId, endpoint, filename) {
-            const fileInput = document.getElementById(fileInputId);
-
-            if (!fileInput.files[0]) {
-                alert('Please select a PDF file');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
-
-            fetch(endpoint, {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => {
-                    if (!response.ok) return response.json();
-                    return response.blob();
-                })
-                .then(result => {
-                    if (result.error) {
-                        throw new Error(result.error);
-                    }
-                    const url = window.URL.createObjectURL(result);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = filename;
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.getElementById(outputId).innerHTML = '<div class="success-message">PDF converted successfully!</div>';
-                })
-                .catch(error => {
-                    document.getElementById(outputId).innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
-                });
-        }
-
-        function ocr() {
-            const fileInput = document.getElementById('ocr-file');
-            const dpi = document.getElementById('ocr-dpi').value;
-
-            if (!fileInput.files[0]) {
-                alert('Please select a PDF file');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
-            formData.append('dpi', dpi);
-
-            fetch('/ocr', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => {
-                    if (!response.ok) return response.json();
-                    return response.blob();
-                })
-                .then(result => {
-                    if (result.error) {
-                        throw new Error(result.error);
-                    }
-                    const url = window.URL.createObjectURL(result);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'ocr.pdf';
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.getElementById('ocr-out').innerHTML = '<div class="success-message">OCR applied successfully!</div>';
-                })
-                .catch(error => {
-                    document.getElementById('ocr-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
-                });
-        }
-
-        function batch_process() {
-            const fileInput = document.getElementById('batch-files');
-            const operation = document.getElementById('batch-op').value;
-            const quality = document.getElementById('batch-quality').value;
-            const format = document.getElementById('batch-format').value;
-
-            if (!fileInput.files[0]) {
-                alert('Please select files to process');
-                return;
-            }
-
-            const formData = new FormData();
-            Array.from(fileInput.files).forEach(file => formData.append('files', file));
-            formData.append('operation', operation);
-            if (operation === 'compress_strong') formData.append('quality', quality);
-            if (operation === 'pdf_to_images') {
-                formData.append('format', format);
-                formData.append('dpi', '144');
-            }
-            if (operation === 'ocr') formData.append('dpi', '200');
-
-            fetch('/batch', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.blob())
-                .then(blob => {
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'batch_results.zip';
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.getElementById('batch-out').innerHTML = '<div class="success-message">Batch processing completed!</div>';
-                })
-                .catch(error => {
-                    document.getElementById('batch-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
-                });
-        }
-
-        function save_settings() {
-            const tesseractPath = document.getElementById('tesseract-path').value;
-            const libreofficePath = document.getElementById('libreoffice-path').value;
-            const ghostscriptPath = document.getElementById('ghostscript-path').value;
-
-            const formData = new FormData();
-            formData.append('tesseract_path', tesseractPath);
-            formData.append('libreoffice_path', libreofficePath);
-            formData.append('ghostscript_path', ghostscriptPath);
-
-            fetch('/settings', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('settings-out').innerHTML = '<div class="success-message">Settings saved successfully!</div>';
-                })
-                .catch(error => {
-                    document.getElementById('settings-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
-                });
-        }
-
-        function load_settings() {
-            fetch('/settings')
-                .then(response => response.json())
-                .then(data => {
-                    const config = data.config;
-                    document.getElementById('tesseract-path').value = config.tesseract_path || '';
-                    document.getElementById('libreoffice-path').value = config.libreoffice_path || '';
-                    document.getElementById('ghostscript-path').value = config.ghostscript_path || '';
-                    document.getElementById('settings-out').innerHTML = '<div class="success-message">Settings loaded successfully!</div>';
-                })
-                .catch(error => {
-                    document.getElementById('settings-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
-                });
-        }
-
-        // Load settings on page load
-        document.addEventListener('DOMContentLoaded', load_settings);
-
-        function edit_metadata() {
-            const fileInput = document.getElementById('meta-file');
-            const title = document.getElementById('meta-title').value;
-            const author = document.getElementById('meta-author').value;
-            const subject = document.getElementById('meta-subject').value;
-            const keywords = document.getElementById('meta-keywords').value;
-
-            if (!fileInput.files[0]) {
-                alert('Please select a PDF file');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
-            formData.append('title', title);
-            formData.append('author', author);
-            formData.append('subject', subject);
-            formData.append('keywords', keywords);
-
-            fetch('/edit-metadata', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => {
-                    if (!response.ok) return response.json();
-                    return response.blob();
-                })
-                .then(result => {
-                    if (result.error) {
-                        throw new Error(result.error);
-                    }
-                    const url = window.URL.createObjectURL(result);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'metadata_edited.pdf';
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.getElementById('meta-out').innerHTML = '<div class="success-message">Metadata edited successfully!</div>';
-                })
-                .catch(error => {
-                    document.getElementById('meta-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
-                });
-        }
-
-        function compare_pdfs() {
-            const file1Input = document.getElementById('compare-file1');
-            const file2Input = document.getElementById('compare-file2');
-
-            if (!file1Input.files[0] || !file2Input.files[0]) {
-                alert('Please select both PDF files');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('file1', file1Input.files[0]);
-            formData.append('file2', file2Input.files[0]);
-
-            fetch('/compare', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => {
-                    if (!response.ok) return response.json();
-                    return response.blob();
-                })
-                .then(result => {
-                    if (result.error) {
-                        throw new Error(result.error);
-                    }
-                    const url = window.URL.createObjectURL(result);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'comparison.pdf';
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.getElementById('compare-out').innerHTML = '<div class="success-message">PDFs compared successfully!</div>';
-                })
-                .catch(error => {
-                    document.getElementById('compare-out').innerHTML = '<div class="error-message">Error: ' + error.message + '</div>';
-                });
-        }
-
         function filterTools(category) {
-
-            const tools = document.querySelectorAll(".tool-card");
-
+            const tags = document.querySelectorAll('.tag');
+            const tools = document.querySelectorAll('.tools__item');
+            
+            tags.forEach(tag => tag.classList.remove('active'));
+            event.target.classList.add('active');
+            
             tools.forEach(tool => {
-
-                if (category === "all") {
-                    tool.style.display = "block";
+                if (category === 'all' || tool.dataset.category === category) {
+                    tool.style.display = 'block';
+                } else {
+                    tool.style.display = 'none';
                 }
-                else if (tool.classList.contains(category)) {
-                    tool.style.display = "block";
-                }
-                else {
-                    tool.style.display = "none";
-                }
-
             });
-
-            const buttons = document.querySelectorAll(".filter-pill");
-
-            buttons.forEach(btn => btn.classList.remove("active"));
-
-            event.target.classList.add("active");
         }
+        
+        // Initialize filter functionality
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                filterTools(this.dataset.filter);
+            });
+        });
     </script>
 </body>
 </html>

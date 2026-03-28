@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-container": "#a44100",
+            "on-primary-fixed": "#07006c",
+            "tertiary-fixed-dim": "#ffb695",
+            "surface-tint": "#c0c1ff",
+            "on-tertiary-container": "#ffd2be",
+            "surface-dim": "#0b1326",
+            "on-tertiary": "#571f00",
+            "on-secondary": "#2a276a",
+            "on-primary": "#1000a9",
+            "primary-fixed": "#e1e0ff",
+            "inverse-on-surface": "#283044",
+            "error": "#ffb4ab",
+            "on-error-container": "#ffdad6",
+            "background": "#0b1326",
+            "surface-container-low": "#131b2e",
+            "surface": "#0b1326",
+            "on-secondary-fixed-variant": "#413f82",
+            "secondary-container": "#413f82",
+            "surface-container-highest": "#2d3449",
+            "on-surface": "#dae2fd",
+            "on-secondary-container": "#b0aef9",
+            "surface-container-lowest": "#060e20",
+            "primary-fixed-dim": "#c0c1ff",
+            "on-error": "#690005",
+            "surface-variant": "#2d3449",
+            "surface-container-high": "#222a3d",
+            "primary": "#c0c1ff",
+            "inverse-surface": "#dae2fd",
+            "primary-container": "#4b4dd8",
+            "on-primary-container": "#d9d8ff",
+            "outline": "#918fa1",
+            "on-tertiary-fixed": "#351000",
+            "inverse-primary": "#494bd6",
+            "on-surface-variant": "#c7c4d8",
+            "on-primary-fixed-variant": "#2f2ebe",
+            "secondary-fixed": "#e2dfff",
+            "surface-container": "#171f33",
+            "error-container": "#93000a",
+            "surface-bright": "#31394d",
+            "secondary-fixed-dim": "#c3c0ff",
+            "tertiary": "#ffb695",
+            "tertiary-fixed": "#ffdbcc",
+            "secondary": "#c3c0ff",
+            "outline-variant": "#464555",
+            "on-tertiary-fixed-variant": "#7b2f00",
+            "on-secondary-fixed": "#140f54",
+            "on-background": "#dae2fd"
+          },
+          fontFamily: {
+            "headline": ["Manrope"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-panel {
+      background: rgba(23, 31, 51, 0.7);
+      backdrop-filter: blur(12px);
+    }
+    .signature-gradient {
+      background: linear-gradient(135deg, #4b4dd8 0%, #c0c1ff 100%);
+    }
+    body {
+      background-color: #0b1326;
+      color: #dae2fd;
+    }
+  </style>
+</head>
+<body class="font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-50 w-full bg-[#0b1326] flex justify-between items-center px-6 py-3 no-border bg-[#131b2e] flat no shadows">
+<div class="flex items-center gap-8">
+<div class="text-xl font-black text-[#c0c1ff] tracking-tighter font-headline">
+        Lithograph PDF
+      </div>
+<nav class="hidden md:flex items-center gap-6 font-headline font-bold tracking-tight">
+<a class="text-[#c7c4d8] hover:text-[#f1f0f7] transition-colors" href="#">Documents</a>
+<a class="text-[#c7c4d8] hover:text-[#f1f0f7] transition-colors" href="#">Templates</a>
+<a class="text-[#c7c4d8] hover:text-[#f1f0f7] transition-colors" href="#">Workspaces</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-lowest border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary w-64 text-on-surface placeholder:text-outline" placeholder="Search for tools..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-[#c7c4d8] hover:bg-[#171f33] rounded-lg transition-all scale-95 active:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-[#c7c4d8] hover:bg-[#171f33] rounded-lg transition-all scale-95 active:opacity-80">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<button class="signature-gradient text-on-primary-fixed px-5 py-2 rounded-full font-headline font-bold text-sm hover:opacity-90 transition-opacity">
+        Upgrade
+      </button>
+</div>
+</header>
+<!-- Main Container -->
+<div class="flex pt-16">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col py-6 space-y-4 fixed h-screen w-64 left-0 top-16 bg-[#131b2e] no-border shadow-none font-['Inter'] text-sm font-medium">
+<div class="px-6 mb-6">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary" data-icon="architecture">architecture</span>
+</div>
+<div>
+<div class="text-[#c0c1ff] font-bold">Architectural Workspace</div>
+<div class="text-xs text-on-surface-variant">Active Project</div>
+</div>
+</div>
+<button class="w-full signature-gradient text-on-primary-fixed font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 ease-in-out">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+          New Document
+        </button>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-6 py-3 text-[#c7c4d8] hover:bg-[#171f33]/50 hover:text-[#f1f0f7] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="folder">folder</span>
+          All Files
+        </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#c7c4d8] hover:bg-[#171f33]/50 hover:text-[#f1f0f7] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="call_split">call_split</span>
+          Merge &amp; Split
+        </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#c7c4d8] hover:bg-[#171f33]/50 hover:text-[#f1f0f7] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="transform">transform</span>
+          Convert
+        </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#c7c4d8] hover:bg-[#171f33]/50 hover:text-[#f1f0f7] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="document_scanner">document_scanner</span>
+          OCR
+        </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#c7c4d8] hover:bg-[#171f33]/50 hover:text-[#f1f0f7] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+          Security
+        </a>
+<a class="flex items-center gap-3 px-6 py-3 bg-[#171f33] text-[#c0c1ff] font-semibold rounded-r-full mr-4 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+          Organize
+        </a>
+</nav>
+<div class="px-6 py-6 border-t border-outline-variant/10 space-y-2">
+<a class="flex items-center gap-3 py-2 text-[#c7c4d8] hover:text-[#f1f0f7] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+          Help
+        </a>
+<div class="pt-4">
+<div class="flex justify-between text-xs mb-2">
+<span class="text-on-surface-variant">Storage</span>
+<span class="text-primary">85%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full signature-gradient w-[85%]"></div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 p-8 min-h-screen">
+<div class="max-w-7xl mx-auto">
+<!-- Hero Section -->
+<header class="mb-12">
+<h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-4">
+            All Tools Directory
+          </h1>
+<p class="text-on-surface-variant max-w-2xl text-lg font-body leading-relaxed">
+            The complete architectural suite for digital documents. Over 30 high-precision tools designed to refine, secure, and transform your PDFs.
+          </p>
+</header>
+<!-- Search & Filter Bar (Mobile/Tablet visible) -->
+<div class="md:hidden mb-8">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant/20 rounded-xl py-4 pl-12 pr-4 text-on-surface" placeholder="Quick find a tool..." type="text"/>
+</div>
+</div>
+<!-- Categories Grid -->
+<div class="grid grid-cols-1 gap-12">
+<!-- Merge & Split Section -->
+<section>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="call_split">call_split</span>
+<h2 class="text-xl font-bold font-headline tracking-tight">Merge &amp; Split</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="group bg-surface-container-low hover:bg-surface-container transition-all p-6 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary mb-4 transition-colors" data-icon="layers">layers</span>
+<h3 class="font-bold mb-1 text-on-surface">Merge PDFs</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">Combine multiple files into one cohesive document.</p>
+</div>
+<div class="group bg-surface-container-low hover:bg-surface-container transition-all p-6 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary mb-4 transition-colors" data-icon="content_cut">content_cut</span>
+<h3 class="font-bold mb-1 text-on-surface">Split PDF</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">Divide one file into several smaller PDF documents.</p>
+</div>
+<div class="group bg-surface-container-low hover:bg-surface-container transition-all p-6 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary mb-4 transition-colors" data-icon="file_open">file_open</span>
+<h3 class="font-bold mb-1 text-on-surface">Extract pages</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">Pull specific pages into a brand new document.</p>
+</div>
+<div class="group bg-surface-container-low hover:bg-surface-container transition-all p-6 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary mb-4 transition-colors" data-icon="bookmark">bookmark</span>
+<h3 class="font-bold mb-1 text-on-surface">Split by bookmarks</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">Divide document based on chapter marks or size.</p>
+</div>
+</div>
+</section>
+<!-- Organize & Edit Section -->
+<section>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="grid_view">grid_view</span>
+<h2 class="text-xl font-bold font-headline tracking-tight">Organize &amp; Edit</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="group bg-surface-container-low p-1 rounded-xl">
+<div class="bg-surface-container-lowest group-hover:bg-surface-container-low transition-all p-6 rounded-lg h-full flex flex-col">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="reorder">reorder</span>
+<h3 class="font-bold mb-2">Reorder &amp; Delete</h3>
+<p class="text-sm text-on-surface-variant mb-4 flex-1">Drag and drop pages to restructure or permanently remove content.</p>
+<div class="flex gap-2">
+<span class="text-[10px] px-2 py-1 bg-surface-container-highest rounded text-outline-variant uppercase tracking-widest font-bold">Structural</span>
+</div>
+</div>
+</div>
+<div class="group bg-surface-container-low p-1 rounded-xl">
+<div class="bg-surface-container-lowest group-hover:bg-surface-container-low transition-all p-6 rounded-lg h-full flex flex-col">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="edit_note">edit_note</span>
+<h3 class="font-bold mb-2">Edit PDF Content</h3>
+<p class="text-sm text-on-surface-variant mb-4 flex-1">Modify text, replace images, and update links directly in the PDF.</p>
+<div class="flex gap-2">
+<span class="text-[10px] px-2 py-1 bg-surface-container-highest rounded text-outline-variant uppercase tracking-widest font-bold">Pro Tool</span>
+</div>
+</div>
+</div>
+<div class="group bg-surface-container-low p-1 rounded-xl">
+<div class="bg-surface-container-lowest group-hover:bg-surface-container-low transition-all p-6 rounded-lg h-full flex flex-col">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="draw">draw</span>
+<h3 class="font-bold mb-2">Create From Scratch</h3>
+<p class="text-sm text-on-surface-variant mb-4 flex-1">Start with a blank canvas and build your document from the ground up.</p>
+<div class="flex gap-2">
+<span class="text-[10px] px-2 py-1 bg-surface-container-highest rounded text-outline-variant uppercase tracking-widest font-bold">Creative</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Convert (Bento Layout) -->
+<section>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="transform">transform</span>
+<h2 class="text-xl font-bold font-headline tracking-tight">Convert &amp; OCR</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<!-- OCR Hero Card -->
+<div class="md:col-span-2 md:row-span-2 bg-primary-container/20 border border-primary/20 p-8 rounded-3xl flex flex-col justify-end relative overflow-hidden group">
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all"></div>
+<span class="material-symbols-outlined text-4xl text-primary mb-6" data-icon="document_scanner">document_scanner</span>
+<h3 class="text-2xl font-bold mb-2">Optical Character Recognition</h3>
+<p class="text-on-surface-variant mb-6">Transform scanned images and unselectable text into fully searchable, editable PDF data with 99.9% accuracy.</p>
+<button class="w-fit px-6 py-2 bg-primary text-on-primary font-bold rounded-full text-sm">Launch OCR Engine</button>
+</div>
+<!-- Convert To -->
+<div class="md:col-span-2 bg-surface-container-low p-6 rounded-2xl">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold">Convert To PDF</h3>
+<span class="material-symbols-outlined text-sm text-on-surface-variant" data-icon="upload_file">upload_file</span>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-surface-container-lowest p-3 rounded-lg text-xs hover:text-primary transition-colors cursor-pointer">Word to PDF</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg text-xs hover:text-primary transition-colors cursor-pointer">Images to PDF</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg text-xs hover:text-primary transition-colors cursor-pointer">HTML to PDF</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg text-xs hover:text-primary transition-colors cursor-pointer">PPT to PDF</div>
+</div>
+</div>
+<!-- Convert From -->
+<div class="md:col-span-2 bg-surface-container-low p-6 rounded-2xl">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold">Convert From PDF</h3>
+<span class="material-symbols-outlined text-sm text-on-surface-variant" data-icon="download">download</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container-lowest px-3 py-1.5 rounded-full text-[11px] font-medium border border-outline-variant/10">Excel</span>
+<span class="bg-surface-container-lowest px-3 py-1.5 rounded-full text-[11px] font-medium border border-outline-variant/10">PowerPoint</span>
+<span class="bg-surface-container-lowest px-3 py-1.5 rounded-full text-[11px] font-medium border border-outline-variant/10">JPG/PNG</span>
+<span class="bg-surface-container-lowest px-3 py-1.5 rounded-full text-[11px] font-medium border border-outline-variant/10">Text/RTF</span>
+<span class="bg-surface-container-lowest px-3 py-1.5 rounded-full text-[11px] font-medium border border-outline-variant/10">HTML5</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Security & Optimize (Horizontal Scroll / Compact) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<!-- Security -->
+<section>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="lock">lock</span>
+<h2 class="text-xl font-bold font-headline tracking-tight">Security &amp; Sign</h2>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl group hover:bg-surface-container transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="encrypted">encrypted</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold">Secure PDF</h4>
+<p class="text-xs text-on-surface-variant">Add AES-256 password encryption.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl group hover:bg-surface-container transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="ink_pen">ink_pen</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold">Sign PDF</h4>
+<p class="text-xs text-on-surface-variant">Request or add digital signatures.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl group hover:bg-surface-container transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="visibility_off">visibility_off</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold">Redact Content</h4>
+<p class="text-xs text-on-surface-variant text-tertiary">Permanently remove sensitive info.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Optimize -->
+<section>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="auto_fix_high">auto_fix_high</span>
+<h2 class="text-xl font-bold font-headline tracking-tight">Optimize &amp; Advanced</h2>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="p-4 bg-surface-container-low rounded-xl hover:bg-surface-container transition-all cursor-pointer border-b border-transparent hover:border-primary">
+<h4 class="text-xs font-bold mb-1 uppercase tracking-wider text-primary">Optimize</h4>
+<p class="text-sm font-medium">Compress Size</p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl hover:bg-surface-container transition-all cursor-pointer border-b border-transparent hover:border-primary">
+<h4 class="text-xs font-bold mb-1 uppercase tracking-wider text-primary">Brand</h4>
+<p class="text-sm font-medium">Watermarks</p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl hover:bg-surface-container transition-all cursor-pointer border-b border-transparent hover:border-primary">
+<h4 class="text-xs font-bold mb-1 uppercase tracking-wider text-primary">Layout</h4>
+<p class="text-sm font-medium">Header/Footer</p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl hover:bg-surface-container transition-all cursor-pointer border-b border-transparent hover:border-primary">
+<h4 class="text-xs font-bold mb-1 uppercase tracking-wider text-primary">Data</h4>
+<p class="text-sm font-medium">Edit Metadata</p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl hover:bg-surface-container transition-all cursor-pointer border-b border-transparent hover:border-primary">
+<h4 class="text-xs font-bold mb-1 uppercase tracking-wider text-primary">Extract</h4>
+<p class="text-sm font-medium">Image Export</p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl hover:bg-surface-container transition-all cursor-pointer border-b border-transparent hover:border-primary">
+<h4 class="text-xs font-bold mb-1 uppercase tracking-wider text-primary">Compliance</h4>
+<p class="text-sm font-medium">Preflight PDF/A</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Footer / Feedback -->
+<footer class="mt-20 py-12 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="verified">verified</span>
+</div>
+<div>
+<p class="text-sm font-bold">Secure Processing</p>
+<p class="text-xs text-on-surface-variant">All files are processed locally or via encrypted tunnel.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="text-xs text-on-surface-variant hover:text-primary transition-colors">Privacy Policy</button>
+<button class="text-xs text-on-surface-variant hover:text-primary transition-colors">Terms of Service</button>
+<button class="text-xs text-on-surface-variant hover:text-primary transition-colors">Support Hub</button>
+</div>
+</footer>
+</div>
+</main>
+</div>
+<!-- Mobile Floating Bottom Bar -->
+<nav class="lg:hidden fixed bottom-0 w-full glass-panel flex justify-around items-center py-4 px-6 border-t border-outline-variant/10 z-50">
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="folder">folder</span>
+<span class="text-[10px] font-bold">Files</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-[10px] font-bold">Tools</span>
+</button>
+<div class="signature-gradient w-12 h-12 rounded-full flex items-center justify-center -mt-8 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-on-primary-fixed" data-icon="add">add</span>
+</div>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="text-[10px] font-bold">Alerts</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-bold">Account</span>
+</button>
+</nav>
+</body></html>

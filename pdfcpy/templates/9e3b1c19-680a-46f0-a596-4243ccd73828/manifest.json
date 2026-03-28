@@ -1,0 +1,188 @@
+{
+  "version": "1.0",
+  "tool": "website_one_page",
+  "seed_url": "https://www.ilovepdf.com/",
+  "seed_origin": "https://www.ilovepdf.com:443",
+  "seed_host": "www.ilovepdf.com",
+  "final_url": "https://www.ilovepdf.com/",
+  "final_host": "www.ilovepdf.com",
+  "origin_lock_mode": "host_only",
+  "captured_at": "2026-03-25T13:02:49.474163Z",
+  "base_href_used": false,
+  "base_href_value": null,
+  "budgets": {
+    "max_pages": 1,
+    "max_assets": 200,
+    "max_assets_per_page": 200,
+    "max_redirects": 5,
+    "max_css_import_depth": 2,
+    "max_html_bytes": 2097152,
+    "max_css_bytes": 1048576,
+    "max_asset_bytes": 104857600,
+    "max_total_asset_bytes": 52428800
+  },
+  "budgets_used": {
+    "pages": 1,
+    "assets": 21,
+    "total_asset_bytes": 450022
+  },
+  "counts": {
+    "html_pages": 1,
+    "assets_total": 36,
+    "assets_included": 21,
+    "assets_excluded": 15
+  },
+  "excluded": [
+    {
+      "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADsSURBVEhLY2AYBfQMgf///3P8+/evAIgvA/FsIF+BavYDDWMBGroaSMMBiE8VC7AZDrIFaMFnii3AZTjUgsUUWUDA8OdAH6iQbQEhw4HyGsPEcKBXBIC4ARhex4G4BsjmweU1soIFaGg/WtoFZRIZdEvIMhxkCCjXIVsATV6gFGACs4Rsw0EGgIIH3QJYJgHSARQZDrWAB+jawzgs+Q2UO49D7jnRSRGoEFRILcdmEMWGI0cm0JJ2QpYA1RDvcmzJEWhABhD/pqrL0S0CWuABKgnRki9lLseS7g2AlqwHWQSKH4oKLrILpRGhEQCw2LiRUIa4lwAAAABJRU5ErkJggg==",
+      "reason": "invalid_scheme"
+    },
+    {
+      "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVEhL5ZSvTsNQFMbXZGICMYGYmJhAQIJAICYQPAACiSDB8AiICQQJT4CqQEwgJvYASAQCiZiYmJhAIBATCARJy+9rTsldd8sKu1M0+dLb057v6/lbq/2rK0mS/TRNj9cWNAKPYIJII7gIxCcQ51cvqID+GIEX8ASG4B1bK5gIZFeQfoJdEXOfgX4QAQg7kH2A65yQ87lyxb27sggkAzAuFhbbg1K2kgCkB1bVwyIR9m2L7PRPIhDUIXgGtyKw575yz3lTNs6X4JXnjV+LKM/m3MydnTbtOKIjtz6VhCBq4vSm3ncdrD2lk0VgUXSVKjVDJXJzijW1RQdsU7F77He8u68koNZTz8Oz5yGa6J3H3lZ0xYgXBK2QymlWWA+RWnYhskLBv2vmE+hBMCtbA7KX5drWyRT/2JsqZ2IvfB9Y4bWDNMFbJRFmC9E74SoS0CqulwjkC0+5bpcV1CZ8NMej4pjy0U+doDQsGyo1hzVJttIjhQ7GnBtRFN1UarUlH8F3xict+HY07rEzoUGPlWcjRFRr4/gChZgc3ZL2d8oAAAAASUVORK5CYII=",
+      "reason": "invalid_scheme"
+    },
+    {
+      "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=",
+      "reason": "invalid_scheme"
+    },
+    {
+      "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHOSURBVEhLrZa/SgNBEMZzh0WKCClSCKaIYOED+AAKeQQLG8HWztLCImBrYadgIdY+gIKNYkBFSwu7CAoqCgkkoGBI/E28PdbLZmeDLgzZzcx83/zZ2SSXC1j9fr+I1Hq93g2yxH4iwM1vkoBWAdxCmpzTxfkN2RcyZNaHFIkSo10+8kgxkXIURV5HGxTmFuc75B2RfQkpxHG8aAgaAFa0tAHqYFfQ7Iwe2yhODk8+J4C7yAoRTWI3w/4klGRgR4lO7Rpn9+gvMyWp+uxFh8+H+ARlgN1nJuJuQAYvNkEnwGFck18Er4q3egEc/oO+mhLdKgRyhdNFiacC0rlOCbhNVz4H9FnAYgDBvU3QIioZlJFLJtsoHYRDfiZoUyIxqCtRpVlANq0EU4dApjrtgezPFad5S19Wgjkc0hNVnuF4HjVA6C7QrSIbylB+oZe3aHgBsqlNqKYH48jXyJKMuAbiyVJ8KzaB3eRc0pg9VwQ4niFryI68qiOi3AbjwdsfnAtk0bCjTLJKr6mrD9g8iq/S/B81hguOMlQTnVyG40wAcjnmgsCNESDrjme7wfftP4P7SP4N3CJZdvzoNyGq2c/HWOXJGsvVg+RA/k2MC/wN6I2YA2Pt8GkAAAAASUVORK5CYII=",
+      "reason": "invalid_scheme"
+    },
+    {
+      "url": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCA2czEuNzk2LS4wMTMgNC42Ny0zLjYxNUM1Ljg1MS45IDYuOTMuMDA2IDggMGMxLjA3LS4wMDYgMi4xNDguODg3IDMuMzQzIDIuMzg1QzE0LjIzMyA2LjAwNSAxNiA2IDE2IDZIMHoiIGZpbGw9InJnYmEoMCwgOCwgMTYsIDAuMikiLz48L3N2Zz4=",
+      "reason": "invalid_scheme"
+    },
+    {
+      "url": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTI1LjMzMyAxNkg2LjY2N20wIDBMMTYgMjUuMzMzTTYuNjY3IDE2TDE2IDYuNjY3IiBzdHJva2U9IiMzMzMzM0IiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=",
+      "reason": "invalid_scheme"
+    },
+    {
+      "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNyIgaGVpZ2h0PSIxNiIgZmlsbD0ibm9uZSI+PHBhdGggc3Ryb2tlPSIjMjkyOTMxIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMS42IiBkPSJNMy44MzMgOGg5LjMzM20wIDBMOC41IDMuMzMzTTEzLjE2NiA4TDguNSAxMi42NjciLz48L3N2Zz4=",
+      "reason": "invalid_scheme"
+    },
+    {
+      "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggc3Ryb2tlPSIjMzMzMzNCIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMi40IiBkPSJNMjQgOEw4IDI0TTggOGwxNiAxNiIvPjwvc3ZnPg==",
+      "reason": "invalid_scheme"
+    },
+    {
+      "url": "https://www.googletagmanager.com/gtag/js?id=G-44KQ8HETWT",
+      "reason": "cross_origin_blocked"
+    },
+    {
+      "url": "https://www.ilovepdf.com/img/bg/background.svg",
+      "reason": "asset_budget_hit"
+    },
+    {
+      "url": "https://www.ilovepdf.com/img/icons/interactive.svg",
+      "reason": "asset_budget_hit"
+    },
+    {
+      "url": "https://www.ilovepdf.com/img/icons/sprite.5.svg",
+      "reason": "asset_budget_hit"
+    },
+    {
+      "url": "https://www.ilovepdf.com/img/items/fail_md.svg",
+      "reason": "asset_budget_hit"
+    },
+    {
+      "url": "https://www.ilovepdf.com/img/items/fail_sm.svg",
+      "reason": "asset_budget_hit"
+    },
+    {
+      "url": "https://www.ilovepdf.com/img/items/ok_md.svg",
+      "reason": "asset_budget_hit"
+    }
+  ],
+  "mapping": {
+    "https://www.ilovepdf.com/dist/css/web.d9861ae.css": {
+      "local_path": "assets/5a89167039af9a150cf782e8fcaaca59c0738a0c1b8b75e1cdc7d80b08559356.css",
+      "content_type": "text/css"
+    },
+    "https://www.ilovepdf.com/img/app-icon.png": {
+      "local_path": "assets/c19beb641a162c5bb43318cdb0e56641d203b68b8e0ebc0c6a68af2fe460cc0c.png",
+      "content_type": "image/png"
+    },
+    "https://www.ilovepdf.com/img/favicons-pdf/favicon-32x32.png": {
+      "local_path": "assets/3383405f54bfabaf7cc5389bc26d181abdeaeb2e58f2a3989893261dcee6f88e.png",
+      "content_type": "image/png"
+    },
+    "https://www.ilovepdf.com/img/home/business.png": {
+      "local_path": "assets/4e2cdec1510cb0e7be45c50191cfa6be33cc028fbe7ee772753b1d5ecabb0813.png",
+      "content_type": "image/png"
+    },
+    "https://www.ilovepdf.com/img/home/business.webp": {
+      "local_path": "assets/d46a6b0cc09d450e60e63236ae68e1cc21e4d9e67bc148705d80267180b5cb05.webp",
+      "content_type": "image/webp"
+    },
+    "https://www.ilovepdf.com/img/home/desktop.png": {
+      "local_path": "assets/751c979754359f0341dfca8461ee36e578ffba200c500bca14aed941455afa89.png",
+      "content_type": "image/png"
+    },
+    "https://www.ilovepdf.com/img/home/desktop.webp": {
+      "local_path": "assets/d702359916b35989eef6a45d22fe3940087fde8d4c4b7f43026d28e2e48c2aa7.webp",
+      "content_type": "image/webp"
+    },
+    "https://www.ilovepdf.com/img/home/iloveimg.png": {
+      "local_path": "assets/df9b703d39e4148d09ef41dfb252f0c0fe3e15c39410e7dbf540abc280276656.png",
+      "content_type": "image/png"
+    },
+    "https://www.ilovepdf.com/img/home/iloveimg.webp": {
+      "local_path": "assets/37ea28e1ce2f64d34449c1d5b6e099a440a8be8d87300806a44e2f2de5969fcf.webp",
+      "content_type": "image/webp"
+    },
+    "https://www.ilovepdf.com/img/home/mobile.png": {
+      "local_path": "assets/61269f24e6488718009c542ceff621b969d6af7927c55f9bab35a189bcb02167.png",
+      "content_type": "image/png"
+    },
+    "https://www.ilovepdf.com/img/home/mobile.webp": {
+      "local_path": "assets/b69f490d2942423ee5904486e936226301fcaf9cc379102f17e5a888a2e3f695.webp",
+      "content_type": "image/webp"
+    },
+    "https://www.ilovepdf.com/img/home/premium.png": {
+      "local_path": "assets/312396e0dfb052e07df8e17ff30b0529adc5b1e9b6ef60661bfdcf3404c60062.png",
+      "content_type": "image/png"
+    },
+    "https://www.ilovepdf.com/img/home/premium.webp": {
+      "local_path": "assets/d0b28a6571aeb78c435535cc76338624bc9ef9bae050dd71bccf91d875f2f3a7.webp",
+      "content_type": "image/webp"
+    },
+    "https://www.ilovepdf.com/img/ilovepdf.svg": {
+      "local_path": "assets/5a57cc7ec71eca69c8e70372656e4234ab1ad56a259a8f518ad535b419aed877.svg",
+      "content_type": "image/svg+xml"
+    },
+    "https://www.ilovepdf.com/img/logos/app_store_w.svg": {
+      "local_path": "assets/cb0b78f5de56a34f64266adb73d4954242bd17cea2334726c38252d5d82af396.svg",
+      "content_type": "image/svg+xml"
+    },
+    "https://www.ilovepdf.com/img/logos/google_play_w.svg": {
+      "local_path": "assets/bfcba44162ba1fc687299b7f625a48054e2fbb6a05418ec07b42dc9361d58d16.svg",
+      "content_type": "image/svg+xml"
+    },
+    "https://www.ilovepdf.com/img/logos/mac_store_w.svg": {
+      "local_path": "assets/87b0753bf1fbacd9405f39fa8815ea1c9520f86df60f28201e68b76478212f26.svg",
+      "content_type": "image/svg+xml"
+    },
+    "https://www.ilovepdf.com/img/logos/microsoft_store_w.svg": {
+      "local_path": "assets/72d47f63fedb029cd64fc9f5464cc27e22d272b00a95d2674b941a0429ffc25d.svg",
+      "content_type": "image/svg+xml"
+    },
+    "https://www.ilovepdf.com/img/trust/iso.svg": {
+      "local_path": "assets/dccba9d383f81b3c8a63c4669faf1f10672afe19fbef10a0064790a335b14bfe.svg",
+      "content_type": "image/svg+xml"
+    },
+    "https://www.ilovepdf.com/img/trust/pdf.svg": {
+      "local_path": "assets/1d3c46fa7b0c4f5417ca5028a28597c36561ac51e073a5cb7189d0c8480c1203.svg",
+      "content_type": "image/svg+xml"
+    },
+    "https://www.ilovepdf.com/img/trust/ssl.svg": {
+      "local_path": "assets/81cd198d1044f38d54d3006e5eff74844f9dee7d8c3d936a8977eca22007b2e7.svg",
+      "content_type": "image/svg+xml"
+    }
+  },
+  "heuristics": {
+    "script_src_count": 2,
+    "meaningful_elements": 265,
+    "text_content_length": 6392
+  }
+}
