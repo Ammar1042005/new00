@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PdfSwiss - Professional PDF Tools</title>
+    <link rel="stylesheet" href="/static/css/modern.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="url(#logo-gradient)"/>
+                    <path d="M8 12L16 8L24 12L16 16L8 12Z" fill="white" opacity="0.9"/>
+                    <path d="M8 16L16 12L24 16V20L16 24L8 20V16Z" fill="white" opacity="0.7"/>
+                    <defs>
+                        <linearGradient id="logo-gradient" x1="0" y1="0" x2="32" y2="32">
+                            <stop stop-color="rgb(255, 0, 0)"/>
+                            <stop offset="0.5" stop-color="rgb(0, 255, 0)"/>
+                            <stop offset="1" stop-color="rgb(0, 0, 255)"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="brand-text">PdfSwiss</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#tools" class="nav-link">Tools</a>
+                <a href="#settings" class="nav-link">Settings</a>
+                <button class="nav-toggle" id="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Professional PDF Tools</h1>
+                <p class="hero-subtitle">Complete PDF processing toolkit with privacy-first approach</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">24+</span>
+                        <span class="stat-label">PDF Tools</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Offline</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Cloud Upload</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-cards">
+                    <div class="floating-card" style="--delay: 0s;">
+                        <span>📄</span>
+                        <span>Convert</span>
+                    </div>
+                    <div class="floating-card" style="--delay: 2s;">
+                        <span>🔒</span>
+                        <span>Secure</span>
+                    </div>
+                    <div class="floating-card" style="--delay: 4s;">
+                        <span>⚡</span>
+                        <span>Fast</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Grid -->
+    <section class="tools-section" id="tools">
+        <div class="tools-container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All</button>
+                <button class="filter-tab" data-filter="organize">Organize PDF</button>
+                <button class="filter-tab" data-filter="convert">Convert PDF</button>
+                <button class="filter-tab" data-filter="optimize">Optimize PDF</button>
+                <button class="filter-tab" data-filter="edit">Edit PDF</button>
+                <button class="filter-tab" data-filter="security">PDF Security</button>
+                <button class="filter-tab" data-filter="setting">PDF Settings</button>
+            </div>
+            <div class="tools-grid">
+                <!-- Merge PDF -->
+                <div class="tool-card" data-category="organize">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Merge PDF</h3>
+                            <p class="tool-description">Combine multiple PDF files into one</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF files</label>
+                            <div class="file-upload">
+                                <input type="file" id="merge-files" multiple accept="application/pdf" class="file-input">
+                                <label for="merge-files" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose files or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="merge()">
+                            <span class="btn-text">Merge PDFs</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Split PDF -->
+                <div class="tool-card" data-category="organize">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Split PDF</h3>
+                            <p class="tool-description">Extract pages or split into multiple files</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="split-file" accept="application/pdf" class="file-input">
+                                <label for="split-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Split Options</label>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <input type="number" id="split-from" min="1" value="1" class="form-input" placeholder="From page">
+                                </div>
+                                <div class="form-col">
+                                    <input type="number" id="split-to" min="1" value="1" class="form-input" placeholder="To page">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="split()">
+                            <span class="btn-text">Split PDF</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Compress PDF -->
+                <div class="tool-card" data-category="optimize">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Compress PDF</h3>
+                            <p class="tool-description">Reduce file size while maintaining quality</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="cmp-file" accept="application/pdf" class="file-input">
+                                <label for="cmp-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="compress()">
+                            <span class="btn-text">Compress PDF</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Word to PDF -->
+                <div class="tool-card" data-category="convert">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Word to PDF</h3>
+                            <p class="tool-description">Convert Word documents to PDF</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select Word file</label>
+                            <div class="file-upload">
+                                <input type="file" id="word-file" accept=".docx" class="file-input">
+                                <label for="word-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="word_to_pdf()">
+                            <span class="btn-text">Convert to PDF</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PDF to Word -->
+                <div class="tool-card" data-category="convert">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">PDF to Word</h3>
+                            <p class="tool-description">Convert PDF to Word document</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="pdf-word-file" accept="application/pdf" class="file-input">
+                                <label for="pdf-word-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="pdf_to_word()">
+                            <span class="btn-text">Convert to Word</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- OCR PDF -->
+                <div class="tool-card" data-category="optimize">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">OCR PDF</h3>
+                            <p class="tool-description">Make scanned PDFs searchable with OCR</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="ocr-file" accept="application/pdf" class="file-input">
+                                <label for="ocr-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">DPI Settings</label>
+                            <select id="ocr-dpi" class="form-select">
+                                <option value="150">150 DPI (Fast)</option>
+                                <option value="200" selected>200 DPI (Balanced)</option>
+                                <option value="300">300 DPI (High Quality)</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="ocr()">
+                            <span class="btn-text">Apply OCR</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rotate PDF -->
+                <div class="tool-card" data-category="organize">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Rotate PDF</h3>
+                            <p class="tool-description">Rotate pages by 90, 180, or 270 degrees</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="rotate-file" accept="application/pdf" class="file-input">
+                                <label for="rotate-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Rotation Angle</label>
+                            <select id="rotate-angle" class="form-select">
+                                <option value="90">90° clockwise</option>
+                                <option value="180">180°</option>
+                                <option value="270">270° clockwise</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="rotate()">
+                            <span class="btn-text">Rotate PDF</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Watermark PDF -->
+                <div class="tool-card" data-category="edit">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Add Watermark</h3>
+                            <p class="tool-description">Add text watermark to PDF pages</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="watermark-file" accept="application/pdf" class="file-input">
+                                <label for="watermark-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Watermark Text</label>
+                            <input type="text" id="watermark-text" class="form-input" placeholder="Enter watermark text">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Font Size</label>
+                            <input type="number" id="watermark-font" value="48" min="8" max="200" class="form-input">
+                        </div>
+                        <button class="btn btn-primary" onclick="watermark()">
+                            <span class="btn-text">Add Watermark</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Protect PDF -->
+                <div class="tool-card" data-category="security">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Protect PDF</h3>
+                            <p class="tool-description">Add password protection to PDF</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="protect-file" accept="application/pdf" class="file-input">
+                                <label for="protect-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">User password</label>
+                            <input type="password" id="prot-user" placeholder="Enter user password" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Owner password (optional)</label>
+                            <input type="password" id="prot-owner" placeholder="Enter owner password" class="form-input">
+                        </div>
+                        <button class="btn btn-primary" onclick="protect()">
+                            <span class="btn-text">Protect PDF</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Unlock PDF -->
+                <div class="tool-card" data-category="security">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Unlock PDF</h3>
+                            <p class="tool-description">Remove password protection from PDF</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="unlock-file" accept="application/pdf" class="file-input">
+                                <label for="unlock-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" id="unl-pass" placeholder="Enter PDF password" class="form-input">
+                        </div>
+                        <button class="btn btn-primary" onclick="unlock()">
+                            <span class="btn-text">Unlock PDF</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Excel to PDF -->
+                <div class="tool-card" data-category="convert">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Excel to PDF</h3>
+                            <p class="tool-description">Convert Excel spreadsheets to PDF</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select Excel file</label>
+                            <div class="file-upload">
+                                <input type="file" id="excel-file" accept=".xlsx" class="file-input">
+                                <label for="excel-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="excel_to_pdf()">
+                            <span class="btn-text">Convert to PDF</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PowerPoint to PDF -->
+                <div class="tool-card" data-category="convert">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">PowerPoint to PDF</h3>
+                            <p class="tool-description">Convert PowerPoint presentations to PDF</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PowerPoint file</label>
+                            <div class="file-upload">
+                                <input type="file" id="pptx-file" accept=".pptx" class="file-input">
+                                <label for="pptx-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="pptx_to_pdf()">
+                            <span class="btn-text">Convert to PDF</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PDF to Excel -->
+                <div class="tool-card" data-category="convert">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">PDF to Excel</h3>
+                            <p class="tool-description">Convert PDF to Excel spreadsheet</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="pdf-excel-file" accept="application/pdf" class="file-input">
+                                <label for="pdf-excel-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="pdf_to_excel()">
+                            <span class="btn-text">Convert to Excel</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PDF to PowerPoint -->
+                <div class="tool-card" data-category="convert">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">PDF to PowerPoint</h3>
+                            <p class="tool-description">Convert PDF to PowerPoint presentation</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="pdf-pptx-file" accept="application/pdf" class="file-input">
+                                <label for="pdf-pptx-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="pdf_to_pptx()">
+                            <span class="btn-text">Convert to PowerPoint</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Images to PDF -->
+                <div class="tool-card" data-category="convert">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Images to PDF</h3>
+                            <p class="tool-description">Convert multiple images to single PDF</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select image files</label>
+                            <div class="file-upload">
+                                <input type="file" id="images-files" multiple accept="image/*" class="file-input">
+                                <label for="images-files" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose files or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="images_to_pdf()">
+                            <span class="btn-text">Convert to PDF</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PDF to Images -->
+                <div class="tool-card" data-category="convert">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">PDF to Images</h3>
+                            <p class="tool-description">Convert PDF pages to image files</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="pdf-images-file" accept="application/pdf" class="file-input">
+                                <label for="pdf-images-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Image Format</label>
+                            <select id="pdf-img-format" class="form-select">
+                                <option value="png">PNG</option>
+                                <option value="jpg">JPG</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">DPI</label>
+                            <input type="number" id="pdf-img-dpi" value="144" min="72" max="300" class="form-input">
+                        </div>
+                        <button class="btn btn-primary" onclick="pdf_to_images()">
+                            <span class="btn-text">Convert to Images</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Add Page Numbers -->
+                <div class="tool-card" data-category="edit">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Add Page Numbers</h3>
+                            <p class="tool-description">Add page numbers to PDF pages</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="paginate-file" accept="application/pdf" class="file-input">
+                                <label for="paginate-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Font Size</label>
+                            <input type="number" id="pg-font" value="12" min="8" max="72" class="form-input">
+                        </div>
+                        <button class="btn btn-primary" onclick="paginate()">
+                            <span class="btn-text">Add Page Numbers</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reorder Pages -->
+                <div class="tool-card" data-category="organize">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Reorder Pages</h3>
+                            <p class="tool-description">Reorganize PDF page order</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="reorder-file" accept="application/pdf" class="file-input">
+                                <label for="reorder-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Page Order (comma-separated)</label>
+                            <input type="text" id="reorder-order" class="form-input" placeholder="e.g., 3,1,4,2">
+                        </div>
+                        <button class="btn btn-primary" onclick="reorder()">
+                            <span class="btn-text">Reorder Pages</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Remove Pages -->
+                <div class="tool-card" data-category="organize">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Remove Pages</h3>
+                            <p class="tool-description">Delete specific pages from PDF</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="remove-file" accept="application/pdf" class="file-input">
+                                <label for="remove-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pages to Remove (comma-separated)</label>
+                            <input type="text" id="remove-pages" class="form-input" placeholder="e.g., 2,4,6-8">
+                        </div>
+                        <button class="btn btn-primary" onclick="remove_pages()">
+                            <span class="btn-text">Remove Pages</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Extract Images -->
+                <div class="tool-card" data-category="edit">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Extract Images</h3>
+                            <p class="tool-description">Extract embedded images from PDF</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="extract-images-file" accept="application/pdf" class="file-input">
+                                <label for="extract-images-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="extract_images()">
+                            <span class="btn-text">Extract Images</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Batch Processing -->
+                <div class="tool-card" data-category="optimize">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Batch Processing</h3>
+                            <p class="tool-description">Process multiple files at once</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select files</label>
+                            <div class="file-upload">
+                                <input type="file" id="batch-files" multiple accept=".pdf,.docx,.xlsx,.pptx,image/*" class="file-input">
+                                <label for="batch-files" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose files or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Operation</label>
+                            <select id="batch-operation" class="form-select">
+                                <option value="compress">Compress PDFs</option>
+                                <option value="compress_strong">Strong Compression</option>
+                                <option value="ocr">Apply OCR</option>
+                                <option value="office_to_pdf">Office to PDF</option>
+                                <option value="pdf_to_images">PDF to Images</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="batch_process()">
+                            <span class="btn-text">Process Files</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Edit Metadata -->
+                <div class="tool-card" data-category="edit">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Edit Metadata</h3>
+                            <p class="tool-description">Edit PDF document metadata</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">Select PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="metadata-file" accept="application/pdf" class="file-input">
+                                <label for="metadata-file" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Title</label>
+                            <input type="text" id="metadata-title" class="form-input" placeholder="Document title">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Author</label>
+                            <input type="text" id="metadata-author" class="form-input" placeholder="Author name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Subject</label>
+                            <input type="text" id="metadata-subject" class="form-input" placeholder="Document subject">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Keywords</label>
+                            <input type="text" id="metadata-keywords" class="form-input" placeholder="Comma-separated keywords">
+                        </div>
+                        <button class="btn btn-primary" onclick="edit_metadata()">
+                            <span class="btn-text">Edit Metadata</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Compare PDFs -->
+                <div class="tool-card" data-category="security">
+                    <div class="tool-header">
+                        <div class="tool-info">
+                            <h3 class="tool-title">Compare PDFs</h3>
+                            <p class="tool-description">Compare two PDF documents</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <div class="form-group">
+                            <label class="form-label">First PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="compare-file1" accept="application/pdf" class="file-input">
+                                <label for="compare-file1" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Second PDF file</label>
+                            <div class="file-upload">
+                                <input type="file" id="compare-file2" accept="application/pdf" class="file-input">
+                                <label for="compare-file2" class="file-label">
+                                    <span class="file-icon">📁</span>
+                                    <span class="file-text">Choose file or drag here</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="compare_pdfs()">
+                            <span class="btn-text">Compare PDFs</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Settings Section -->
+    <section class="settings-section" id="settings">
+        <div class="settings-container">
+            <div class="settings-header">
+                <h2 class="settings-title">Configuration</h2>
+                <p class="settings-subtitle">Configure external tools for advanced features</p>
+            </div>
+            <div class="settings-grid">
+                <div class="settings-card">
+                    <h3 class="settings-card-title">Tesseract OCR</h3>
+                    <div class="form-group">
+                        <label class="form-label">Tesseract Path</label>
+                        <input type="text" id="tesseract-path" class="form-input" placeholder="e.g., C:\Program Files\Tesseract-OCR\tesseract.exe">
+                    </div>
+                    <div class="settings-help">
+                        <p><strong>Installation:</strong></p>
+                        <ul>
+                            <li>Download from <a href="https://github.com/UB-Mannheim/tesseract/wiki" target="_blank">Tesseract OCR GitHub</a></li>
+                            <li>Choose Windows installer (not source code)</li>
+                            <li>Install to default location</li>
+                            <li>Path should be: <code>C:\Program Files\Tesseract-OCR\tesseract.exe</code></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="settings-card-title">LibreOffice</h3>
+                    <div class="form-group">
+                        <label class="form-label">LibreOffice Path</label>
+                        <input type="text" id="libreoffice-path" class="form-input" placeholder="e.g., ./assets/Libre/program/soffice.exe">
+                    </div>
+                    <div class="settings-help">
+                        <p><strong>Current Setup:</strong></p>
+                        <ul>
+                            <li>LibreOffice is installed in: <code>./assets/Libre/</code></li>
+                            <li>Executable path: <code>./assets/Libre/program/soffice.exe</code></li>
+                            <li>This should work automatically for document conversions</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="settings-card-title">Ghostscript</h3>
+                    <div class="form-group">
+                        <label class="form-label">Ghostscript Path</label>
+                        <input type="text" id="ghostscript-path" class="form-input" placeholder="e.g., C:\Program Files\gs\gs10.01.2\bin\gswin64c.exe">
+                    </div>
+                    <div class="settings-help">
+                        <p><strong>Installation:</strong></p>
+                        <ul>
+                            <li>Download from <a href="https://ghostscript.com/releases/gsdnld.html" target="_blank">Ghostscript</a></li>
+                            <li>Install for Windows (64-bit recommended)</li>
+                            <li>Find gswin64c.exe in installation directory</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="settings-actions">
+                <button class="btn btn-primary" onclick="save_settings()">
+                    <span class="btn-text">Save Settings</span>
+                    <span class="btn-icon">→</span>
+                </button>
+                <button class="btn btn-secondary" onclick="load_settings()">
+                    <span class="btn-text">Reload Settings</span>
+                    <span class="btn-icon">↻</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#logo-gradient)"/>
+                        <path d="M8 12L16 8L24 12L16 16L8 12Z" fill="white" opacity="0.9"/>
+                        <path d="M8 16L16 12L24 16V20L16 24L8 20V16Z" fill="white" opacity="0.7"/>
+                        <defs>
+                            <linearGradient id="logo-gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="rgb(255, 0, 0)"/>
+                                <stop offset="0.5" stop-color="rgb(0, 255, 0)"/>
+                                <stop offset="1" stop-color="rgb(0, 0, 255)"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="brand-text">PdfSwiss</span>
+                </div>
+                <p class="footer-description">Professional PDF tools with privacy first</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4 class="footer-title">Features</h4>
+                    <ul class="footer-list">
+                        <li><a href="#tools">PDF Tools</a></li>
+                        <li><a href="#settings">Configuration</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Privacy</h4>
+                    <ul class="footer-list">
+                        <li><a href="#privacy">100% Offline</a></li>
+                        <li><a href="#data">No Data Collection</a></li>
+                        <li><a href="#security">Secure Processing</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 PdfSwiss. Local Edition • Privacy First • No Cloud Processing</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/modern.js"></script>
+</body>
+</html>
